@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function WillCaseStudy() {
@@ -9,6 +10,14 @@ export default function WillCaseStudy() {
       y: 0,
       transition: { duration: 0.8, ease: "easeOut" }
     }
+  };
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText("hello@bineet.in");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -23,21 +32,21 @@ export default function WillCaseStudy() {
         className="w-full flex flex-col"
       >
         {/* Section 1: Hero */}
-        <section className="max-w-[994px] mx-auto w-full px-6 lg:px-0">
+        <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
           {/* Top Nav */}
           <motion.div variants={fadeInUp} className="flex justify-between items-center w-full mb-16 mt-12">
             <a href="/#projects" className="flex items-center gap-4 text-zinc-500 hover:text-zinc-900 transition-colors group">
-              <div className="w-14 h-14 bg-[#F4F4F4] rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors shrink-0">
+              <div className="w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F4] rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors shrink-0">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="19" y1="12" x2="5" y2="12"></line>
                   <polyline points="12 19 5 12 12 5"></polyline>
                 </svg>
               </div>
-              <span className="text-[20px] font-normal leading-none">
+              <span className="text-sm md:text-[20px] font-normal leading-none">
                 Back to Projects
               </span>
             </a>
-            <a href="/" className="px-8 py-3 border border-zinc-200 rounded-[20px] text-[20px] font-normal text-black hover:bg-[#F4F4F4] transition-colors leading-none shrink-0">
+            <a href="/" className="px-5 py-2 text-sm md:px-8 md:py-3 md:text-[20px] border border-zinc-200 rounded-[20px] font-normal text-black hover:bg-[#F4F4F4] transition-colors leading-none shrink-0">
               Home
             </a>
           </motion.div>
@@ -45,7 +54,7 @@ export default function WillCaseStudy() {
           {/* Title */}
           <motion.h1 
             variants={fadeInUp}
-            className="text-[64px] font-normal leading-tight text-black mb-12"
+            className="text-[36px] md:text-[64px] font-normal leading-tight text-black mb-6 md:mb-12"
           >
             UX Case Study : WILL
           </motion.h1>
@@ -53,7 +62,7 @@ export default function WillCaseStudy() {
           {/* Image */}
           <motion.div 
             variants={fadeInUp}
-            className="w-full h-[460px] rounded-[32px] overflow-hidden mb-12 bg-[#F4F4F4] relative"
+            className="w-full h-[250px] sm:h-[300px] md:h-[460px] rounded-[32px] overflow-hidden mb-12 bg-[#F4F4F4] relative"
           >
             <AnimatePresence mode="wait">
               <motion.img 
@@ -70,17 +79,17 @@ export default function WillCaseStudy() {
           {/* Subtext */}
           <motion.p 
             variants={fadeInUp}
-            className="text-[32px] font-normal leading-tight text-black max-w-[850px] pb-24"
+            className="text-[20px] md:text-[32px] font-normal leading-tight text-black max-w-[850px] pb-12 md:pb-24"
           >
             How do you design an app connecting India's busiest users to its least literate workforce?
           </motion.p>
         </section>
 
         {/* Section 2: What is WILL? */}
-        <section className="max-w-[994px] mx-auto w-full px-6 lg:px-0">
+        <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
           <motion.div variants={fadeInUp} className="flex justify-between items-center w-full mb-8">
             <h2 className="text-[32px] text-black font-normal leading-tight">What is WILL?</h2>
-            <a href="https://www.figma.com/proto/lfwa1QNC1O9rpavVkhf7vk/Will----Define?node-id=188-1005&p=f&viewport=-24%2C-434%2C0.1&t=nomB2KN7WcgZfLoY-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=216%3A669&page-id=134%3A1295" target="_blank" rel="noopener noreferrer" className="border border-zinc-200 rounded-[20px] px-6 py-2 text-black hover:bg-[#F4F4F4] transition-colors">
+            <a href="https://www.figma.com/proto/lfwa1QNC1O9rpavVkhf7vk/Will----Define?node-id=188-1005&p=f&viewport=-24%2C-434%2C0.1&t=nomB2KN7WcgZfLoY-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=216%3A669&page-id=134%3A1295" target="_blank" rel="noopener noreferrer" className="border border-zinc-200 rounded-[20px] px-4 py-2 text-sm md:px-6 md:py-2 text-black hover:bg-[#F4F4F4] transition-colors">
               View prototype
             </a>
           </motion.div>
@@ -99,9 +108,9 @@ export default function WillCaseStudy() {
 
         {/* Section 3: Project Overview */}
         <motion.section variants={fadeInUp} className="w-full bg-[#F4F4F4] py-20">
-          <div className="max-w-[994px] mx-auto w-full px-6 lg:px-0">
+          <div className="max-w-[994px] mx-auto w-full px-5 md:px-0">
             <h2 className="text-[32px] text-black font-normal leading-tight mb-12">Project Overview</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-[16px] text-black">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-[16px] text-black">
               <div>
                 <p className="text-zinc-500 mb-2">Project Duration :</p>
                 <p>2 weeks</p>
@@ -119,8 +128,8 @@ export default function WillCaseStudy() {
         </motion.section>
 
         {/* Section 4: The Problem */}
-        <motion.section variants={fadeInUp} className="max-w-[994px] mx-auto w-full py-24 px-6 lg:px-0 flex flex-col md:flex-row gap-16 items-center">
-          <div className="w-full md:w-[400px] h-[260px] shrink-0 rounded-2xl overflow-hidden bg-[#F4F4F4] relative">
+        <motion.section variants={fadeInUp} className="max-w-[994px] mx-auto w-full py-24 px-5 md:px-0 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
+          <div className="w-full md:w-[400px] h-auto aspect-video md:h-[260px] shrink-0 rounded-2xl overflow-hidden bg-[#F4F4F4] relative">
             <img src="/images/chowk.png" alt="The Problem" className="w-full h-full object-cover absolute inset-0" />
           </div>
           <div className="w-full flex flex-col text-left">
@@ -131,23 +140,23 @@ export default function WillCaseStudy() {
           </div>
         </motion.section>
         {/* Section 5: Problem Statement & Personas */}
-        <motion.section variants={fadeInUp} className="max-w-[994px] mx-auto w-full flex flex-col gap-6 pb-24 px-6 lg:px-0">
+        <motion.section variants={fadeInUp} className="max-w-[994px] mx-auto w-full flex flex-col gap-6 pb-24 px-5 md:px-0">
           <h3 className="text-[32px] font-normal text-black mt-16 mb-8">Problem Statement & User Personas</h3>
 
           {/* Box 1 (2-Column Grid) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-            <div className="bg-[#F4F4F4] rounded-[24px] p-8 md:p-12 w-full">
+            <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
               <h4 className="text-[24px] font-normal mb-6 text-black">User/Customer : Sanjay</h4>
               <p className="text-[16px] text-zinc-600 leading-relaxed">No reliable, trust-verified way to book skilled workers on demand.</p>
             </div>
-            <div className="bg-[#F4F4F4] rounded-[24px] p-8 md:p-12 w-full">
+            <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
               <h4 className="text-[24px] font-normal mb-6 text-black">Worker : Vinod</h4>
               <p className="text-[16px] text-zinc-600 leading-relaxed">No consistent, fair way to find daily work without being underpaid.</p>
             </div>
           </div>
 
           {/* Box 2 (How Might We) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-8 md:p-12 w-full">
+          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
             <h4 className="text-[24px] font-normal mb-6 text-black">How Might We:</h4>
             <div className="flex flex-col gap-3 text-zinc-600 text-[16px] leading-relaxed">
               <p>Q. HMW help Sanjay trust a worker he's never met before letting them into his home?</p>
@@ -159,7 +168,7 @@ export default function WillCaseStudy() {
           </div>
 
           {/* Box 3 (Understanding the Users) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-8 md:p-12 w-full">
+          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
             <h4 className="text-[24px] font-normal mb-6 text-black">Understanding the Users:</h4>
             
             <p className="text-[16px] text-zinc-600 leading-relaxed">
@@ -178,7 +187,7 @@ export default function WillCaseStudy() {
           </div>
 
           {/* Box 4 (Journey Maps) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-8 md:p-12 w-full">
+          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
             <h4 className="text-[24px] font-normal mb-6 text-black">Journey Maps:</h4>
             <div className="flex flex-col gap-6 text-[16px] text-zinc-600 leading-relaxed">
               <p>
@@ -194,13 +203,13 @@ export default function WillCaseStudy() {
           </div>
 
           {/* Box 5 (Information Architecture) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-8 md:p-12 w-full">
+          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
             <h4 className="text-[24px] font-normal mb-6 text-black">Information Architecture of WILL:</h4>
             <p className="text-[16px] text-zinc-600 leading-relaxed">
               WILL required two separate information architectures — one per user type. Designing one without the other would break the transaction.
             </p>
 
-            <div className="mt-8 w-full bg-[#111111] text-zinc-300 p-8 rounded-2xl overflow-y-auto max-h-[500px] text-[13px] leading-relaxed font-mono whitespace-pre custom-scrollbar">
+            <div className="mt-8 w-full bg-[#111111] text-zinc-300 p-8 rounded-2xl overflow-x-auto overflow-y-auto max-h-[500px] text-[13px] leading-relaxed font-mono whitespace-pre custom-scrollbar">
 {`WILL (Customer App)
 │
 ├── 1. Onboarding
@@ -356,14 +365,14 @@ WILL (Worker App)
             <h2 className="text-[48px] font-normal text-black mb-24 text-center">Key Decisions</h2>
 
             {/* Decision 01 */}
-            <div className="flex flex-col md:flex-row items-center gap-16 mb-32 relative">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
               <div className="w-full md:w-1/2">
                 <img src="/images/decision-1.png" alt="Decision 01" className="object-contain w-full" />
               </div>
               <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-10 -left-10 text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">01</span>
+                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">01</span>
                 <div className="relative z-10">
-                  <h3 className="text-[24px] text-black mb-6">Decision 01: Two Separate Apps</h3>
+                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 01: Two Separate Apps</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Build a dedicated customer app & a dedicated worker app.</p>
                   <p className="text-[16px] text-zinc-500 leading-relaxed">Why: A single app causes heavy cognitive load. Keeping them separate allows for distinct UI/UX, different mental models, and targeted language settings for the worker demographic.</p>
                 </div>
@@ -371,14 +380,14 @@ WILL (Worker App)
             </div>
 
             {/* Decision 02 */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-16 mb-32 relative">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
               <div className="w-full md:w-1/2">
                 <img src="/images/decision-2.png" alt="Decision 02" className="object-contain w-full" />
               </div>
               <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-10 -left-10 text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">02</span>
+                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">02</span>
                 <div className="relative z-10">
-                  <h3 className="text-[24px] text-black mb-6">Decision 02: Hindi/Voice Navigation</h3>
+                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 02: Hindi/Voice Navigation</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Worker app defaults to Hindi with voice readouts for core actions.</p>
                   <p className="text-[16px] text-zinc-500 leading-relaxed">Why: A vast portion of our target demographic has low literacy. A text-heavy UI is non-functional. Voice and iconography allow users who can't read to still operate independently.</p>
                 </div>
@@ -386,14 +395,14 @@ WILL (Worker App)
             </div>
 
             {/* Decision 03 */}
-            <div className="flex flex-col md:flex-row items-center gap-16 mb-32 relative">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
               <div className="w-full md:w-1/2">
                 <img src="/images/decision-3.png" alt="Decision 03" className="object-contain w-full" />
               </div>
               <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-10 -left-10 text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">03</span>
+                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">03</span>
                 <div className="relative z-10">
-                  <h3 className="text-[24px] text-black mb-6">Decision 03: ₹20 Booking Fee</h3>
+                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 03: ₹20 Booking Fee</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Charge a nominal, 100% refundable booking fee.</p>
                   <p className="text-[16px] text-zinc-500 leading-relaxed">Why: Without financial commitment, customers cancel easily, wasting a wage worker's time. This fee ensures serious intent, while the refund guarantee protects the customer against no-shows.</p>
                 </div>
@@ -401,14 +410,14 @@ WILL (Worker App)
             </div>
 
             {/* Decision 04 */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-16 mb-32 relative">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
               <div className="w-full md:w-1/2">
                 <img src="/images/decision-4.png" alt="Decision 04" className="object-contain w-full" />
               </div>
               <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-10 -left-10 text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">04</span>
+                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">04</span>
                 <div className="relative z-10">
-                  <h3 className="text-[24px] text-black mb-6">Decision 04: Dual OTP System</h3>
+                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 04: Dual OTP System</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Require an Arrival OTP and a Completion OTP.</p>
                   <p className="text-[16px] text-zinc-500 leading-relaxed">Why: The trust deficit is massive. The Arrival OTP verifies the worker before home entry. The Completion OTP authorizes payment only when the customer is satisfied. It creates a secure boundary.</p>
                 </div>
@@ -416,14 +425,14 @@ WILL (Worker App)
             </div>
 
             {/* Decision 05 */}
-            <div className="flex flex-col md:flex-row items-center gap-16 mb-32 relative">
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
               <div className="w-full md:w-1/2">
                 <img src="/images/decision-5.png" alt="Decision 05" className="object-contain w-full" />
               </div>
               <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-10 -left-10 text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">05</span>
+                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">05</span>
                 <div className="relative z-10">
-                  <h3 className="text-[24px] text-black mb-6">Decision 05: Automated Assignment</h3>
+                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 05: Automated Assignment</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Connect users automatically based on verified skills rather than profile browsing.</p>
                   <p className="text-[16px] text-zinc-500 leading-relaxed">Why: In traditional models, customers may discriminate based on photos or names. Automatic assignment removes bias, ensures equal opportunity for verified workers, and speeds up booking.</p>
                 </div>
@@ -431,14 +440,14 @@ WILL (Worker App)
             </div>
 
             {/* Decision 06 */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-16 relative">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 relative">
               <div className="w-full md:w-1/2">
                 <img src="/images/decision-6.png" alt="Decision 06" className="object-contain w-full" />
               </div>
               <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-10 -left-10 text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">06</span>
+                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">06</span>
                 <div className="relative z-10">
-                  <h3 className="text-[24px] text-black mb-6">Decision 06: Visual Process Diagrams</h3>
+                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 06: Visual Process Diagrams</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Show a step-by-step visual diagram before booking commitment.</p>
                   <p className="text-[16px] text-zinc-500 leading-relaxed">Why: To lower anxiety. Users need to know exactly what happens after they hit 'Book'. Visual roadmaps answer unspoken questions and build trust instantly.</p>
                 </div>
@@ -446,8 +455,8 @@ WILL (Worker App)
             </div>
 
             {/* The Final Quote Section */}
-            <div className="w-full max-w-[800px] mx-auto text-center py-24 border-t border-zinc-200 mt-16">
-              <p className="text-[32px] md:text-[40px] font-normal leading-tight text-black">
+            <div className="w-full max-w-[800px] mx-auto text-center border-t border-zinc-200 mt-16">
+              <p className="text-[24px] md:text-[40px] font-normal leading-tight text-black px-5 py-16 md:py-24">
                 "WILL is the first system that connects Sanjay (the user) & Vinod (the Worker) & protects simultaneously."
               </p>
             </div>
@@ -470,27 +479,27 @@ WILL (Worker App)
               
               {/* Email Input */}
               <div>
-                <a
-                  href="mailto:hello@bineet.in"
+                <button
+                  onClick={handleCopy}
                   className="inline-flex items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  hello@bineet.in
-                </a>
+                  {copied ? "Email copied!" : "hello@bineet.in"}
+                </button>
               </div>
             </div>
 
             {/* Right Column - Links */}
             <div className="grid grid-cols-2 gap-8 md:gap-12">
               {/* Links Column 1 */}
-              <nav className="flex flex-col gap-4">
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
+              <nav className="flex flex-col gap-4 items-start">
+                <button
+                  onClick={handleCopy}
+                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
-                  Email
-                </a>
+                  {copied ? "Copied!" : "Email"}
+                </button>
                 <a
                   href="https://www.linkedin.com/in/bineet-barthwal"
                   target="_blank"
