@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -97,7 +98,7 @@ export default function Home() {
           transition={{ ...fadeInUp.transition, delay: 0.4 }}
           className="mt-10 flex flex-wrap justify-center gap-4"
         >
-          <a href="mailto:hello@bineet.in" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-gray-100 px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-200 active:scale-95">
+          <a href="mailto:hello@bineet.in" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-[#F4F4F4] px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-[#F4F4F4] active:scale-95">
             Email me
           </a>
           <a href="/bineet-resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-50 active:scale-95">
@@ -120,27 +121,29 @@ export default function Home() {
           {/* Projects Grid */}
           <div className="grid gap-8 md:grid-cols-2">
           {/* Will Project */}
-          <article className="flex flex-col">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-zinc-100">
-              <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
-            </div>
-            <h3 
-              className="text-xl font-normal text-gray-900 md:text-2xl"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Will
-            </h3>
-            <p 
-              className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              How do you design an app connecting India's busiest users to its least literate workforce?
-            </p>
-          </article>
+          <Link href="/will" className="block">
+            <article className="flex flex-col hover:opacity-90 transition-opacity">
+              <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
+                <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
+              </div>
+              <h3 
+                className="text-xl font-normal text-gray-900 md:text-2xl"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                Will
+              </h3>
+              <p 
+                className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                How do you design an app connecting India's busiest users to its least literate workforce?
+              </p>
+            </article>
+          </Link>
 
           {/* Fundbridge Project */}
           <article className="flex flex-col">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-zinc-100">
+            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
               <img src="/images/fundbridge-thumbnail-1.png" alt="Fundbridge thumbnail" className="w-full h-full object-cover object-top" />
             </div>
             <h3 
@@ -159,7 +162,7 @@ export default function Home() {
 
           {/* MiH Interiors Project */}
           <article className="flex flex-col">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-zinc-100">
+            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
               {/* Placeholder for MiH Interiors */}
             </div>
             <h3 
@@ -178,7 +181,7 @@ export default function Home() {
 
           {/* Some Other Work Project */}
           <article className="flex flex-col">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-zinc-100">
+            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
               {/* Placeholder for other work */}
             </div>
             <h3 
@@ -214,7 +217,7 @@ export default function Home() {
         <div className="w-full max-w-6xl">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Image Placeholder - 16:9 aspect ratio */}
-            <div className="relative w-full max-w-full md:max-w-[480px] aspect-video rounded-2xl overflow-hidden shrink-0 bg-zinc-100">
+            <div className="relative w-full max-w-full md:max-w-[480px] aspect-video rounded-2xl overflow-hidden shrink-0 bg-[#F4F4F4]">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={artIndex}
@@ -262,7 +265,7 @@ export default function Home() {
           <div className="space-y-10">
           {/* Experience 1: Chandigarh University */}
           <article className="flex items-start gap-6 md:gap-8">
-            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-gray-200 md:h-20 md:w-20">
+            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-[#F4F4F4] md:h-20 md:w-20">
               {/* Placeholder for company logo */}
             </div>
             <div className="flex-grow">
@@ -289,7 +292,7 @@ export default function Home() {
 
           {/* Experience 2: Tree Multisoft Services */}
           <article className="flex items-start gap-6 md:gap-8">
-            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-gray-200 md:h-20 md:w-20">
+            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-[#F4F4F4] md:h-20 md:w-20">
               {/* Placeholder for company logo */}
             </div>
             <div className="flex-grow">
@@ -316,7 +319,7 @@ export default function Home() {
 
           {/* Experience 3: Kanishk Hospital */}
           <article className="flex items-start gap-6 md:gap-8">
-            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-gray-200 md:h-20 md:w-20">
+            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-[#F4F4F4] md:h-20 md:w-20">
               {/* Placeholder for company logo */}
             </div>
             <div className="flex-grow">
@@ -346,7 +349,7 @@ export default function Home() {
 
       {/* Tools & Skills Section */}
       <section id="skills" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
-        <div className="w-full max-w-6xl rounded-2xl bg-gray-100 px-8 py-10 md:px-12 md:py-14">
+        <div className="w-full max-w-6xl rounded-2xl bg-[#F4F4F4] px-8 py-10 md:px-12 md:py-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
             <div className="flex-grow">
           <h2 
@@ -386,7 +389,7 @@ export default function Home() {
             {/* View Skills Button */}
             <a
               href="/skills"
-              className="mt-6 flex-shrink-0 rounded-2xl border border-gray-400 px-6 py-2.5 text-center text-sm font-normal text-gray-700 transition-all hover:bg-gray-200 active:scale-95 md:mt-0"
+              className="mt-6 flex-shrink-0 rounded-2xl border border-gray-400 px-6 py-2.5 text-center text-sm font-normal text-gray-700 transition-all hover:bg-[#F4F4F4] active:scale-95 md:mt-0"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
               View Skills
