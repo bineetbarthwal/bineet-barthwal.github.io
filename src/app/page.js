@@ -37,17 +37,17 @@ export default function Home() {
   };
 
   return (
-    <main className="relative flex flex-col bg-white" style={{ scrollBehavior: "smooth" }}>
+    <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]" style={{ scrollBehavior: "smooth" }}>
       
       {/* Clean Sliding Pill Navigation */}
-      <nav className="fixed top-8 left-1/2 z-50 -translate-x-1/2">
-        <div className="flex items-center gap-0 rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md relative">
+      <nav className="fixed top-8 left-1/2 z-50 -translate-x-1/2 max-w-[90vw] overflow-x-auto scrollbar-hide md:max-w-fit">
+        <div className="flex items-center gap-0 rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md relative w-max md:w-auto">
           {/* Mapped Navigation Buttons */}
           {['home', 'projects', 'about', 'skills'].map((item) => (
             <motion.button
               key={item}
               onClick={() => handleNavClick(item)}
-              className="relative px-6 py-2 text-sm font-normal rounded-full"
+              className="relative px-6 py-2 text-sm md:text-base font-normal rounded-full"
               style={{ zIndex: 10 }}
               whileHover={{ scale: 1.05 }}
             >
@@ -69,7 +69,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section - Full Height */}
-      <section id="home" className="relative flex min-h-screen flex-col items-center justify-center px-6 overflow-hidden">
+      <section id="home" className="relative flex min-h-screen flex-col items-center justify-center px-5 md:px-12 overflow-hidden">
         {/* Hero Content */}
         <div className="relative z-10 flex max-w-3xl flex-col items-center text-center">
         <motion.h1 
@@ -97,10 +97,10 @@ export default function Home() {
           transition={{ ...fadeInUp.transition, delay: 0.4 }}
           className="mt-10 flex flex-wrap justify-center gap-4"
         >
-          <a href="mailto:your-email@example.com" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-gray-100 px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-200 active:scale-95">
+          <a href="mailto:hello@bineet.in" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-gray-100 px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-200 active:scale-95">
             Email me
           </a>
-          <a href="/resume.pdf" target="_blank" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-50 active:scale-95">
+          <a href="/bineet-resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-50 active:scale-95">
             Resume
           </a>
         </motion.div>
@@ -108,7 +108,7 @@ export default function Home() {
       </section>
 
       {/* Selected Work Section */}
-      <section id="projects" className="relative z-10 flex w-full flex-col items-center px-6">
+      <section id="projects" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12">
         <div className="w-full max-w-6xl">
           <h2 
             className="mb-12 text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
@@ -210,11 +210,11 @@ export default function Home() {
       </section>
 
       {/* About Me Section */}
-      <section id="about" className="relative z-10 flex w-full flex-col items-center px-6 py-16 md:py-24 lg:py-32">
+      <section id="about" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-6xl">
-          <div className="flex flex-col md:flex-row md:items-center md:gap-12 lg:gap-20">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
             {/* Image Placeholder - 16:9 aspect ratio */}
-            <div className="relative w-[358px] aspect-[16/9] md:w-[403px] flex-shrink-0 overflow-hidden rounded-2xl bg-zinc-100">
+            <div className="relative w-full max-w-full md:max-w-[480px] aspect-video rounded-2xl overflow-hidden shrink-0 bg-zinc-100">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={artIndex}
@@ -249,7 +249,7 @@ export default function Home() {
       </section>
 
       {/* Experiences Section */}
-      <section id="experiences" className="relative z-10 flex w-full flex-col items-center px-6 py-16 md:py-24 lg:py-32">
+      <section id="experiences" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-6xl">
           <h2 
             className="mb-12 text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
@@ -345,7 +345,7 @@ export default function Home() {
       </section>
 
       {/* Tools & Skills Section */}
-      <section id="skills" className="relative z-10 flex w-full flex-col items-center px-6 py-16 md:py-24 lg:py-32">
+      <section id="skills" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-6xl rounded-2xl bg-gray-100 px-8 py-10 md:px-12 md:py-14">
           <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
             <div className="flex-grow">
@@ -396,7 +396,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative z-10 flex w-full flex-col items-center px-6 py-16 md:py-24 lg:py-32">
+      <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-6xl">
           <h2 
             className="mb-12 text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
@@ -433,7 +433,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="relative z-10 w-full bg-zinc-950 overflow-hidden py-32 md:py-40">
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-6xl px-5 md:px-12">
           <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
             {/* Left Column - CTA */}
             <div>
@@ -475,7 +475,9 @@ export default function Home() {
                   LinkedIn
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="/bineet-resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
