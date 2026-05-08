@@ -40,14 +40,14 @@ export default function Home() {
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]" style={{ scrollBehavior: "smooth" }}>
       
       {/* Clean Sliding Pill Navigation */}
-      <nav className="fixed top-8 left-1/2 z-50 -translate-x-1/2 max-w-[90vw] overflow-x-auto scrollbar-hide md:max-w-fit">
-        <div className="flex items-center gap-0 rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md relative w-max md:w-auto">
+      <nav className="fixed top-8 left-1/2 z-50 -translate-x-1/2 w-full max-w-[95vw] mx-auto overflow-x-auto scrollbar-hide md:max-w-fit">
+        <div className="flex items-center gap-2 md:gap-0 mx-auto rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md relative w-max md:w-auto">
           {/* Mapped Navigation Buttons */}
           {['home', 'projects', 'about', 'skills'].map((item) => (
             <motion.button
               key={item}
               onClick={() => handleNavClick(item)}
-              className="relative px-6 py-2 text-sm md:text-base font-normal rounded-full"
+              className="relative px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full"
               style={{ zIndex: 10 }}
               whileHover={{ scale: 1.05 }}
             >
@@ -468,7 +468,9 @@ export default function Home() {
                   Email
                 </a>
                 <a
-                  href="https://linkedin.com/in/bineet"
+                  href="https://www.linkedin.com/in/bineet-barthwal"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
