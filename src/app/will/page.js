@@ -479,9 +479,16 @@ WILL (Worker App)
               
               {/* Email Input */}
               <div>
+                <a
+                  href="mailto:hello@bineet.in"
+                  className="inline-flex md:hidden items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  hello@bineet.in
+                </a>
                 <button
                   onClick={handleCopy}
-                  className="inline-flex items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
+                  className="hidden md:inline-flex items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   {copied ? "Email copied!" : "hello@bineet.in"}
@@ -493,9 +500,16 @@ WILL (Worker App)
             <div className="grid grid-cols-2 gap-8 md:gap-12">
               {/* Links Column 1 */}
               <nav className="flex flex-col gap-4 items-start">
+                <a
+                  href="mailto:hello@bineet.in"
+                  className="block md:hidden text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Email
+                </a>
                 <button
                   onClick={handleCopy}
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
+                  className="hidden md:block text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   {copied ? "Copied!" : "Email"}
