@@ -362,8 +362,6 @@ export default function Home() {
       {/* Tools & Skills Section */}
       <section id="skills" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-6xl rounded-2xl bg-[#F4F4F4] px-8 py-10 md:px-12 md:py-14">
-          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-            <div className="flex-grow">
           <h2 
             className="text-2xl font-normal text-gray-900 md:text-3xl"
             style={{ fontFamily: 'var(--font-sans)' }}
@@ -371,41 +369,30 @@ export default function Home() {
             Tools & Skills
           </h2>
 
-              {/* Tools */}
-              <div className="mt-6">
-                <p 
-                  className="font-medium text-gray-900"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Tools:{" "}
-                  <span className="font-normal text-gray-600">
-                    Figma, FigJam, Adobe Creative Cloud
-                  </span>
-                </p>
-              </div>
-
-              {/* Skills */}
-              <div className="mt-4">
-                <p 
-                  className="font-medium text-gray-900"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Skills:{" "}
-                  <span className="font-normal text-gray-600">
-                    UX Research, Information Architecture, Wireframing, Prototyping, Visual Design, Typography, Graphic Design, HTML, CSS.
-                  </span>
-                </p>
-              </div>
-            </div>
-
-            {/* View Skills Button */}
-            <a
-              href="/skills"
-              className="mt-6 flex-shrink-0 rounded-2xl border border-gray-400 px-6 py-2.5 text-center text-sm font-normal text-gray-700 transition-all hover:bg-[#F4F4F4] active:scale-95 md:mt-0"
+          {/* Tools */}
+          <div className="mt-6">
+            <p 
+              className="font-medium text-gray-900"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              View Skills
-            </a>
+              Tools:{" "}
+              <span className="font-normal text-gray-600">
+                Figma, FigJam, Adobe Creative Cloud
+              </span>
+            </p>
+          </div>
+
+          {/* Skills */}
+          <div className="mt-4">
+            <p 
+              className="font-medium text-gray-900"
+              style={{ fontFamily: 'var(--font-sans)' }}
+            >
+              Skills:{" "}
+              <span className="font-normal text-gray-600">
+                UX Research, Information Architecture, Wireframing, Prototyping, Visual Design, Typography, Graphic Design, HTML, CSS.
+              </span>
+            </p>
           </div>
         </div>
       </section>
