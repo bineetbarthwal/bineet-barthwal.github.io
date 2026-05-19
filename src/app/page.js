@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { LayoutTemplate, Search, PenTool, Layers, Terminal, Smartphone, Palette } from "lucide-react";
+import { SiFigma, SiReact, SiTailwindcss } from "react-icons/si";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,10 +27,33 @@ export default function Home() {
     }, 2500);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const sectionIds = ['home', 'projects', 'about', 'skills'];
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
   const reviews = [
-    { quote: "Bineet brings exceptional product understanding and customer empathy.", author: "Reviewer One" },
-    { quote: "A thoughtful designer who balances craft with user needs.", author: "Reviewer Two" },
-    { quote: "Delivers clear, elegant interfaces and strong product instincts.", author: "Reviewer Three" }
+    { quote: "Very diligent and calm. I thoroughly enjoyed working with him.", author: "Aryan Rajput" },
+    { quote: "I appreciate how instantly Bineet grasps the vibe and the client's desired aesthetic. I never had to explain what I wanted twice.", author: "Dr. D.P. Purohit" },
+    { quote: "We truly appreciated his altruistic nature and collaborative spirit. Wishing him the absolute best.", author: "Shreya Bhatt" }
   ];
   
   const fadeInUp = {
@@ -168,28 +194,36 @@ export default function Home() {
               className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              How do you design an app connecting India's busiest users to its least literate workforce, smoothly?
+              A unified platform connecting founders and VCs.
             </p>
           </article>
 
           {/* MiH Interiors Project */}
-          <article className="flex flex-col">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-              {/* Placeholder for MiH Interiors */}
-            </div>
-            <h3 
-              className="text-xl font-normal text-gray-900 md:text-2xl"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              MiH Interiors
-            </h3>
-            <p 
-              className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Designing a website for a premium interior design studio that actually converts.
-            </p>
-          </article>
+          <Link href="/mih" className="block">
+            <article className="flex flex-col hover:opacity-90 transition-opacity">
+              <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
+                <Image 
+                  src="/images/mih-interiors.png" 
+                  alt="MIH Interiors Case Study" 
+                  width={800} 
+                  height={600} 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 ease-in-out"
+                />
+              </div>
+              <h3 
+                className="text-xl font-normal text-gray-900 md:text-2xl"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                MiH Interiors
+              </h3>
+              <p 
+                className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                Designing a website for a premium interior design studio that actually converts.
+              </p>
+            </article>
+          </Link>
 
           {/* Some Other Work Project */}
           <article className="flex flex-col">
@@ -200,13 +234,13 @@ export default function Home() {
               className="text-xl font-normal text-gray-900 md:text-2xl"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              Some other work
+              Coming Soon
             </h3>
             <p 
               className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              Upcoming work for showcase
+              Currently crafting new UX case studies and product explorations.
             </p>
           </article>
         </div>
@@ -228,20 +262,15 @@ export default function Home() {
       <section id="about" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
         <div className="w-full max-w-6xl">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-            {/* Image Placeholder - 16:9 aspect ratio */}
-            <div className="relative w-full max-w-full md:max-w-[480px] aspect-video rounded-2xl overflow-hidden shrink-0 bg-[#F4F4F4]">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={artIndex}
-                  src={artImages[artIndex]}
-                  alt="About me art"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full h-full object-cover absolute inset-0"
-                />
-              </AnimatePresence>
+            {/* Editorial Portrait */}
+            <div className="w-full md:w-1/2 aspect-video rounded-[24px] overflow-hidden bg-zinc-100">
+              <Image 
+                src="/images/profile-bw.png"
+                alt="Bineet Barthwal Portrait"
+                width={800}
+                height={1000}
+                className="object-cover w-full h-full"
+              />
             </div>
 
             {/* About Content */}
@@ -274,125 +303,117 @@ export default function Home() {
           </h2>
 
           {/* Experiences List */}
-          <div className="space-y-10">
-          {/* Experience 1: Chandigarh University */}
-          <article className="flex items-start gap-6 md:gap-8">
-            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-[#F4F4F4] md:h-20 md:w-20">
-              {/* Placeholder for company logo */}
-            </div>
-            <div className="flex-grow">
-              <h3 
-                className="text-lg font-normal text-gray-900 md:text-xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Chandigarh University
-              </h3>
-              <p 
-                className="mt-1 text-sm text-gray-600 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Graphics & UI/UX Designer
-              </p>
-              <p 
-                className="mt-1 text-sm text-gray-500 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
+          <div className="flex flex-col w-full">
+            {/* Experience 1: Chandigarh University */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-t border-b border-zinc-200 group">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-[20px] font-medium text-black" style={{ fontFamily: 'var(--font-sans)' }}>Graphics & UI/UX Designer</h3>
+                <p className="text-[16px] text-zinc-500" style={{ fontFamily: 'var(--font-sans)' }}>Chandigarh University</p>
+              </div>
+              <div className="text-[14px] text-zinc-400 mt-2 md:mt-0 tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
                 April 2025 – Present
-              </p>
+              </div>
             </div>
-          </article>
 
-          {/* Experience 2: Tree Multisoft Services */}
-          <article className="flex items-start gap-6 md:gap-8">
-            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-[#F4F4F4] md:h-20 md:w-20">
-              {/* Placeholder for company logo */}
-            </div>
-            <div className="flex-grow">
-              <h3 
-                className="text-lg font-normal text-gray-900 md:text-xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Tree Multisoft Services
-              </h3>
-              <p 
-                className="mt-1 text-sm text-gray-600 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Graphics & UI/UX Designer
-              </p>
-              <p 
-                className="mt-1 text-sm text-gray-500 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
+            {/* Experience 2: Tree Multisoft Services */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-zinc-200 group">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-[20px] font-medium text-black" style={{ fontFamily: 'var(--font-sans)' }}>Graphics & UI/UX Designer</h3>
+                <p className="text-[16px] text-zinc-500" style={{ fontFamily: 'var(--font-sans)' }}>Tree Multisoft Services</p>
+              </div>
+              <div className="text-[14px] text-zinc-400 mt-2 md:mt-0 tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
                 May 2024 – April 2025
-              </p>
+              </div>
             </div>
-          </article>
 
-          {/* Experience 3: Kanishk Hospital */}
-          <article className="flex items-start gap-6 md:gap-8">
-            <div className="mt-1 h-16 w-16 flex-shrink-0 overflow-hidden rounded bg-[#F4F4F4] md:h-20 md:w-20">
-              {/* Placeholder for company logo */}
-            </div>
-            <div className="flex-grow">
-              <h3 
-                className="text-lg font-normal text-gray-900 md:text-xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Kanishk Surgical & Super Speciality Hospital
-              </h3>
-              <p 
-                className="mt-1 text-sm text-gray-600 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Graphic Designer
-              </p>
-              <p 
-                className="mt-1 text-sm text-gray-500 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
+            {/* Experience 3: Kanishk Hospital */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-zinc-200 group">
+              <div className="flex flex-col gap-1">
+                <h3 className="text-[20px] font-medium text-black" style={{ fontFamily: 'var(--font-sans)' }}>Graphic Designer</h3>
+                <p className="text-[16px] text-zinc-500" style={{ fontFamily: 'var(--font-sans)' }}>Kanishk Surgical & Super Speciality Hospital</p>
+              </div>
+              <div className="text-[14px] text-zinc-400 mt-2 md:mt-0 tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
                 June 2023 – May 2024
-              </p>
+              </div>
             </div>
-          </article>
           </div>
         </div>
       </section>
 
-      {/* Tools & Skills Section */}
-      <section id="skills" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
-        <div className="w-full max-w-6xl rounded-2xl bg-[#F4F4F4] px-8 py-10 md:px-12 md:py-14">
-          <h2 
-            className="text-2xl font-normal text-gray-900 md:text-3xl"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            Tools & Skills
+
+
+      {/* Capabilities Section */}
+      <section id="skills" className="w-full bg-[#F4F4F4] py-32">
+        <div className="max-w-[1100px] mx-auto px-5 w-full">
+          <h2 className="text-[48px] font-normal text-black mb-20" style={{ fontFamily: 'var(--font-sans)' }}>
+            Skills
           </h2>
 
-          {/* Tools */}
-          <div className="mt-6">
-            <p 
-              className="font-medium text-gray-900"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Tools:{" "}
-              <span className="font-normal text-gray-600">
-                Figma, FigJam, Adobe Creative Cloud
-              </span>
-            </p>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12">
+            {/* Column 1: Systems & UX */}
+            <div>
+              <h3 className="text-[24px] mb-8 text-black border-b border-zinc-300 pb-4" style={{ fontFamily: 'var(--font-sans)' }}>Systems & UX</h3>
+              <ul className="flex flex-col gap-6">
+                <li className="flex flex-row items-center gap-4">
+                  <Search size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>UX Research & Discovery</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <LayoutTemplate size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Information Architecture</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <Layers size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Wireframing & User Flows</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <Smartphone size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Mobile-First Prototyping</span>
+                </li>
+              </ul>
+            </div>
 
-          {/* Skills */}
-          <div className="mt-4">
-            <p 
-              className="font-medium text-gray-900"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Skills:{" "}
-              <span className="font-normal text-gray-600">
-                UX Research, Information Architecture, Wireframing, Prototyping, Visual Design, Typography, Graphic Design, HTML, CSS.
-              </span>
-            </p>
+            {/* Column 2: Visual Craft */}
+            <div>
+              <h3 className="text-[24px] mb-8 text-black border-b border-zinc-300 pb-4" style={{ fontFamily: 'var(--font-sans)' }}>Visual Craft</h3>
+              <ul className="flex flex-col gap-6">
+                <li className="flex flex-row items-center gap-4">
+                  <PenTool size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>UI & Interaction Design</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <SiFigma size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Figma & FigJam</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <Palette size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Adobe Creative Suite</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <LayoutTemplate size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Design Systems</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Execution & Tooling */}
+            <div>
+              <h3 className="text-[24px] mb-8 text-black border-b border-zinc-300 pb-4" style={{ fontFamily: 'var(--font-sans)' }}>Execution & Tooling</h3>
+              <ul className="flex flex-col gap-6">
+                <li className="flex flex-row items-center gap-4">
+                  <Terminal size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>HTML & CSS Fundamentals</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <SiTailwindcss size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Tailwind CSS</span>
+                </li>
+                <li className="flex flex-row items-center gap-4">
+                  <PenTool size={24} className="text-zinc-800" />
+                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>AI-Assisted Workflows</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
