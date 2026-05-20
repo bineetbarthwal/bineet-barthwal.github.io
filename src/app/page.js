@@ -554,6 +554,13 @@ export default function Home() {
                 >
                   Skills
                 </a>
+                <a
+                  href="/privacy"
+                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Privacy Policy
+                </a>
               </nav>
             </div>
           </div>

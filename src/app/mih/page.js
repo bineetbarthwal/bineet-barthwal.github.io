@@ -202,6 +202,13 @@ export default function MIHCaseStudy() {
                 >
                   Skills
                 </Link>
+                <Link
+                  href="/privacy"
+                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Privacy Policy
+                </Link>
               </nav>
             </div>
           </div>
