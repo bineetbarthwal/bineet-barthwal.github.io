@@ -207,7 +207,7 @@ export default function Home() {
                   alt="MIH Interiors Case Study" 
                   width={800} 
                   height={600} 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500 ease-in-out"
+                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500 ease-in-out"
                 />
               </div>
               <h3 
