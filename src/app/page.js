@@ -265,7 +265,7 @@ export default function Home() {
             {/* Editorial Portrait */}
             <div className="w-full md:w-1/2 aspect-video rounded-[24px] overflow-hidden bg-zinc-100">
               <Image 
-                src="/images/profile-bw.png"
+                src="/images/profile-bw-v1.png"
                 alt="Bineet Barthwal Portrait"
                 width={800}
                 height={1000}
