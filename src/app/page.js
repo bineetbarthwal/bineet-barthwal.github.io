@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,6 +11,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [copied, setCopied] = useState(false);
+  const isClickScrolling = useRef(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText("hello@bineet.in");
@@ -31,6 +32,7 @@ export default function Home() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isClickScrolling.current) return;
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
@@ -63,11 +65,15 @@ export default function Home() {
   };
 
   const handleNavClick = (sectionId) => {
+    isClickScrolling.current = true;
     setActiveSection(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setTimeout(() => {
+      isClickScrolling.current = false;
+    }, 900);
   };
 
   return (
