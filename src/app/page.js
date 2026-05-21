@@ -265,11 +265,12 @@ export default function Home() {
             {/* Editorial Portrait */}
             <div className="w-full md:w-1/2 aspect-video rounded-[24px] overflow-hidden bg-zinc-100">
               <Image 
-                src="/images/profile-bw-v1.png"
-                alt="Bineet Barthwal Portrait"
+                src="/images/bineet-illustration.jpg"
+                alt="Bineet Barthwal"
                 width={800}
                 height={1000}
-                className="object-cover w-full h-full"
+                draggable={false}
+                className="object-cover w-full h-full pointer-events-none select-none"
               />
             </div>
 
