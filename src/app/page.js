@@ -186,7 +186,7 @@ export default function Home() {
           </Link>
 
           {/* Fundbridge Project */}
-          <article className="flex flex-col">
+          <article className="flex flex-col hover:opacity-90 transition-opacity">
             <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
               <img src="/images/fundbridge-thumbnail-1.png" alt="Fundbridge thumbnail" className="w-full h-full object-cover object-top" />
             </div>
@@ -213,7 +213,7 @@ export default function Home() {
                   alt="MIH Interiors Case Study" 
                   width={800} 
                   height={600} 
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500 ease-in-out"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
               <h3 
@@ -231,35 +231,35 @@ export default function Home() {
             </article>
           </Link>
 
-          {/* Some Other Work Project */}
-          <article className="flex flex-col">
+          {/* Rkade Project */}
+          <article className="flex flex-col hover:opacity-90 transition-opacity">
             <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-              {/* Placeholder for other work */}
+              <img src="/images/rkade-thumbnail.png" alt="Rkade thumbnail" className="w-full h-full object-cover object-top" />
             </div>
             <h3 
               className="text-xl font-normal text-gray-900 md:text-2xl"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              Coming Soon
+              Rkade
             </h3>
             <p 
               className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              Currently crafting new UX case studies and product explorations.
+              A campus-focused platform where students can discover and participate in college events, hackathons, fests, and gaming/community activities.
             </p>
           </article>
         </div>
 
         {/* See More Work Button */}
         <div className="mt-12 flex justify-center md:mt-16">
-          <a
+          <Link
             href="/work"
             className="rounded-full border border-gray-300 px-8 py-3 text-center text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 active:scale-95 md:px-10 md:py-4 md:text-base"
             style={{ fontFamily: 'var(--font-sans)' }}
           >
             See more work
-          </a>
+          </Link>
         </div>
         </div>
       </section>
@@ -292,7 +292,7 @@ export default function Home() {
                 className="mt-6 text-base leading-relaxed text-gray-700 md:text-lg"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
-                I'm Bineet Barthwal, originally from Dehradun. I came into UX through graphic design, which means structure & craft have always been the same thing for me. I'm drawn to complex problems & the process of untangling them. Outside of work, nature & music keep me sane.
+                I'm Bineet Barthwal, originally from Dehradun. With a B.Sc in Statistics and an MBA in Business Analytics, I got into UX through graphic design, so structure, data, and craft have always felt like the same thing. Outside work, nature and music keep me grounded.
               </p>
             </div>
           </div>
