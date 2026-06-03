@@ -167,24 +167,26 @@ export default function WorkPage() {
               </>
             ) : (
               <>
-                {/* Poster & Banner Design */}
-                <article className="flex flex-col hover:opacity-90 transition-opacity">
-                  <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                    {/* Placeholder image */}
-                  </div>
-                  <h3
-                    className="text-xl font-normal text-gray-900 md:text-2xl"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    Poster &amp; Banner Design
-                  </h3>
-                  <p
-                    className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    Visual communication through impactful poster and banner designs.
-                  </p>
-                </article>
+                {/* Visual Craft */}
+                <Link href="/work/visual-craft" className="block">
+                  <article className="flex flex-col hover:opacity-90 transition-opacity">
+                    <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
+                      {/* Placeholder image */}
+                    </div>
+                    <h3
+                      className="text-xl font-normal text-gray-900 md:text-2xl"
+                      style={{ fontFamily: 'var(--font-sans)' }}
+                    >
+                      Visual Craft
+                    </h3>
+                    <p
+                      className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
+                      style={{ fontFamily: 'var(--font-sans)' }}
+                    >
+                      Editorial layouts, brand identity, and marketing design.
+                    </p>
+                  </article>
+                </Link>
 
                 {/* Logo Design */}
                 <article className="flex flex-col hover:opacity-90 transition-opacity">
