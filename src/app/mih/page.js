@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-export default function MIHCaseStudy() {
+function MIHCaseStudy() {
   const searchParams = useSearchParams();
   const isFromHome = searchParams.get('from') === 'home';
   const backHref = isFromHome ? '/' : '/work';
@@ -19,8 +19,7 @@ export default function MIHCaseStudy() {
   };
 
   return (
-    <Suspense fallback={<div className="min-h-screen bg-white w-full flex items-center justify-center">Loading...</div>}>
-      <main className="bg-white min-h-screen font-sans">
+    <main className="bg-white min-h-screen font-sans">
       <div className="w-full flex flex-col">
         
         {/* Navigation */}
@@ -217,6 +216,13 @@ export default function MIHCaseStudy() {
         </div>
       </footer>
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>}>
+      <MIHCaseStudy />
     </Suspense>
   );
 }
