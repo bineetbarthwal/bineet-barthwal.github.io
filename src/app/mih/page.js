@@ -1,14 +1,10 @@
 "use client";
-import { Suspense } from 'react';
 import { useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-function MIHCaseStudy() {
-  const searchParams = useSearchParams();
-  const isFromHome = searchParams.get('from') === 'home';
-  const backHref = isFromHome ? '/' : '/work';
-  const backText = isFromHome ? 'Back to Home' : 'Back to Work';
+export default function MIHCaseStudy() {
+  const backHref = '/work';
+  const backText = 'Back to Work';
 
   const [copied, setCopied] = useState(false);
 
@@ -216,13 +212,5 @@ function MIHCaseStudy() {
         </div>
       </footer>
     </main>
-  );
-}
-
-export default function Page() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center">Loading...</div>}>
-      <MIHCaseStudy />
-    </Suspense>
   );
 }
