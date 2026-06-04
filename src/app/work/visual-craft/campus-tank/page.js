@@ -9,11 +9,14 @@ export default function CampusTankPage() {
         <div className="w-full max-w-5xl mx-auto">
           <Link
             href="/work/visual-craft"
-            className="inline-flex items-center gap-1 text-sm md:text-base font-normal text-[#71717a] hover:text-black transition-colors"
-            style={{ fontFamily: 'var(--font-sans)' }}
+            className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit"
           >
-            <span>←</span>
-            <span>Back to Visual Craft</span>
+            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </span>
+            <span className="font-medium">Back to Visual Craft</span>
           </Link>
         </div>
       </nav>
