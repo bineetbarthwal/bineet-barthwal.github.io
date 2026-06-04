@@ -8,62 +8,64 @@ export default function WorkPage() {
 
   return (
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]">
-      {/* Navigation */}
-      <nav className="fixed top-8 left-0 right-0 z-50 w-full px-5 md:px-12">
-        <div className="flex flex-col md:flex-row items-start md:items-center w-full mb-8 md:mb-12 gap-6 relative">
-          {/* Standardized Circular Back Button */}
-          <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit relative z-10">
-            <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7" />
-              </svg>
-            </span>
-            <span className="font-medium text-sm md:text-base">Back to Home</span>
-          </Link>
-
-          {/* Center: Toggle Pill */}
-          <div className="w-full md:w-auto md:absolute md:left-1/2 md:-translate-x-1/2 flex justify-center">
-            <div className="flex items-center rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md">
-              <button
-                onClick={() => setActiveTab("UX")}
-                className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "UX"
-                  ? "bg-black text-white"
-                  : "bg-transparent text-[#71717a] hover:text-black"
-                  }`}
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Product &amp; UX
-              </button>
-              <button
-                onClick={() => setActiveTab("Creative")}
-                className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "Creative"
-                  ? "bg-black text-white"
-                  : "bg-transparent text-[#71717a] hover:text-black"
-                  }`}
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Creative Design
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Header */}
-      <section className="pt-32 pb-12 px-5 md:px-12 flex flex-col items-center">
+      <section className="pt-32 pb-12 px-5 md:px-12 flex flex-col items-center w-full">
         <div className="w-full max-w-6xl">
-          <h1
-            className="text-3xl font-normal text-gray-900 md:text-4xl lg:text-5xl"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            My Work
-          </h1>
-          <p
-            className="mt-4 text-sm leading-relaxed text-gray-600 md:text-base max-w-2xl"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            A collection of case studies and projects I've worked on.
-          </p>
+          
+          {/* Top Bar: Standardized Container Alignment */}
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full mb-16 gap-6">
+            
+            {/* 1. Left: Back Button */}
+            <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-[140px]">
+              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+              </span>
+              <span className="font-medium text-sm md:text-base">Back to Home</span>
+            </Link>
+
+            {/* 2. Center: Toggle Switch */}
+            <div className="flex items-center justify-center">
+              <div className="flex items-center rounded-[16px] border border-gray-300 bg-white/95 p-1">
+                <button
+                  onClick={() => setActiveTab("UX")}
+                  className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "UX"
+                    ? "bg-black text-white"
+                    : "bg-transparent text-[#71717a] hover:text-black"
+                    }`}
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Product &amp; UX
+                </button>
+                <button
+                  onClick={() => setActiveTab("Creative")}
+                  className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "Creative"
+                    ? "bg-black text-white"
+                    : "bg-transparent text-[#71717a] hover:text-black"
+                    }`}
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Creative Design
+                </button>
+              </div>
+            </div>
+            
+            {/* 3. Right: Spacer (Matches back button width to keep toggle perfectly centered) */}
+            <div className="hidden md:block w-[140px]"></div>
+          </div>
+
+          {/* Page Title */}
+          <div className="mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: 'var(--font-sans)' }}>
+              My Work
+            </h1>
+            <p
+              className="mt-4 text-sm leading-relaxed text-gray-600 md:text-base max-w-2xl"
+              style={{ fontFamily: 'var(--font-sans)' }}
+            >
+              A collection of case studies and projects I've worked on.
+            </p>
+          </div>
         </div>
       </section>
 
