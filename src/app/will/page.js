@@ -2,8 +2,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 export default function WillCaseStudy() {
+  const searchParams = useSearchParams();
+  const isFromHome = searchParams.get('from') === 'home';
+  const backHref = isFromHome ? '/' : '/work';
+  const backText = isFromHome ? 'Back to Home' : 'Back to Work';
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     show: { 
@@ -36,13 +42,13 @@ export default function WillCaseStudy() {
         <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
           {/* Top Nav */}
           <motion.div variants={fadeInUp} className="w-full mb-16 mt-12">
-            <Link href="/work" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit">
+            <Link href={backHref} className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit">
               <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
               </span>
-              <span className="font-medium text-base">Back to Work</span>
+              <span className="font-medium text-base">{backText}</span>
             </Link>
           </motion.div>
 

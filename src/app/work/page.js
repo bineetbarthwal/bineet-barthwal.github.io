@@ -83,7 +83,7 @@ export default function WorkPage() {
             {activeTab === "UX" ? (
               <>
                 {/* Will Project */}
-                <Link href="/will" className="block">
+                <Link href="/will?from=work" className="block">
                   <article className="flex flex-col hover:opacity-90 transition-opacity">
                     <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
                       <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
@@ -123,7 +123,7 @@ export default function WorkPage() {
                 </article>
 
                 {/* MiH Interiors Project */}
-                <Link href="/mih" className="block">
+                <Link href="/mih?from=work" className="block">
                   <article className="flex flex-col hover:opacity-90 transition-opacity">
                     <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
                       <Image
