@@ -6,7 +6,7 @@ export default function VisualCraftPage() {
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]">
       {/* Navigation */}
       <nav className="fixed top-8 left-0 right-0 z-50 w-full px-5 md:px-12">
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-7xl mx-auto">
           <Link
             href="/work"
             className="inline-flex items-center gap-1 text-sm md:text-base font-normal text-[#71717a] hover:text-black transition-colors"
@@ -19,8 +19,8 @@ export default function VisualCraftPage() {
       </nav>
 
       {/* Header */}
-      <section className="pt-32 pb-12 px-5 md:px-12 flex flex-col items-center">
-        <div className="w-full max-w-6xl">
+      <section className="pt-32 pb-12 px-4 flex flex-col items-center">
+        <div className="w-full max-w-7xl mx-auto">
           <h1
             className="text-3xl font-normal text-gray-900 md:text-4xl lg:text-5xl"
             style={{ fontFamily: 'var(--font-sans)' }}
@@ -36,49 +36,39 @@ export default function VisualCraftPage() {
         </div>
       </section>
 
-      {/* Masonry Gallery */}
-      <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 pb-24">
-        <div className="w-full max-w-6xl">
-          <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
-            {/* Image 1 — Replace src with your .webp file */}
-            <div className="break-inside-avoid">
-              <img
-                src=""
-                alt="Visual Craft work 1"
-                className="w-full rounded-2xl bg-[#F4F4F4] object-cover"
-                style={{ minHeight: '200px' }}
-              />
-            </div>
+      {/* Projects Grid */}
+      <section className="relative z-10 flex w-full flex-col items-center px-4 pb-24">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Campus Tank Branding */}
+            <Link href="/work/visual-craft/campus-tank" className="block group">
+              <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
+                <div className="w-full h-full group-hover:opacity-90 transition-opacity">
+                  {/* Replace with actual image */}
+                </div>
+              </div>
+              <h3
+                className="mt-4 text-lg font-normal text-gray-900"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                Campus Tank Branding
+              </h3>
+            </Link>
 
-            {/* Image 2 — Replace src with your .webp file */}
-            <div className="break-inside-avoid">
-              <img
-                src=""
-                alt="Visual Craft work 2"
-                className="w-full rounded-2xl bg-[#F4F4F4] object-cover"
-                style={{ minHeight: '260px' }}
-              />
-            </div>
-
-            {/* Image 3 — Replace src with your .webp file */}
-            <div className="break-inside-avoid">
-              <img
-                src=""
-                alt="Visual Craft work 3"
-                className="w-full rounded-2xl bg-[#F4F4F4] object-cover"
-                style={{ minHeight: '220px' }}
-              />
-            </div>
-
-            {/* Image 4 — Replace src with your .webp file */}
-            <div className="break-inside-avoid">
-              <img
-                src=""
-                alt="Visual Craft work 4"
-                className="w-full rounded-2xl bg-[#F4F4F4] object-cover"
-                style={{ minHeight: '240px' }}
-              />
-            </div>
+            {/* Event Standees */}
+            <Link href="/work/visual-craft/event-standees" className="block group">
+              <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
+                <div className="w-full h-full group-hover:opacity-90 transition-opacity">
+                  {/* Replace with actual image */}
+                </div>
+              </div>
+              <h3
+                className="mt-4 text-lg font-normal text-gray-900"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                Event Standees
+              </h3>
+            </Link>
           </div>
         </div>
       </section>
