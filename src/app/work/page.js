@@ -10,12 +10,12 @@ export default function WorkPage() {
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]">
       {/* Navigation */}
       <nav className="fixed top-8 left-0 right-0 z-50 w-full px-5 md:px-12">
-        <div className="flex flex-col md:flex-row items-start md:items-center w-full max-w-6xl mx-auto mb-8 md:mb-12 gap-6 relative">
+        <div className="flex flex-col md:flex-row items-start md:items-center w-full mb-8 md:mb-12 gap-6 relative">
           {/* Standardized Circular Back Button */}
           <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit relative z-10">
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M19 12H5M12 19l-7-7 7-7"/>
+                <path d="M19 12H5M12 19l-7-7 7-7" />
               </svg>
             </span>
             <span className="font-medium text-sm md:text-base">Back to Home</span>
@@ -26,22 +26,20 @@ export default function WorkPage() {
             <div className="flex items-center rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md">
               <button
                 onClick={() => setActiveTab("UX")}
-                className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${
-                  activeTab === "UX"
-                    ? "bg-black text-white"
-                    : "bg-transparent text-[#71717a] hover:text-black"
-                }`}
+                className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "UX"
+                  ? "bg-black text-white"
+                  : "bg-transparent text-[#71717a] hover:text-black"
+                  }`}
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
                 Product &amp; UX
               </button>
               <button
                 onClick={() => setActiveTab("Creative")}
-                className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${
-                  activeTab === "Creative"
-                    ? "bg-black text-white"
-                    : "bg-transparent text-[#71717a] hover:text-black"
-                }`}
+                className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "Creative"
+                  ? "bg-black text-white"
+                  : "bg-transparent text-[#71717a] hover:text-black"
+                  }`}
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
                 Creative Design
