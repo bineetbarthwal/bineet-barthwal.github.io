@@ -1,15 +1,11 @@
 "use client";
-export const dynamic = 'force-dynamic';
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
 export default function WillCaseStudy() {
-  const searchParams = useSearchParams();
-  const isFromHome = searchParams.get('from') === 'home';
-  const backHref = isFromHome ? '/' : '/work';
-  const backText = isFromHome ? 'Back to Home' : 'Back to Work';
+  const backHref = '/work';
+  const backText = 'Back to Work';
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
