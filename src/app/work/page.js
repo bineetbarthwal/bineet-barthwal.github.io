@@ -12,20 +12,22 @@ export default function WorkPage() {
         <div className="w-full max-w-6xl">
           
           {/* Top Bar: Standardized Container Alignment */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full mb-16 gap-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center w-full mb-16 gap-6">
             
             {/* 1. Left: Back Button */}
-            <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-[140px]">
-              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-              </span>
-              <span className="font-medium text-sm md:text-base">Back to Home</span>
-            </Link>
+            <div className="flex-1">
+              <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit whitespace-nowrap">
+                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                  </svg>
+                </span>
+                <span className="font-medium text-sm md:text-base">Back to Home</span>
+              </Link>
+            </div>
 
             {/* 2. Center: Toggle Switch */}
-            <div className="flex items-center justify-center">
+            <div className="shrink-0 flex items-center justify-center">
               <div className="flex items-center rounded-[16px] border border-gray-300 bg-white/95 p-1">
                 <button
                   onClick={() => setActiveTab("UX")}
@@ -50,8 +52,9 @@ export default function WorkPage() {
               </div>
             </div>
             
-            {/* 3. Right: Spacer (Matches back button width to keep toggle perfectly centered) */}
-            <div className="hidden md:block w-[140px]"></div>
+            {/* 3. Right: Flexible Spacer */}
+            <div className="flex-1 hidden md:block"></div>
+            
           </div>
 
           {/* Page Title */}
