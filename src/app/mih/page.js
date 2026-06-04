@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from 'react';
 import { useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -18,7 +19,8 @@ export default function MIHCaseStudy() {
   };
 
   return (
-    <main className="bg-white min-h-screen font-sans">
+    <Suspense fallback={<div className="min-h-screen bg-white w-full flex items-center justify-center">Loading...</div>}>
+      <main className="bg-white min-h-screen font-sans">
       <div className="w-full flex flex-col">
         
         {/* Navigation */}
@@ -215,5 +217,6 @@ export default function MIHCaseStudy() {
         </div>
       </footer>
     </main>
+    </Suspense>
   );
 }
