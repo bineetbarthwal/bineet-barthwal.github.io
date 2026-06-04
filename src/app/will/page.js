@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 export default function WillCaseStudy() {
   const fadeInUp = {
@@ -34,21 +35,15 @@ export default function WillCaseStudy() {
         {/* Section 1: Hero */}
         <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
           {/* Top Nav */}
-          <motion.div variants={fadeInUp} className="flex justify-between items-center w-full mb-16 mt-12">
-            <a href="/#projects" className="flex items-center gap-4 text-zinc-500 hover:text-zinc-900 transition-colors group">
-              <div className="w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F4] rounded-full flex items-center justify-center group-hover:bg-gray-200 transition-colors shrink-0">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="19" y1="12" x2="5" y2="12"></line>
-                  <polyline points="12 19 5 12 12 5"></polyline>
+          <motion.div variants={fadeInUp} className="w-full mb-16 mt-12">
+            <Link href="/work" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit">
+              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
-              </div>
-              <span className="text-sm md:text-[20px] font-normal leading-none">
-                Back to Projects
               </span>
-            </a>
-            <a href="/" className="px-5 py-2 text-sm md:px-8 md:py-3 md:text-[20px] border border-zinc-200 rounded-[20px] font-normal text-black hover:bg-[#F4F4F4] transition-colors leading-none shrink-0">
-              Home
-            </a>
+              <span className="font-medium text-base">Back to Work</span>
+            </Link>
           </motion.div>
 
           {/* Title */}
