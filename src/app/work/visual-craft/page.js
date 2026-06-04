@@ -23,7 +23,7 @@ export default function VisualCraftPage() {
 
       {/* Header */}
       <section className="pt-32 pb-12 px-5 md:px-12 flex flex-col items-center">
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-6xl">
           <h1
             className="text-3xl font-normal text-gray-900 md:text-4xl lg:text-5xl"
             style={{ fontFamily: 'var(--font-sans)' }}
@@ -41,7 +41,7 @@ export default function VisualCraftPage() {
 
       {/* Projects Grid */}
       <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 pb-24">
-        <div className="w-full max-w-6xl mx-auto">
+        <div className="w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Campus Tank Branding */}
             <Link href="/work/visual-craft/campus-tank" className="block group">
