@@ -1,10 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function WorkPage() {
-  const [activeTab, setActiveTab] = useState("UX");
+function WorkContent() {
+  const searchParams = useSearchParams();
+  const initialTab = searchParams.get("tab") === "Creative" ? "Creative" : "UX";
+  const [activeTab, setActiveTab] = useState(initialTab);
 
   return (
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]">
@@ -75,102 +78,103 @@ export default function WorkPage() {
       {/* Projects Grid */}
       <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 pb-24">
         <div className="w-full max-w-6xl">
-          <div className="grid gap-8 md:grid-cols-2">
-            {activeTab === "UX" ? (
-              <>
-                {/* Will Project */}
-                <Link href="/will?from=work" className="block">
-                  <article className="flex flex-col hover:opacity-90 transition-opacity">
-                    <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                      <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
-                    </div>
-                    <h3
-                      className="text-xl font-normal text-gray-900 md:text-2xl"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      Will
-                    </h3>
-                    <p
-                      className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      How do you design an app connecting India's busiest users to its least literate workforce?
-                    </p>
-                  </article>
-                </Link>
-
-                {/* Fundbridge Project */}
+          {activeTab === "UX" ? (
+            <div className="grid gap-8 md:grid-cols-2">
+              {/* Will Project */}
+              <Link href="/will?from=work" className="block">
                 <article className="flex flex-col hover:opacity-90 transition-opacity">
                   <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                    <img src="/images/fundbridge-thumbnail-1.png" alt="Fundbridge thumbnail" className="w-full h-full object-cover object-top" />
+                    <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
                   </div>
                   <h3
                     className="text-xl font-normal text-gray-900 md:text-2xl"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    Fundbridge
+                    Will
                   </h3>
                   <p
                     className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    A unified platform connecting founders and VCs.
+                    How do you design an app connecting India's busiest users to its least literate workforce?
                   </p>
                 </article>
+              </Link>
 
-                {/* MiH Interiors Project */}
-                <Link href="/mih?from=work" className="block">
-                  <article className="flex flex-col hover:opacity-90 transition-opacity">
-                    <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                      <Image
-                        src="/images/mih-interiors.png"
-                        alt="MIH Interiors Case Study"
-                        width={800}
-                        height={600}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </div>
-                    <h3
-                      className="text-xl font-normal text-gray-900 md:text-2xl"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      MiH Interiors
-                    </h3>
-                    <p
-                      className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      Designing a website for a premium interior design studio that actually converts.
-                    </p>
-                  </article>
-                </Link>
+              {/* Fundbridge Project */}
+              <article className="flex flex-col hover:opacity-90 transition-opacity">
+                <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
+                  <img src="/images/fundbridge-thumbnail-1.png" alt="Fundbridge thumbnail" className="w-full h-full object-cover object-top" />
+                </div>
+                <h3
+                  className="text-xl font-normal text-gray-900 md:text-2xl"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Fundbridge
+                </h3>
+                <p
+                  className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  A unified platform connecting founders and VCs.
+                </p>
+              </article>
 
-                {/* Rkade Project */}
+              {/* MiH Interiors Project */}
+              <Link href="/mih?from=work" className="block">
                 <article className="flex flex-col hover:opacity-90 transition-opacity">
                   <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                    <img src="/images/rkade-thumbnail.png" alt="Rkade thumbnail" className="w-full h-full object-cover object-top" />
+                    <Image
+                      src="/images/mih-interiors.png"
+                      alt="MIH Interiors Case Study"
+                      width={800}
+                      height={600}
+                      className="w-full h-full object-cover object-top"
+                    />
                   </div>
                   <h3
                     className="text-xl font-normal text-gray-900 md:text-2xl"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    Rkade
+                    MiH Interiors
                   </h3>
                   <p
                     className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    A campus-focused platform where students can discover and participate in college events, hackathons, fests, and gaming/community activities.
+                    Designing a website for a premium interior design studio that actually converts.
                   </p>
                 </article>
-              </>
-            ) : (
-              <>
-                {/* Visual Craft */}
+              </Link>
+
+              {/* Rkade Project */}
+              <article className="flex flex-col hover:opacity-90 transition-opacity">
+                <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
+                  <img src="/images/rkade-thumbnail.png" alt="Rkade thumbnail" className="w-full h-full object-cover object-top" />
+                </div>
+                <h3
+                  className="text-xl font-normal text-gray-900 md:text-2xl"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  Rkade
+                </h3>
+                <p
+                  className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
+                  style={{ fontFamily: 'var(--font-sans)' }}
+                >
+                  A campus-focused platform where students can discover and participate in college events, hackathons, fests, and gaming/community activities.
+                </p>
+              </article>
+            </div>
+          ) : (
+            <div className="w-full animate-in fade-in duration-500">
+              <div className="grid gap-8 md:grid-cols-2">
+                
+                {/* Visual Craft Category Card */}
                 <Link href="/work/visual-craft" className="block">
                   <article className="flex flex-col hover:opacity-90 transition-opacity">
                     <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                      {/* Placeholder image */}
+                      <img src="/images/visualcraft.png" alt="Visual Craft" className="w-full h-full object-cover" />
                     </div>
                     <h3
                       className="text-xl font-normal text-gray-900 md:text-2xl"
@@ -187,29 +191,40 @@ export default function WorkPage() {
                   </article>
                 </Link>
 
-                {/* Logo Design */}
-                <article className="flex flex-col hover:opacity-90 transition-opacity">
-                  <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                    {/* Placeholder image */}
-                  </div>
-                  <h3
-                    className="text-xl font-normal text-gray-900 md:text-2xl"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    Logo Design
-                  </h3>
-                  <p
-                    className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    Crafting memorable brand identities through thoughtful logo design.
-                  </p>
-                </article>
-              </>
-            )}
-          </div>
+                {/* Logo Design Category Card */}
+                <Link href="/work/logos" className="block">
+                  <article className="flex flex-col hover:opacity-90 transition-opacity">
+                    <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
+                      <img src="/images/logodesigns.png" alt="Logo Design" className="w-full h-full object-cover" />
+                    </div>
+                    <h3
+                      className="text-xl font-normal text-gray-900 md:text-2xl"
+                      style={{ fontFamily: 'var(--font-sans)' }}
+                    >
+                      Logo Design
+                    </h3>
+                    <p
+                      className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
+                      style={{ fontFamily: 'var(--font-sans)' }}
+                    >
+                      Crafting memorable brand identities through thoughtful logo design.
+                    </p>
+                  </article>
+                </Link>
+
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </main>
+  );
+}
+
+export default function WorkPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white"></div>}>
+      <WorkContent />
+    </Suspense>
   );
 }

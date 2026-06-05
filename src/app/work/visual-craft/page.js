@@ -8,7 +8,7 @@ export default function VisualCraftPage() {
       <nav className="fixed top-8 left-0 right-0 z-50 w-full px-5 md:px-12">
         <div className="w-full max-w-6xl mx-auto">
           <Link
-            href="/work"
+            href="/work?tab=Creative"
             className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit"
           >
             <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
@@ -43,33 +43,63 @@ export default function VisualCraftPage() {
       <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 pb-24">
         <div className="w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Campus Tank Branding */}
+            {/* Campus Tank */}
             <Link href="/work/visual-craft/campus-tank" className="block group">
               <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
                 <div className="w-full h-full group-hover:opacity-90 transition-opacity">
-                  {/* Replace with actual image */}
+                  <img src="/images/campustank.jpg" alt="Campus Tank" className="w-full h-full object-cover" />
                 </div>
               </div>
               <h3
                 className="mt-4 text-lg font-normal text-gray-900"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
-                Campus Tank Branding
+                Campus Tank
               </h3>
             </Link>
 
-            {/* Event Standees */}
-            <Link href="/work/visual-craft/event-standees" className="block group">
+            {/* AI Convergence */}
+            <Link href="/work/visual-craft/ai-convergence" className="block group">
               <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
                 <div className="w-full h-full group-hover:opacity-90 transition-opacity">
-                  {/* Replace with actual image */}
+                  <img src="/images/aiconvergence.jpg" alt="AI Convergence" className="w-full h-full object-cover" />
                 </div>
               </div>
               <h3
                 className="mt-4 text-lg font-normal text-gray-900"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
-                Event Standees
+                AI Convergence
+              </h3>
+            </Link>
+
+            {/* AI Fest */}
+            <Link href="/work/visual-craft/ai-fest" className="block group">
+              <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
+                <div className="w-full h-full group-hover:opacity-90 transition-opacity">
+                  <img src="/images/aifest.jpg" alt="AI Fest" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <h3
+                className="mt-4 text-lg font-normal text-gray-900"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                AI Fest
+              </h3>
+            </Link>
+
+            {/* Hack With Uttarpradesh */}
+            <Link href="/work/visual-craft/hack-with-uttarpradesh" className="block group">
+              <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
+                <div className="w-full h-full group-hover:opacity-90 transition-opacity">
+                  <img src="/images/havkwithup.jpg" alt="Hack With Uttarpradesh" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <h3
+                className="mt-4 text-lg font-normal text-gray-900"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                Hack With Uttarpradesh
               </h3>
             </Link>
           </div>

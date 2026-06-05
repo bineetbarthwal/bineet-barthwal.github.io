@@ -253,12 +253,21 @@ export default function Home() {
 
         {/* See More Work Button */}
         <div className="mt-12 flex justify-center md:mt-16">
-          <Link
-            href="/work"
-            className="rounded-full border border-gray-300 px-8 py-3 text-center text-sm font-medium text-gray-700 transition-all hover:bg-gray-50 active:scale-95 md:px-10 md:py-4 md:text-base"
-            style={{ fontFamily: 'var(--font-sans)' }}
+          <Link 
+            href="/work" 
+            className="relative inline-flex overflow-hidden rounded-full p-[1px] group active:scale-95 transition-transform"
           >
-            See more work
+            {/* 1. The Spinning Highlight (Behind the button) */}
+            {/* We make it massive (inset-[-1000%]) so the center perfectly rotates around wide pill shapes */}
+            <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E5E7EB_0%,#E5E7EB_85%,#1C1C1C_100%)]" />
+            
+            {/* 2. The Actual Button (On top) */}
+            <span 
+              className="relative inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm md:text-base font-medium text-gray-900 w-full h-full transition-colors group-hover:bg-gray-50 md:px-10 md:py-4" 
+              style={{ fontFamily: 'var(--font-sans)' }}
+            >
+              See more work
+            </span>
           </Link>
         </div>
         </div>
