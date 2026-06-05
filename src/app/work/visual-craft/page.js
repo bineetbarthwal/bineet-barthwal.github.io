@@ -102,6 +102,21 @@ export default function VisualCraftPage() {
                 Hack With Uttarpradesh
               </h3>
             </Link>
+
+            {/* Sandbox */}
+            <Link href="/work/visual-craft/sandbox" className="block group">
+              <div className="aspect-video bg-gray-200 rounded-xl overflow-hidden relative">
+                <div className="w-full h-full group-hover:opacity-90 transition-opacity">
+                  <img src="/images/sandbox.png" alt="Sandbox" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <h3
+                className="mt-4 text-lg font-normal text-gray-900"
+                style={{ fontFamily: 'var(--font-sans)' }}
+              >
+                Sandbox
+              </h3>
+            </Link>
           </div>
         </div>
       </section>
