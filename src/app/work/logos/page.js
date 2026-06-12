@@ -23,7 +23,17 @@ export default function LogosPage() {
     { 
       name: 'Sandbox', 
       thumbnail: '/images/sandboxlogo.svg', 
-      images: [] 
+      images: [
+        '/designs/sandbox1.jpg',
+        '/designs/sandbox2.jpg',
+        '/designs/sandbox3.jpg',
+        '/designs/sandbox4.jpg',
+        '/designs/sandbox5.jpg',
+        '/designs/sandbox6.jpg',
+        '/designs/sandbox7.jpg',
+        '/designs/sandbox8.jpg',
+        '/designs/sandbox9.jpg'
+      ] 
     },
     { 
       name: 'IEDC', 
@@ -39,9 +49,32 @@ export default function LogosPage() {
         '/images/iedc8.jpg'
       ] 
     },
-    { name: 'CUBE', thumbnail: '/images/cubelogo.svg', images: [] },
-    { name: 'Nari', thumbnail: '/images/narilogo.svg', images: [] },
-    { name: 'AI Convergence', thumbnail: '/images/AIconvergencelogo.svg', images: [] }
+    { 
+      name: 'CUBE', 
+      thumbnail: '/images/cubelogo.svg', 
+      images: [
+        '/designs/cube1.jpg',
+        '/designs/cube2.jpg',
+        '/designs/cube3.jpg',
+        '/designs/CUBEvideo.mp4'
+      ] 
+    },
+    { 
+      name: 'Nari', 
+      thumbnail: '/images/narilogo.svg', 
+      images: [
+        '/images/narilogo.svg'
+      ] 
+    },
+    { 
+      name: 'AI Convergence', 
+      thumbnail: '/images/AIconvergencelogo.svg', 
+      images: [
+        '/designs/aiconvergence1.jpg',
+        '/designs/aiconvergence2.jpg',
+        '/designs/aiconvergence3.jpg'
+      ] 
+    }
   ];
 
   return (
@@ -109,15 +142,39 @@ export default function LogosPage() {
             className="relative w-full max-w-5xl my-12 md:my-24 mx-4 md:mx-auto flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            {selectedLogo.images.map((imgSrc, index) => (
-              <img 
-                key={index} 
-                src={imgSrc} 
-                alt={`${selectedLogo.name} showcase ${index + 1}`}
-                className="w-full h-auto block"
-                loading="lazy"
-              />
-            ))}
+            {selectedLogo.images.map((imgSrc, index) => {
+              if (imgSrc.endsWith('.mp4')) {
+                return (
+                  <video 
+                    key={index}
+                    src={imgSrc} 
+                    controls 
+                    className="w-full h-auto mb-4"
+                  />
+                );
+              } else if (imgSrc.endsWith('.svg')) {
+                return (
+                  <div key={index} className="w-full aspect-video bg-white flex items-center justify-center p-16 md:p-24 lg:p-32">
+                    <img 
+                      src={imgSrc} 
+                      alt={`${selectedLogo.name} showcase ${index + 1}`}
+                      className="w-full h-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              } else {
+                return (
+                  <img 
+                    key={index} 
+                    src={imgSrc} 
+                    alt={`${selectedLogo.name} showcase ${index + 1}`}
+                    className="w-full h-auto block"
+                    loading="lazy"
+                  />
+                );
+              }
+            })}
           </div>
         </div>
       )}
