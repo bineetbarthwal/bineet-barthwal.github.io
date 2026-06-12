@@ -15,10 +15,10 @@ function WorkContent() {
         <div className="w-full max-w-6xl">
           
           {/* Top Bar: Standardized Container Alignment */}
-          <div className="flex flex-col md:flex-row items-start md:items-center w-full mb-16 gap-6">
+          <div className="flex flex-col md:flex-row items-center w-full mb-16 gap-6">
             
             {/* 1. Left: Back Button */}
-            <div className="flex-1">
+            <div className="flex-1 self-start">
               <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit whitespace-nowrap">
                 <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

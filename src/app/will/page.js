@@ -85,9 +85,9 @@ export default function WillCaseStudy() {
 
         {/* Section 2: What is WILL? */}
         <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
-          <motion.div variants={fadeInUp} className="flex justify-between items-center w-full mb-8">
-            <h2 className="text-[32px] text-black font-normal leading-tight">What is WILL?</h2>
-            <a href="https://www.figma.com/proto/lfwa1QNC1O9rpavVkhf7vk/Will----Define?node-id=188-1005&p=f&viewport=-24%2C-434%2C0.1&t=nomB2KN7WcgZfLoY-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=216%3A669&page-id=134%3A1295" target="_blank" rel="noopener noreferrer" className="border border-zinc-200 rounded-[20px] px-4 py-2 text-sm md:px-6 md:py-2 text-black hover:bg-[#F4F4F4] transition-colors">
+          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full mb-8 gap-4">
+            <h2 className="text-[28px] sm:text-[32px] text-black font-normal leading-tight">What is WILL?</h2>
+            <a href="https://www.figma.com/proto/lfwa1QNC1O9rpavVkhf7vk/Will----Define?node-id=188-1005&p=f&viewport=-24%2C-434%2C0.1&t=nomB2KN7WcgZfLoY-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=216%3A669&page-id=134%3A1295" target="_blank" rel="noopener noreferrer" className="border border-zinc-200 rounded-[20px] px-5 py-2.5 text-sm text-black hover:bg-[#F4F4F4] transition-colors whitespace-nowrap shrink-0">
               View prototype
             </a>
           </motion.div>
@@ -360,7 +360,7 @@ WILL (Worker App)
         {/* Section 6: Key Decisions */}
         <section className="w-full bg-[#F4F4F4] py-32">
           <div className="max-w-[1100px] mx-auto w-full px-5">
-            <h2 className="text-[48px] font-normal text-black mb-24 text-center">Key Decisions</h2>
+            <h2 className="text-[32px] md:text-[48px] font-normal text-black mb-16 md:mb-24 text-center">Key Decisions</h2>
 
             {/* Decision 01 */}
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
