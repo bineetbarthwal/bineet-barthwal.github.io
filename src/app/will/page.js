@@ -60,7 +60,7 @@ export default function WillCaseStudy() {
           {/* Image */}
           <motion.div 
             variants={fadeInUp}
-            className="w-full h-[250px] sm:h-[300px] md:h-[460px] rounded-[32px] overflow-hidden mb-12 bg-[#F4F4F4] relative"
+            className="w-full aspect-video rounded-[24px] md:rounded-[32px] overflow-hidden mb-12 bg-[#F4F4F4]"
           >
             <AnimatePresence mode="wait">
               <motion.img 
@@ -69,7 +69,7 @@ export default function WillCaseStudy() {
                 initial={{ opacity: 0, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="w-full h-full object-cover absolute inset-0"
+                className="w-full h-full object-cover"
               />
             </AnimatePresence>
           </motion.div>
