@@ -79,7 +79,7 @@ export default function WillCaseStudy() {
             variants={fadeInUp}
             className="text-[20px] md:text-[32px] font-normal leading-tight text-black max-w-[850px] pb-12 md:pb-24"
           >
-            How do you design an app connecting India's busiest users to its least literate workforce?
+            How do you design an app connecting India&apos;s busiest users to its least literate workforce?
           </motion.p>
         </section>
 
@@ -99,7 +99,7 @@ export default function WillCaseStudy() {
               The platform required two separate apps designed simultaneously: one for the customer booking a service, one for the worker receiving the job.
             </p>
             <p>
-              The challenge wasn't just designing an app. It was designing trust, for a customer who's never let a stranger into his home, and a worker who's been underpaid his entire life.
+              The challenge wasn&apos;t just designing an app. It was designing trust, for a customer who&apos;s never let a stranger into his home, and a worker who&apos;s been underpaid his entire life.
             </p>
           </motion.div>
         </section>
@@ -157,9 +157,9 @@ export default function WillCaseStudy() {
           <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
             <h4 className="text-[24px] font-normal mb-6 text-black">How Might We:</h4>
             <div className="flex flex-col gap-3 text-zinc-600 text-[16px] leading-relaxed">
-              <p>Q. HMW help Sanjay trust a worker he's never met before letting them into his home?</p>
+              <p>Q. HMW help Sanjay trust a worker he&apos;s never met before letting them into his home?</p>
               <p>Q. HMW ensure Vinod gets paid exactly what was agreed — every time?</p>
-              <p>Q. HMW make the booking experience work for someone who can't read English?</p>
+              <p>Q. HMW make the booking experience work for someone who can&apos;t read English?</p>
               <p>Q. HMW reduce the risk of no-shows on both sides?</p>
               <p>Q. HMW design two completely different experiences that still form one seamless transaction?</p>
             </div>
@@ -172,15 +172,15 @@ export default function WillCaseStudy() {
             <p className="text-[16px] text-zinc-600 leading-relaxed">
               <strong className="text-black font-semibold">Sanjay Mehta — The Customer (Software Engineer, 29, Bangalore)</strong><br/><br/>
               Sanjay is busy, digitally comfortable, and used to solving problems with his phone. When something breaks at home, he wants it fixed fast — without taking a day off work or letting an unverified stranger into his apartment.<br/>
-              Current behaviour: Googles services, calls random numbers, asks colleagues for referrals. Core anxiety: Can I trust this person in my home? Core goal: Book a verified, skilled worker quickly without disrupting his workday. <strong className="text-black font-semibold">Quote: "I just need to know the person coming to my house is legit."</strong>
+              Current behaviour: Googles services, calls random numbers, asks colleagues for referrals. Core anxiety: Can I trust this person in my home? Core goal: Book a verified, skilled worker quickly without disrupting his workday. <strong className="text-black font-semibold">Quote: &ldquo;I just need to know the person coming to my house is legit.&rdquo;</strong>
             </p>
 
             <div className="mt-8"></div>
 
             <p className="text-[16px] text-zinc-600 leading-relaxed">
               <strong className="text-black font-semibold">Vinod Kumar — The Worker (Electrician, 34, Mumbai)</strong><br/><br/>
-              Vinod is skilled, experienced, and entirely dependent on word of mouth and the chowk for daily work. Some days are good. Most are unpredictable. He's been underpaid, given less than agreed, and has no way to prove his worth beyond showing up.<br/>
-              Current behaviour: Goes to the chowk daily, relies on repeat clients and referrals. Core anxiety: Will I get paid what was promised? Core goal: Consistent, fairly paid work — without depending on luck every morning. <strong className="text-black font-semibold">Quote: "I do the work. Getting paid what we agreed is another fight."</strong>
+              Vinod is skilled, experienced, and entirely dependent on word of mouth and the chowk for daily work. Some days are good. Most are unpredictable. He&apos;s been underpaid, given less than agreed, and has no way to prove his worth beyond showing up.<br/>
+              Current behaviour: Goes to the chowk daily, relies on repeat clients and referrals. Core anxiety: Will I get paid what was promised? Core goal: Consistent, fairly paid work — without depending on luck every morning. <strong className="text-black font-semibold">Quote: &ldquo;I do the work. Getting paid what we agreed is another fight.&rdquo;</strong>
             </p>
           </div>
 
@@ -189,11 +189,11 @@ export default function WillCaseStudy() {
             <h4 className="text-[24px] font-normal mb-6 text-black">Journey Maps:</h4>
             <div className="flex flex-col gap-6 text-[16px] text-zinc-600 leading-relaxed">
               <p>
-                Sanjay's Arc: Notices problem → Searches online → Calls unreliable numbers → Waits with no updates → Takes leave from work → Lets a stranger in with no verification → Pays cash, no record<br/>
+                Sanjay&apos;s Arc: Notices problem → Searches online → Calls unreliable numbers → Waits with no updates → Takes leave from work → Lets a stranger in with no verification → Pays cash, no record<br/>
                 Low points: No trust signals. No transparency. No accountability.
               </p>
               <p>
-                Vinod's Arc: Wakes up early → Goes to chowk → Waits with no certainty → Gets a job (or doesn't) → Travels to site → Does the work → Gets paid less than agreed with no recourse<br/>
+                Vinod&apos;s Arc: Wakes up early → Goes to chowk → Waits with no certainty → Gets a job (or doesn&apos;t) → Travels to site → Does the work → Gets paid less than agreed with no recourse<br/>
                 Low points: No consistency. No protection. No dignity.
               </p>
               <p>Every negative emotion in these journey maps became a design question.</p>
@@ -387,7 +387,7 @@ WILL (Worker App)
                 <div className="relative z-10">
                   <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 02: Hindi/Voice Navigation</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Worker app defaults to Hindi with voice readouts for core actions.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: A vast portion of our target demographic has low literacy. A text-heavy UI is non-functional. Voice and iconography allow users who can't read to still operate independently.</p>
+                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: A vast portion of our target demographic has low literacy. A text-heavy UI is non-functional. Voice and iconography allow users who can&apos;t read to still operate independently.</p>
                 </div>
               </div>
             </div>
@@ -402,7 +402,7 @@ WILL (Worker App)
                 <div className="relative z-10">
                   <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 03: ₹20 Booking Fee</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Charge a nominal, 100% refundable booking fee.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: Without financial commitment, customers cancel easily, wasting a wage worker's time. This fee ensures serious intent, while the refund guarantee protects the customer against no-shows.</p>
+                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: Without financial commitment, customers cancel easily, wasting a wage worker&apos;s time. This fee ensures serious intent, while the refund guarantee protects the customer against no-shows.</p>
                 </div>
               </div>
             </div>
@@ -447,7 +447,7 @@ WILL (Worker App)
                 <div className="relative z-10">
                   <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 06: Visual Process Diagrams</h3>
                   <p className="text-[16px] font-medium text-black mb-2">The decision: Show a step-by-step visual diagram before booking commitment.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: To lower anxiety. Users need to know exactly what happens after they hit 'Book'. Visual roadmaps answer unspoken questions and build trust instantly.</p>
+                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: To lower anxiety. Users need to know exactly what happens after they hit &apos;Book&apos;. Visual roadmaps answer unspoken questions and build trust instantly.</p>
                 </div>
               </div>
             </div>
@@ -455,7 +455,7 @@ WILL (Worker App)
             {/* The Final Quote Section */}
             <div className="w-full max-w-[800px] mx-auto text-center border-t border-zinc-200 mt-16">
               <p className="text-[24px] md:text-[40px] font-normal leading-tight text-black px-5 py-16 md:py-24">
-                "WILL is the first system that connects Sanjay (the user) & Vinod (the Worker) & protects simultaneously."
+                &ldquo;WILL is the first system that connects Sanjay (the user) &amp; Vinod (the Worker) &amp; protects simultaneously.&rdquo;
               </p>
             </div>
           </div>
@@ -472,7 +472,7 @@ WILL (Worker App)
                 className="text-2xl font-normal text-white md:text-3xl lg:text-4xl"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
-                I'm available for new opportunities.
+                I&apos;m available for new opportunities.
               </h3>
               
               {/* Email Input */}
@@ -534,41 +534,41 @@ WILL (Worker App)
 
               {/* Links Column 2 */}
               <nav className="flex flex-col gap-4">
-                <a
+                <Link
                   href="/#home"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   Home
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/#projects"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   Projects
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/#about"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   About
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/#skills"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   Skills
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/privacy"
                   className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
                   style={{ fontFamily: 'var(--font-sans)' }}
                 >
                   Privacy Policy
-                </a>
+                </Link>
               </nav>
             </div>
           </div>

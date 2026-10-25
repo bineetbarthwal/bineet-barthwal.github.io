@@ -1,583 +1,485 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { LayoutTemplate, Search, PenTool, Layers, Terminal, Smartphone, Palette } from "lucide-react";
-import { SiFigma, SiReact, SiTailwindcss } from "react-icons/si";
+import GlassFolder from "@/components/GlassFolder";
 
+/* ─── Main Homepage ─── */
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [copied, setCopied] = useState(false);
-  const isClickScrolling = useRef(false);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("hello@bineet.in");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const artImages = ['/images/myart-1.png', '/images/myart-2.png', '/images/myart-3.png'];
-  const [artIndex, setArtIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setArtIndex((prevIndex) => (prevIndex + 1) % artImages.length);
-    }, 2500);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (isClickScrolling.current) return;
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    const sectionIds = ['home', 'projects', 'about', 'skills'];
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, []);
-  const reviews = [
-    { quote: "Very diligent and calm. I thoroughly enjoyed working with him.", author: "Aryan Rajput" },
-    { quote: "I appreciate how instantly Bineet grasps the vibe and the client's desired aesthetic. I never had to explain what I wanted twice.", author: "Dr. D.P. Purohit" },
-    { quote: "We truly appreciated his altruistic nature and collaborative spirit. Wishing him the absolute best.", author: "Shreya Bhatt" }
+  /* Thumbnail images for folder cards */
+  const productCards = [
+    "/images/will-thumbnail-1.jpg",
+    "/images/fundbridge-thumbnail-1.png",
+    "/images/mih-interiors.png",
   ];
-  
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: "easeOut" }
-  };
+  const brandCards = [
+    "/images/logodesigns.png",
+    "/images/visualcraft.png",
+    "/designs/sandbox.png",
+  ];
 
-  const handleNavClick = (sectionId) => {
-    isClickScrolling.current = true;
-    setActiveSection(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-    setTimeout(() => {
-      isClickScrolling.current = false;
-    }, 900);
-  };
 
   return (
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]" style={{ scrollBehavior: "smooth" }}>
       
-      {/* Clean Sliding Pill Navigation */}
-      <nav className="fixed top-8 left-1/2 z-50 -translate-x-1/2 w-full max-w-[95vw] mx-auto overflow-x-auto scrollbar-hide md:max-w-fit">
-        <div className="flex items-center gap-2 md:gap-0 mx-auto rounded-[16px] border border-gray-300 bg-white/95 p-1 shadow-sm backdrop-blur-md relative w-max md:w-auto">
-          {/* Mapped Navigation Buttons */}
-          {['home', 'projects', 'about', 'skills'].map((item) => (
-            <motion.button
-              key={item}
-              onClick={() => handleNavClick(item)}
-              className="relative px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full"
-              style={{ zIndex: 10 }}
-              whileHover={{ scale: 1.05 }}
+      {/* ═══════════════════════════════════════════ */}
+      {/* HERO SECTION — Single aligned editorial column */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="home" className="relative flex flex-col justify-center overflow-hidden">
+        <div className="relative z-10 max-w-[610px] mx-auto w-full px-6 pt-9">
+
+          {/* Top Header Row */}
+          <div className="flex items-center justify-between mb-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F4F4F6] border border-black/[0.05] font-mono-custom text-[12px] text-[#3F3F46]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Available for work</span>
+            </div>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary-pill"
             >
-              {activeSection === item && (
-                <motion.div
-                  layoutId="nav-pill"
-                  className="absolute inset-0 bg-black rounded-full"
-                  style={{ zIndex: 0 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.8 }}
-                />
-              )}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+              <span>Resume</span>
+            </a>
+          </div>
 
-              <motion.span layout className="relative z-10" style={{ color: activeSection === item ? 'white' : '#71717a' }}>
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </motion.span>
-            </motion.button>
-          ))}
-        </div>
-      </nav>
+          {/* Role Label */}
+          <div className="font-mono-custom text-[13px] text-[#52525B] leading-[1.5] mb-4">
+            <p>Product &amp; Brand Designer</p>
+          </div>
 
-      {/* Hero Section - Full Height */}
-      <section id="home" className="relative flex min-h-screen flex-col items-center justify-center px-5 md:px-12 overflow-hidden">
-        {/* Hero Content */}
-        <div className="relative z-10 flex max-w-3xl flex-col items-center text-center">
-        <motion.h1 
-          {...fadeInUp}
-          className="text-4xl font-normal tracking-tight text-black md:text-5xl lg:text-6xl leading-tight"
-        >
-          Hello,<br />
-          I am Bineet Barthwal,<br />
-          a UI/UX Designer
-        </motion.h1>
+          {/* Name Display Heading */}
+          <h1 className="font-display font-extrabold text-[56px] sm:text-[68px] text-[#3B5BFF] tracking-[-0.045em] leading-[0.98]">
+            Bineet Barthwal
+          </h1>
 
-        <motion.p 
-          {...fadeInUp}
-          transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          className="mt-8 max-w-2xl text-sm leading-relaxed text-gray-700 md:text-base"
-        >
-          I like solving problems. It’s my favourite part of the UX process. 
-          My strength is versatility, from static visual design to complex, 
-          low-friction product screens.
-        </motion.p>
+          {/* Tagline — Regular weight instead of bold, "products" instead of "interfaces" */}
+          <p className="font-display font-normal text-[20px] sm:text-[22px] text-[#141417] mt-5 tracking-[-0.02em] leading-[1.35]">
+            I design products that convert and brands that scale.
+          </p>
 
-        {/* Buttons */}
-        <motion.div 
-          {...fadeInUp}
-          transition={{ ...fadeInUp.transition, delay: 0.4 }}
-          className="mt-10 flex flex-wrap justify-center gap-4"
-        >
-          {/* Mobile Email Button */}
-          <a href="mailto:hello@bineet.in" className="flex md:hidden items-center justify-center rounded-2xl border border-gray-300 bg-[#F4F4F4] px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-[#F4F4F4] active:scale-95">
-            Email me
-          </a>
-          {/* Desktop Email Button */}
-          <button onClick={handleCopy} className="hidden md:flex items-center justify-center rounded-2xl border border-gray-300 bg-[#F4F4F4] px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-[#F4F4F4] active:scale-95">
-            {copied ? "Email copied!" : "Email me"}
-          </button>
-          <a href="/bineet-resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center rounded-2xl border border-gray-300 bg-white px-6 py-2.5 text-sm font-normal text-black transition-all hover:bg-gray-50 active:scale-95">
-            Resume
-          </a>
-        </motion.div>
+          {/* Refined Hero Bio — No year limits, open & authoritative */}
+          <p className="font-sans-custom font-normal text-[16px] text-[#3F3F46] mt-3.5 leading-[1.68] max-w-[540px]">
+            I bridge analytical thinking with visual craft—turning complex workflows into
+            intuitive digital products and building cohesive brand identities from the
+            ground up. From B2B SaaS platforms and conversion-focused web experiences to
+            large-scale campaign systems, I design and ship across{" "}
+            <span className="kw kw-figma">
+              Figma
+              <span className="kw-figma-handle -top-[3px] -left-[3px]" />
+              <span className="kw-figma-handle -top-[3px] -right-[3px]" />
+              <span className="kw-figma-handle -bottom-[3px] -left-[3px]" />
+              <span className="kw-figma-handle -bottom-[3px] -right-[3px]" />
+              <span className="kw-pop px-2 py-0.5 rounded bg-[#8B5CF6] text-white font-mono-custom text-[10px] font-medium shadow-md">
+                ✦ Auto Layout
+              </span>
+            </span>
+            ,{" "}
+            <span className="kw">
+              Adobe CC
+              <span className="kw-pop flex items-center gap-1 px-2 py-1 rounded-full bg-white border border-zinc-200 shadow-lg">
+                <span className="w-5 h-5 rounded-[5px] bg-[#330000] text-[#FF9A00] font-mono-custom text-[10px] font-bold flex items-center justify-center">
+                  Ai
+                </span>
+                <span className="w-5 h-5 rounded-[5px] bg-[#49021F] text-[#FF3366] font-mono-custom text-[10px] font-bold flex items-center justify-center">
+                  Id
+                </span>
+                <span className="w-5 h-5 rounded-[5px] bg-[#001E36] text-[#31A8FF] font-mono-custom text-[10px] font-bold flex items-center justify-center">
+                  Ps
+                </span>
+              </span>
+            </span>
+            , and{" "}
+            <span className="kw">
+              React
+              <span className="kw-pop flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#141417] text-white font-mono-custom text-[11px] shadow-lg">
+                <span className="w-2 h-2 rounded-full bg-[#38BDF8]" />
+                <span>Next.js · Tailwind</span>
+              </span>
+            </span>
+            .
+          </p>
+
+          {/* Get in Touch + Share Row */}
+          <div className="mt-7 mb-2 flex flex-wrap items-center gap-3">
+            <a href="mailto:hello@bineet.in" className="btn-dark-pill">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <span>Get in touch</span>
+            </a>
+          </div>
+
+          {/* Bento Folders Row with Refined Negative Space (100–140px on desktop) */}
+          <div className="mt-28 sm:mt-32 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+            <GlassFolder
+              variant="product"
+              title="Product & UI/UX"
+              description="B2B SaaS workflows, mobile apps, and conversion web interfaces."
+              href="#projects"
+              cards={productCards}
+            />
+            <GlassFolder
+              variant="brand"
+              title="Brand & Visuals"
+              description="Visual identities, national summit branding, and campaign systems."
+              href="/studio"
+              cards={brandCards}
+            />
+          </div>
         </div>
       </section>
 
-      {/* Selected Work Section */}
-      <section id="projects" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12">
-        <div className="w-full max-w-6xl">
-          <h2 
-            className="mb-12 text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
+      {/* ═══════════════════════════════════════════ */}
+      {/* SELECTED WORK                               */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="product-work" className="relative z-10 w-full">
+        <div id="projects" className="absolute -top-16" />
+        <div className="max-w-[610px] mx-auto w-full px-6 pt-24 sm:pt-28 pb-4">
+          <h2 className="font-display font-bold text-[22px] text-[#141417] tracking-[-0.025em] mb-8">
             Selected Work
           </h2>
 
-          {/* Projects Grid */}
-          <div className="grid gap-8 md:grid-cols-2">
-          {/* Will Project */}
-          <Link href="/will?from=home" className="block">
-            <article className="flex flex-col hover:opacity-90 transition-opacity">
-              <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
-              </div>
-              <h3 
-                className="text-xl font-normal text-gray-900 md:text-2xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Will
+          {/* Case Study Row: Will */}
+          <div className="group flex flex-col sm:flex-row gap-5 py-6 border-t border-zinc-200/80 transition-colors hover:bg-zinc-50/50 -mx-3 px-3 rounded-lg">
+            <Link href="/will" className="w-full sm:w-[135px] h-[95px] flex-shrink-0 rounded-[10px] border border-zinc-200/80 overflow-hidden bg-zinc-100 block">
+              <img
+                src="/images/will-thumbnail-1.jpg"
+                alt="Will — service marketplace app"
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </Link>
+            <div className="flex flex-col justify-center min-w-0 items-start">
+              <span className="font-mono-custom text-[11.5px] text-[#71717A] uppercase tracking-wider">
+                PRODUCT DESIGN · 2-SIDED MARKETPLACE
+              </span>
+              <h3 className="font-display font-bold text-[18px] text-[#141417] leading-snug mt-1">
+                Will — Bridging urban households with blue-collar professionals
               </h3>
-              <p 
-                className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                How do you design an app connecting India's busiest users to its least literate workforce?
+              <p className="font-sans-custom text-[15px] text-[#3F3F46] leading-[1.55] mt-1.5 mb-3.5">
+                How do you design a zero-friction booking experience connecting time-poor urban users with a low-literacy service workforce?
               </p>
-            </article>
-          </Link>
-
-          {/* Fundbridge Project */}
-          <article className="flex flex-col hover:opacity-90 transition-opacity">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-              <img src="/images/fundbridge-thumbnail-1.png" alt="Fundbridge thumbnail" className="w-full h-full object-cover object-top" />
+              <Link className="btn-secondary-pill" href="/will">
+                <span>Read case study</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
             </div>
-            <h3 
-              className="text-xl font-normal text-gray-900 md:text-2xl"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Fundbridge
-            </h3>
-            <p 
-              className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              A unified platform connecting founders and VCs.
-            </p>
-          </article>
+          </div>
 
-          {/* MiH Interiors Project */}
-          <Link href="/mih?from=home" className="block">
-            <article className="flex flex-col hover:opacity-90 transition-opacity">
-              <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                <Image 
-                  src="/images/mih-interiors.png" 
-                  alt="MIH Interiors Case Study" 
-                  width={800} 
-                  height={600} 
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-              <h3 
-                className="text-xl font-normal text-gray-900 md:text-2xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                MiH Interiors
+          {/* Case Study Row: MiH Interiors */}
+          <div className="group flex flex-col sm:flex-row gap-5 py-6 border-t border-b border-zinc-200/80 transition-colors hover:bg-zinc-50/50 -mx-3 px-3 rounded-lg">
+            <Link href="/mih" className="w-full sm:w-[135px] h-[95px] flex-shrink-0 rounded-[10px] border border-zinc-200/80 overflow-hidden bg-zinc-100 block">
+              <img
+                src="/images/mih-interiors.png"
+                alt="MIH Interiors — conversion-focused website"
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+            </Link>
+            <div className="flex flex-col justify-center min-w-0 items-start">
+              <span className="font-mono-custom text-[11.5px] text-[#71717A] uppercase tracking-wider">
+                WEB &amp; CONVERSION DESIGN
+              </span>
+              <h3 className="font-display font-bold text-[18px] text-[#141417] leading-snug mt-1">
+                MiH Interiors — Turning passive browsers into high-intent leads
               </h3>
-              <p 
-                className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Designing a website for a premium interior design studio that actually converts.
+              <p className="font-sans-custom text-[15px] text-[#3F3F46] leading-[1.55] mt-1.5 mb-3.5">
+                Replacing high-friction contact forms with a guided, value-first estimation flow for a premium interior design studio.
               </p>
-            </article>
-          </Link>
-
-          {/* Rkade Project */}
-          <article className="flex flex-col hover:opacity-90 transition-opacity">
-            <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-              <img src="/images/rkade-thumbnail.png" alt="Rkade thumbnail" className="w-full h-full object-cover object-top" />
+              <Link className="btn-secondary-pill" href="/mih">
+                <span>Read case study</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </Link>
             </div>
-            <h3 
-              className="text-xl font-normal text-gray-900 md:text-2xl"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Rkade
-            </h3>
-            <p 
-              className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              A campus-focused platform where students can discover and participate in college events, hackathons, fests, and gaming/community activities.
-            </p>
-          </article>
-        </div>
+          </div>
 
-        {/* See More Work Button */}
-        <div className="mt-12 flex justify-center md:mt-16">
-          <Link 
-            href="/work" 
-            className="relative inline-flex overflow-hidden rounded-full p-[1px] group active:scale-95 transition-transform"
-          >
-            {/* 1. The Spinning Highlight (Behind the button) */}
-            {/* We make it massive (inset-[-1000%]) so the center perfectly rotates around wide pill shapes */}
-            <span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E5E7EB_0%,#E5E7EB_85%,#1C1C1C_100%)]" />
-            
-            {/* 2. The Actual Button (On top) */}
-            <span 
-              className="relative inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm md:text-base font-medium text-gray-900 w-full h-full transition-colors group-hover:bg-gray-50 md:px-10 md:py-4" 
-              style={{ fontFamily: 'var(--font-sans)' }}
+          {/* See all work + Share Row */}
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <Link className="btn-secondary-pill" href="/work">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="7" height="7" x="3" y="3" rx="1" />
+                <rect width="7" height="7" x="14" y="3" rx="1" />
+                <rect width="7" height="7" x="14" y="14" rx="1" />
+                <rect width="7" height="7" x="3" y="14" rx="1" />
+              </svg>
+              <span>See all work</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({ title: "Bineet Barthwal · Product & Brand Designer", url: window.location.origin });
+                } else {
+                  navigator.clipboard.writeText(window.location.origin);
+                }
+              }}
+              className="btn-outline-pill"
             >
-              See more work
-            </span>
-          </Link>
-        </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+              </svg>
+              <span>Share</span>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* About Me Section */}
-      <section id="about" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
-        <div className="w-full max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-            {/* Editorial Portrait */}
-            <div className="w-full md:w-1/2 aspect-video rounded-[24px] overflow-hidden bg-zinc-100">
-              <Image 
+      {/* ═══════════════════════════════════════════ */}
+      {/* ABOUT & EXPERIENCE                          */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="about" className="relative z-10 w-full">
+        <div className="max-w-[610px] mx-auto w-full px-6 pt-24 pb-4">
+
+          {/* About */}
+          <h2 className="font-display font-bold text-[22px] text-[#141417] tracking-[-0.025em] mb-7">
+            About
+          </h2>
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-7 items-start mb-20">
+            <div className="w-[80px] h-[80px] shrink-0 rounded-2xl overflow-hidden border border-zinc-200/80 bg-[#f4f4f4] shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
+              <img
                 src="/images/bineet-illustration.jpg"
                 alt="Bineet Barthwal"
-                width={800}
-                height={1000}
-                draggable={false}
-                className="object-cover w-full h-full pointer-events-none select-none"
+                className="w-full h-full object-cover object-center"
               />
             </div>
-
-            {/* About Content */}
-            <div className="max-w-2xl">
-              <h2 
-                className="text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                About me
-              </h2>
-              <p 
-                className="mt-6 text-base leading-relaxed text-gray-700 md:text-lg"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                I'm Bineet Barthwal, originally from Dehradun. With a B.Sc in Statistics and an MBA in Business Analytics, I got into UX through graphic design, so structure, data, and craft have always felt like the same thing. Outside work, nature and music keep me grounded.
+            <div className="font-sans-custom text-[15.5px] text-[#3F3F46] leading-[1.68] space-y-4">
+              <p>
+                My path into design started with a{" "}
+                <span className="kw">
+                  B.Sc. in Statistics and an MBA in Business Analytics
+                  <span className="kw-pop flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white border border-zinc-200/90 shadow-xl">
+                    <svg width="42" height="24" viewBox="0 0 44 30" fill="none">
+                      <path
+                        d="M3 25 L11 20 L19 22 L27 13 L34 16 L41 5"
+                        stroke="#10B981"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <circle cx="41" cy="5" r="3" fill="#10B981" />
+                    </svg>
+                    <span className="text-left leading-tight">
+                      <span className="block font-sans-custom text-[11.5px] font-bold text-[#141417]">
+                        Data-Driven UX
+                      </span>
+                      <span className="block font-mono-custom text-[10px] text-emerald-600">
+                        Metrics → Decisions
+                      </span>
+                    </span>
+                  </span>
+                </span>
+                —followed by four years of obsessing over visual craft, brand systems, and
+                interface design.
+              </p>
+              <p>
+                That combination shapes how I work today. Whether I&apos;m architecting a multi-role SaaS workflow, designing a conversion-focused web experience, or rolling out a 40+ asset national campaign, I pair analytical structure with visual polish that holds up in the real world.
               </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Experiences Section */}
-      <section id="experiences" className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
-        <div className="w-full max-w-6xl">
-          <h2 
-            className="mb-12 text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            Experiences
+          {/* Experience */}
+          <h2 className="font-display font-bold text-[22px] text-[#141417] tracking-[-0.025em] mb-8">
+            Experience
           </h2>
 
-          {/* Experiences List */}
-          <div className="flex flex-col w-full">
-            {/* Experience 1: Chandigarh University */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-t border-b border-zinc-200 group">
-              <div className="flex flex-col gap-1">
-                <h3 className="text-[20px] font-medium text-black" style={{ fontFamily: 'var(--font-sans)' }}>Graphics & UI/UX Designer</h3>
-                <p className="text-[16px] text-zinc-500" style={{ fontFamily: 'var(--font-sans)' }}>Chandigarh University</p>
-              </div>
-              <div className="text-[14px] text-zinc-400 mt-2 md:mt-0 tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
-                April 2025 – Present
-              </div>
+          {/* Experience 1: CU-TBI */}
+          <div className="flex flex-col sm:flex-row gap-1 sm:gap-8 py-6 border-t border-zinc-200/80">
+            <div className="sm:w-[130px] flex-shrink-0">
+              <span className="font-mono-custom text-[12.5px] text-[#8b8b95]">
+                2025 – Present
+              </span>
             </div>
-
-            {/* Experience 2: Tree Multisoft Services */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-zinc-200 group">
-              <div className="flex flex-col gap-1">
-                <h3 className="text-[20px] font-medium text-black" style={{ fontFamily: 'var(--font-sans)' }}>Graphics & UI/UX Designer</h3>
-                <p className="text-[16px] text-zinc-500" style={{ fontFamily: 'var(--font-sans)' }}>Tree Multisoft Services</p>
-              </div>
-              <div className="text-[14px] text-zinc-400 mt-2 md:mt-0 tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
-                May 2024 – April 2025
-              </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-display font-bold text-[16px] text-[#141417] tracking-[-0.015em] leading-snug">
+                Graphic &amp; UX Designer · CU-TBI
+              </h3>
+              <p className="font-sans-custom text-[13.5px] text-[#6e6e77] mt-0.5 mb-2.5">
+                Chandigarh University Technology Business Incubator
+              </p>
+              <ul className="font-sans-custom text-[13.5px] text-[#52525b] leading-[1.6] space-y-1.5 list-none">
+                <li className="flex gap-2">
+                  <span className="text-zinc-400 select-none">·</span>
+                  <span>Designing internal incubator management workflows, startup web interfaces, and product pitch systems across web and mobile.</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-zinc-400 select-none">·</span>
+                  <span>Leading end-to-end brand identity, environmental graphics, and 40+ asset campaign systems for flagship national summits (ISBACON, INCEPT, CUBE).</span>
+                </li>
+              </ul>
             </div>
+          </div>
 
-            {/* Experience 3: Kanishk Hospital */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-zinc-200 group">
-              <div className="flex flex-col gap-1">
-                <h3 className="text-[20px] font-medium text-black" style={{ fontFamily: 'var(--font-sans)' }}>Graphic Designer</h3>
-                <p className="text-[16px] text-zinc-500" style={{ fontFamily: 'var(--font-sans)' }}>Kanishk Surgical & Super Speciality Hospital</p>
-              </div>
-              <div className="text-[14px] text-zinc-400 mt-2 md:mt-0 tracking-wide" style={{ fontFamily: 'var(--font-sans)' }}>
-                June 2023 – May 2024
-              </div>
+          {/* Experience 2: Tree Multisoft */}
+          <div className="flex flex-col sm:flex-row gap-1 sm:gap-8 py-6 border-t border-b border-zinc-200/80">
+            <div className="sm:w-[130px] flex-shrink-0">
+              <span className="font-mono-custom text-[12.5px] text-[#8b8b95]">
+                2024 – 2025
+              </span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <h3 className="font-display font-bold text-[16px] text-[#141417] tracking-[-0.015em] leading-snug">
+                Graphics &amp; UI/UX Designer · Tree Multisoft Services
+              </h3>
+              <ul className="font-sans-custom text-[13.5px] text-[#52525b] leading-[1.6] space-y-1.5 list-none mt-2.5">
+                <li className="flex gap-2">
+                  <span className="text-zinc-400 select-none">·</span>
+                  <span>Designed B2B web dashboards, conversion landing pages, and brand collateral for commercial clients from wireframe to handoff.</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
-
-
-      {/* Capabilities Section */}
-      <section id="skills" className="w-full bg-[#F4F4F4] py-32">
-        <div className="max-w-[1100px] mx-auto px-5 w-full">
-          <h2 className="text-[48px] font-normal text-black mb-20" style={{ fontFamily: 'var(--font-sans)' }}>
+      {/* ═══════════════════════════════════════════ */}
+      {/* SKILLS                                      */}
+      {/* ═══════════════════════════════════════════ */}
+      <section id="skills" className="relative z-10 w-full">
+        <div className="max-w-[610px] mx-auto w-full px-6 pt-24 pb-4">
+          <h2 className="font-display font-bold text-[22px] text-[#141417] tracking-[-0.025em] mb-8">
             Skills
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12">
-            {/* Column 1: Systems & UX */}
-            <div>
-              <h3 className="text-[24px] mb-8 text-black border-b border-zinc-300 pb-4" style={{ fontFamily: 'var(--font-sans)' }}>Systems & UX</h3>
-              <ul className="flex flex-col gap-6">
-                <li className="flex flex-row items-center gap-4">
-                  <Search size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>UX Research & Discovery</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <LayoutTemplate size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Information Architecture</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <Layers size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Wireframing & User Flows</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <Smartphone size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Mobile-First Prototyping</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 2: Visual Craft */}
-            <div>
-              <h3 className="text-[24px] mb-8 text-black border-b border-zinc-300 pb-4" style={{ fontFamily: 'var(--font-sans)' }}>Visual Craft</h3>
-              <ul className="flex flex-col gap-6">
-                <li className="flex flex-row items-center gap-4">
-                  <PenTool size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>UI & Interaction Design</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <SiFigma size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Figma & FigJam</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <Palette size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Adobe Creative Suite</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <LayoutTemplate size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Design Systems</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Execution & Tooling */}
-            <div>
-              <h3 className="text-[24px] mb-8 text-black border-b border-zinc-300 pb-4" style={{ fontFamily: 'var(--font-sans)' }}>Execution & Tooling</h3>
-              <ul className="flex flex-col gap-6">
-                <li className="flex flex-row items-center gap-4">
-                  <Terminal size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>HTML & CSS Fundamentals</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <SiTailwindcss size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>Tailwind CSS</span>
-                </li>
-                <li className="flex flex-row items-center gap-4">
-                  <PenTool size={24} className="text-zinc-800" />
-                  <span className="text-[16px] text-zinc-600" style={{ fontFamily: 'var(--font-sans)' }}>AI-Assisted Workflows</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 py-16 md:py-24 lg:py-32">
-        <div className="w-full max-w-6xl">
-          <h2 
-            className="mb-12 text-2xl font-normal text-gray-900 md:text-3xl lg:text-4xl"
-            style={{ fontFamily: 'var(--font-sans)' }}
-          >
-            Hear from the people I have worked with
-          </h2>
-
-          {/* Testimonials Accordion Grid */}
-          <div className="flex flex-col md:flex-row gap-4">
-            {reviews.map((r, idx) => {
-              const flexClass = hoveredIndex === null ? 'flex-1' : hoveredIndex === idx ? 'flex-[3]' : 'flex-[1]';
-              return (
-                <motion.div
-                  key={idx}
-                  layout
-                  onMouseEnter={() => setHoveredIndex(idx)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  className={`${flexClass} overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 md:p-8 transition-all`}
-                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                >
-                  <p className="text-sm leading-relaxed text-gray-700 md:text-base" style={{ fontFamily: 'var(--font-sans)' }}>
-                    {r.quote}
-                  </p>
-                  <p className="mt-6 font-medium text-gray-900" style={{ fontFamily: 'var(--font-sans)' }}>
-                    {r.author}
-                  </p>
-                </motion.div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative z-10 w-full bg-zinc-950 overflow-hidden py-32 md:py-40">
-        <div className="mx-auto max-w-6xl px-5 md:px-12">
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
-            {/* Left Column - CTA */}
-            <div>
-              <h3 
-                className="text-2xl font-normal text-white md:text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                I'm available for new opportunities.
-              </h3>
-              
-              {/* Email Input */}
-              <div>
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="inline-flex md:hidden items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  hello@bineet.in
-                </a>
-                <button
-                  onClick={handleCopy}
-                  className="hidden md:inline-flex items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {copied ? "Email copied!" : "hello@bineet.in"}
-                </button>
+          <div className="divide-y divide-zinc-200/70 border-t border-b border-zinc-200/70">
+            <div className="py-5 grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 items-start">
+              <span className="font-mono-custom text-[12.5px] text-[#71717A] pt-1">Product &amp; UX</span>
+              <div className="flex flex-wrap gap-2">
+                {["UI/UX Design", "Figma", "Design Systems", "Wireframing", "Information Architecture", "Prototyping", "B2B SaaS", "Conversion UI"].map((skill) => (
+                  <span key={skill} className="skill-chip">{skill}</span>
+                ))}
               </div>
             </div>
 
-            {/* Right Column - Links */}
-            <div className="grid grid-cols-2 gap-8 md:gap-12">
-              {/* Links Column 1 */}
-              <nav className="flex flex-col gap-4 items-start">
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="block md:hidden text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Email
-                </a>
-                <button
-                  onClick={handleCopy}
-                  className="hidden md:block text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {copied ? "Copied!" : "Email"}
-                </button>
-                <a
-                  href="https://www.linkedin.com/in/bineet-barthwal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="/bineet-resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Resume
-                </a>
-              </nav>
+            <div className="py-5 grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 items-start">
+              <span className="font-mono-custom text-[12.5px] text-[#71717A] pt-1">Brand &amp; Visual</span>
+              <div className="flex flex-wrap gap-2">
+                {["Brand Identity", "Visual Systems", "Art Direction", "Brand Guidelines", "Event & Print Systems", "Illustrator", "InDesign", "Photoshop"].map((skill) => (
+                  <span key={skill} className="skill-chip">{skill}</span>
+                ))}
+              </div>
+            </div>
 
-              {/* Links Column 2 */}
-              <nav className="flex flex-col gap-4">
-                <a
-                  href="#home"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Home
-                </a>
-                <a
-                  href="#projects"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Projects
-                </a>
-                <a
-                  href="#about"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  About
-                </a>
-                <a
-                  href="#skills"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Skills
-                </a>
-                <a
-                  href="/privacy"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Privacy Policy
-                </a>
-              </nav>
+            <div className="py-5 grid grid-cols-1 sm:grid-cols-[150px_1fr] gap-3 items-start">
+              <span className="font-mono-custom text-[12.5px] text-[#71717A] pt-1">Code &amp; Strategy</span>
+              <div className="flex flex-wrap gap-2">
+                {["React", "Next.js", "Tailwind CSS", "Framer Motion", "HTML/CSS", "Business Analytics", "Funnel Metrics", "Workflow Automation"].map((skill) => (
+                  <span key={skill} className="skill-chip">{skill}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════ */}
+      {/* FOOTER                                      */}
+      {/* ═══════════════════════════════════════════ */}
+      <footer className="w-full bg-white border-t border-zinc-200/80 mt-20">
+        <div className="max-w-[610px] mx-auto px-6 py-16">
+          {/* Status Line */}
+          <div className="inline-flex items-center gap-2 font-mono-custom text-[12.5px] text-[#52525B] mb-3">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Open to work</span>
+          </div>
+
+          {/* Original Footer Heading (Replaces copied "Let's build something real.") */}
+          <h2 className="font-display font-extrabold text-[28px] sm:text-[34px] text-[#141417] tracking-[-0.03em] leading-[1.15]">
+            Have a product to ship or a brand to sharpen?
+          </h2>
+
+          {/* Direct Email Callout */}
+          <p className="font-sans-custom text-[15.5px] text-[#52525B] mt-2.5 leading-relaxed">
+            Reach out directly at{" "}
+            <a
+              href="mailto:hello@bineet.in"
+              className="font-semibold text-[#3B5BFF] hover:underline"
+            >
+              hello@bineet.in
+            </a>{" "}
+            — I usually reply within a few hours.
+          </p>
+
+          {/* Action Pill Row */}
+          <div className="flex flex-wrap items-center gap-2.5 mt-6">
+            <a href="mailto:hello@bineet.in" className="btn-dark-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              <span>hello@bineet.in</span>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/bineet-barthwal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-pill"
+            >
+              <span>LinkedIn</span>
+            </a>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-pill"
+            >
+              <span>Resume</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({ title: "Bineet Barthwal · Product & Brand Designer", url: window.location.origin });
+                } else {
+                  navigator.clipboard.writeText(window.location.origin);
+                }
+              }}
+              className="btn-outline-pill"
+            >
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3" />
+                <circle cx="6" cy="12" r="3" />
+                <circle cx="18" cy="19" r="3" />
+                <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+                <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
+              </svg>
+              <span>Share</span>
+            </button>
+          </div>
+
+          {/* Bottom Legal & Privacy Bar (for Google Analytics compliance) */}
+          <div className="mt-12 pt-6 border-t border-zinc-100 flex flex-wrap items-center justify-between gap-4 font-mono-custom text-[12px] text-[#71717A]">
+            <span>© 2026 Bineet Barthwal</span>
+            <div className="flex items-center gap-5">
+              <Link className="hover:text-[#141417] transition-colors" href="/privacy">
+                Privacy Policy
+              </Link>
+              <a
+                href="mailto:hello@bineet.in"
+                className="hover:text-[#141417] transition-colors"
+              >
+                hello@bineet.in
+              </a>
             </div>
           </div>
         </div>

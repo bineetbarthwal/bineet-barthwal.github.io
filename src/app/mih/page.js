@@ -73,7 +73,7 @@ export default function MIHCaseStudy() {
               <div>
                 <h4 className="text-[24px] text-black mb-4" style={{ fontFamily: 'var(--font-sans)' }}>The Friction of Lead Generation</h4>
                 <p className="text-[16px] text-zinc-600 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                  In the luxury interior industry, traditional websites rely on high-friction 'Contact Us' forms. Users are often intimidated by potential costs and fear aggressive sales tactics. Asking for high-effort data while offering zero immediate value causes massive user drop-off.
+                  In the luxury interior industry, traditional websites rely on high-friction &apos;Contact Us&apos; forms. Users are often intimidated by potential costs and fear aggressive sales tactics. Asking for high-effort data while offering zero immediate value causes massive user drop-off.
                 </p>
               </div>
 
@@ -81,7 +81,7 @@ export default function MIHCaseStudy() {
               <div>
                 <h4 className="text-[24px] text-black mb-4" style={{ fontFamily: 'var(--font-sans)' }}>A Value-First Quoting Flow</h4>
                 <p className="text-[16px] text-zinc-600 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                  We reframed the architecture from a 'data capture' model to a 'value delivery' model. By introducing an interactive, room-by-room AI Estimate tool, we provided immediate pricing transparency. This broke down intimidating costs into digestible chunks and explicitly lowered the commitment barrier for the user.
+                  We reframed the architecture from a &apos;data capture&apos; model to a &apos;value delivery&apos; model. By introducing an interactive, room-by-room AI Estimate tool, we provided immediate pricing transparency. This broke down intimidating costs into digestible chunks and explicitly lowered the commitment barrier for the user.
                 </p>
               </div>
 
@@ -109,7 +109,7 @@ export default function MIHCaseStudy() {
                 className="text-2xl font-normal text-white md:text-3xl lg:text-4xl"
                 style={{ fontFamily: 'var(--font-sans)' }}
               >
-                I'm available for new opportunities.
+                I&apos;m available for new opportunities.
               </h3>
               
               {/* Email Input */}

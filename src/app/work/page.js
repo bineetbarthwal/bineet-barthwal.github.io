@@ -69,7 +69,7 @@ function WorkContent() {
               className="mt-4 text-sm leading-relaxed text-gray-600 md:text-base max-w-2xl"
               style={{ fontFamily: 'var(--font-sans)' }}
             >
-              A collection of case studies and projects I've worked on.
+              A collection of case studies and projects I&apos;ve worked on.
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@ function WorkContent() {
                     className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
                     style={{ fontFamily: 'var(--font-sans)' }}
                   >
-                    How do you design an app connecting India's busiest users to its least literate workforce?
+                    How do you design an app connecting India&apos;s busiest users to its least literate workforce?
                   </p>
                 </article>
               </Link>
