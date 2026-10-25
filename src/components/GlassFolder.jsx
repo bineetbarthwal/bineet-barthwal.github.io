@@ -86,7 +86,7 @@ export default function GlassFolder({
               ) : (
                 <>
                   <span className="w-[36px] h-[36px] rounded-[10px] bg-white shadow-[0_2px_5px_rgba(0,0,0,0.05)] border border-black/[0.04] flex items-center justify-center">
-                    <span className="w-[22px] h-[22px] rounded-[6px] bg-[#3B5BFF] text-white flex items-center justify-center text-[10px] font-bold tracking-tighter font-mono-custom">
+                    <span className="w-[22px] h-[22px] rounded-[6px] bg-[#3B5BFF] text-white flex items-center justify-center text-[10px] font-bold tracking-tight font-sans-custom">
                       Ai
                     </span>
                   </span>
@@ -110,10 +110,16 @@ export default function GlassFolder({
 
           {/* Main Folder Front Body */}
           <div className="bg-[#F5F5F7] rounded-b-[22px] rounded-tr-[22px] px-5 pt-4 pb-5 border-b border-l border-r border-black/[0.04] shadow-[0_10px_28px_rgba(0,0,0,0.05)] text-left">
-            <h3 className="font-display font-bold text-[19px] text-[#111113] tracking-[-0.025em] leading-snug whitespace-nowrap">
+            <h3
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="font-display font-bold text-[18px] text-[#141417] tracking-[-0.02em] leading-snug whitespace-nowrap"
+            >
               {title}
             </h3>
-            <p className="font-sans-custom text-[13.5px] text-[#6e6e77] mt-1.5 leading-[1.45] line-clamp-2 min-h-[39px]">
+            <p
+              style={{ fontFamily: "var(--font-hanken), sans-serif" }}
+              className="font-sans-custom text-[13.5px] text-[#6e6e77] mt-1.5 leading-[1.45] line-clamp-2 min-h-[39px]"
+            >
               {description}
             </p>
           </div>

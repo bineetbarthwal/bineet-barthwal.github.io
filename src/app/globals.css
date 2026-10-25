@@ -16,8 +16,11 @@ body::-webkit-scrollbar {
   display: none; /* Chrome/Edge: hides ugly right scrollbar */
 }
 
+body, p, span, a, button, li, div {
+  font-family: var(--font-hanken), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 body {
-  font-family: 'Hanken Grotesk', sans-serif !important;
   color: #141417;
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
@@ -26,15 +29,16 @@ body {
 }
 
 .font-display {
-  font-family: 'Bricolage Grotesque', sans-serif !important;
+  font-family: var(--font-bricolage), -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 .font-sans-custom {
-  font-family: 'Hanken Grotesk', sans-serif !important;
+  font-family: var(--font-hanken), -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
+/* Force any remaining mono classes to use clean Hanken Grotesk instead of AI typewriter font */
 .font-mono-custom {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: var(--font-hanken), -apple-system, BlinkMacSystemFont, sans-serif !important;
 }
 
 @media (pointer: fine) {
