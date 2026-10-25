@@ -49,10 +49,9 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Role & Year (Clean sans-serif, subtle grey) */}
+          {/* Role (Clean sans-serif, subtle grey) */}
           <div className="text-[14px] text-[#6E6E77] leading-[1.45] mb-5 font-normal">
             <p>Product &amp; Brand Designer</p>
-            <p>2026 · open to work</p>
           </div>
 
           {/* Name Display Heading (Bricolage Grotesque 800, exact #3B5BFF blue) */}
