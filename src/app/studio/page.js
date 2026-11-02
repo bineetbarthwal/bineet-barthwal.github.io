@@ -149,7 +149,7 @@ function FrameLoopSlide({ frames, interval = 550, alt = "Animated slide" }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// TOOLS POPOVER  (right action rail)
+// TOOLS POPOVER  (right action rail — opens leftward from the rail button)
 // ─────────────────────────────────────────────────────────────────────────────
 function ToolsPopover({ tools, brief }) {
   const [open, setOpen] = useState(false);
@@ -165,17 +165,21 @@ function ToolsPopover({ tools, brief }) {
   }, [open]);
 
   return (
-    <div className="relative" ref={ref}>
+    <div className="flex flex-col items-center gap-1 relative" ref={ref}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         title="Tools & Brief"
-        className="w-11 h-11 rounded-full bg-white text-[#141417] shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow cursor-pointer"
+        className="w-9 h-9 rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-md flex items-center justify-center transition-transform hover:scale-105 cursor-pointer"
       >
-        <span className="font-bold text-[13px] leading-none tracking-tighter select-none">
+        {/* Illustrator-style "Ai" badge icon */}
+        <span className="font-bold text-[12px] leading-none tracking-tighter select-none">
           Ai
         </span>
       </button>
+      <span className="text-[10.5px] font-medium text-zinc-400 tracking-tight select-none">
+        Tools
+      </span>
 
       <AnimatePresence>
         {open && (
@@ -184,7 +188,7 @@ function ToolsPopover({ tools, brief }) {
             animate={{ opacity: 1, scale: 1, x: 0 }}
             exit={{ opacity: 0, scale: 0.92, x: 8 }}
             transition={{ duration: 0.14 }}
-            className="absolute right-full top-1/2 -translate-y-1/2 mr-3 w-[260px] bg-[#141417] border border-white/10 rounded-xl p-4 shadow-2xl text-white z-50"
+            className="absolute right-full top-0 mr-3 w-[260px] bg-[#141417] border border-white/10 rounded-xl p-4 shadow-2xl text-white z-50"
           >
             {tools && tools.length > 0 && (
               <div className="mb-3">
@@ -220,8 +224,8 @@ function ToolsPopover({ tools, brief }) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // BEHANCE SHOWCASE MODAL
-// Full Behance-style: wide white canvas, slides stacked from pixel 0,
-// sticky dark header, floating right rail, Lenis-bypass wheel handling.
+// Layer A = fixed UI (header, rail, arrows) — never scrolls.
+// Layer B = absolute inset scrollable viewport — native scroll, Lenis bypassed.
 // ─────────────────────────────────────────────────────────────────────────────
 function ShowcaseModal({ item, onClose }) {
   const [briefOpen, setBriefOpen] = useState(false);
@@ -235,7 +239,6 @@ function ShowcaseModal({ item, onClose }) {
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    // Pause Lenis if it exposes a global handle
     const lenis = window.__lenis__;
     if (lenis && typeof lenis.stop === "function") lenis.stop();
     return () => {
@@ -261,8 +264,6 @@ function ShowcaseModal({ item, onClose }) {
     return () => document.removeEventListener("mousedown", handler);
   }, [briefOpen]);
 
-  const handleWheel = useCallback((e) => { e.stopPropagation(); }, []);
-
   const handleCopyPermalink = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
       setCopied(true);
@@ -283,196 +284,203 @@ function ShowcaseModal({ item, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
-      // data-lenis-prevent tells Lenis to hand wheel control back to native scroll
-      data-lenis-prevent="true"
-      onWheel={handleWheel}
-      className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-[2px] overflow-y-auto overscroll-contain"
+      className="fixed inset-0 z-[9999] bg-black/88 backdrop-blur-xs"
     >
-      {/* ── STICKY HEADER ──────────────────────────────────────────── */}
-      <div className="sticky top-0 z-[10001] bg-[#111113]/92 backdrop-blur-md border-b border-white/10">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-8 pt-4 pb-3 flex items-center justify-between text-white">
-          {/* Left: avatar + title + byline */}
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-full bg-[#3B5BFF] text-white font-bold flex items-center justify-center text-sm shrink-0 select-none">
-              BB
-            </div>
-            <div className="min-w-0">
-              <h3
-                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
-                className="font-display font-bold text-[15px] text-white truncate leading-snug"
-              >
-                {item.title}
-              </h3>
-              <p className="text-[12px] text-zinc-400 font-normal leading-tight truncate">
-                Bineet Barthwal &middot; Brand &amp; Visual Identity &middot; Available for work
-              </p>
-            </div>
+      {/* ── LAYER A: FIXED UI — NEVER SCROLLS ──────────────────────── */}
+
+      {/* Top Header Bar */}
+      <div className="fixed top-0 inset-x-0 z-30 h-14 px-6 bg-[#0e0e11]/90 backdrop-blur-md border-b border-white/[0.07] flex items-center justify-between">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-7 h-7 rounded-full bg-[#3B5BFF] text-white text-[11px] font-bold flex items-center justify-center shrink-0 select-none">
+            BB
           </div>
-
-          {/* Right: circular close */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close showcase"
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white cursor-pointer transition-colors ml-4 shrink-0"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* ── WIDE WHITE PRESENTATION CANVAS ─────────────────────────── */}
-      <div className="relative max-w-[1120px] w-full mx-auto mb-16 bg-white shadow-2xl overflow-hidden group/canvas mt-6 sm:mt-8">
-
-        {/* Hover pills — top-left of canvas, Behance style */}
-        <div className="absolute top-4 left-4 z-20 flex items-center gap-2 opacity-0 group-hover/canvas:opacity-100 transition-opacity duration-200 pointer-events-none group-hover/canvas:pointer-events-auto">
-          {/* Brief pill */}
-          <div className="relative" ref={briefRef}>
-            <button
-              type="button"
-              onClick={() => setBriefOpen((v) => !v)}
-              className="px-3.5 py-1.5 rounded-full bg-black/65 hover:bg-black/80 backdrop-blur-md text-white text-[12.5px] font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
+          <div className="min-w-0 flex items-baseline gap-2">
+            <span
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="text-[13.5px] font-semibold text-white truncate leading-none"
             >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 16v-4M12 8h.01" />
-              </svg>
-              Brief
-            </button>
-            <AnimatePresence>
-              {briefOpen && item.brief && (
-                <motion.div
-                  initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                  transition={{ duration: 0.14 }}
-                  className="absolute top-full left-0 mt-2 w-[300px] bg-[#141417]/96 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-2xl text-white z-30"
-                >
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-2">
-                    Project Brief
-                  </span>
-                  <p className="text-[13px] text-zinc-200 leading-relaxed">{item.brief}</p>
-                  {item.tools && item.tools.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
-                      {item.tools.map((t) => (
-                        <span key={t} className="px-2 py-0.5 bg-white/10 rounded text-[11px] text-zinc-300 font-medium">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
+              {item.title}
+            </span>
+            <span className="text-[12px] text-zinc-400 hidden sm:inline shrink-0">
+              Bineet Barthwal &middot; Brand &amp; Visual Identity &middot; Available for work
+            </span>
           </div>
-
-          {/* Permalink pill */}
-          <button
-            type="button"
-            onClick={handleCopyPermalink}
-            className="px-3.5 py-1.5 rounded-full bg-black/65 hover:bg-black/80 backdrop-blur-md text-white text-[12.5px] font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-            </svg>
-            {copied ? "Copied!" : "Permalink"}
-          </button>
         </div>
-
-        {/* Seamless vertical slide stack — starts at pixel 0 (no padding/gap) */}
-        <div className="flex flex-col gap-0">
-          {item.slides && item.slides.map((slide, idx) => {
-            if (typeof slide === "string") {
-              return (
-                <div key={idx} className="w-full leading-[0]">
-                  <img
-                    src={slide}
-                    alt={`${item.title} — Artboard ${idx + 1}`}
-                    className="w-full h-auto block select-none"
-                    loading={idx < 2 ? "eager" : "lazy"}
-                    draggable={false}
-                  />
-                </div>
-              );
-            }
-            if (slide.type === "loop") {
-              return (
-                <div key={idx} className="w-full leading-[0]">
-                  <FrameLoopSlide
-                    frames={slide.frames}
-                    interval={slide.interval ?? 550}
-                    alt={`${item.title} — Regional motif loop`}
-                  />
-                </div>
-              );
-            }
-            return null;
-          })}
-
-          {/* Fallback if no slides defined */}
-          {(!item.slides || item.slides.length === 0) && (
-            <img
-              src={item.src}
-              alt={item.title}
-              className="w-full h-auto block select-none"
-              draggable={false}
-            />
-          )}
-        </div>
-      </div>
-
-      {/* ── END-OF-SHOWCASE FOOTER ──────────────────────────────────── */}
-      <div className="text-center pb-16 flex flex-col items-center gap-4 px-4">
-        <span className="text-[11px] text-zinc-500 uppercase tracking-[0.12em] font-mono">
-          End of showcase &middot; {slideCount} artboards
-        </span>
         <button
           type="button"
           onClick={onClose}
-          className="btn-secondary-pill !bg-white !text-[#141417] !px-6 !py-2 !text-[13px] font-medium"
+          aria-label="Close showcase"
+          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xs cursor-pointer transition-colors ml-4 shrink-0"
         >
-          Close Showcase &#x2715;
+          ✕
         </button>
       </div>
 
-      {/* ── FLOATING RIGHT ACTION RAIL (lg+ only) ──────────────────── */}
-      <div className="fixed right-5 top-1/2 -translate-y-1/2 z-[10000] hidden lg:flex flex-col items-center gap-4">
-        {/* Hire / Message */}
-        <a
-          href="mailto:hello@bineet.in"
-          title="Message"
-          className="w-11 h-11 rounded-full bg-white text-[#141417] shadow-lg flex flex-col items-center justify-center hover:shadow-xl transition-shadow cursor-pointer gap-0.5"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
-          <span className="text-[8px] font-semibold uppercase tracking-wide leading-none">Hire</span>
-        </a>
+      {/* Right Floating Action Rail */}
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col items-center gap-4">
+        {/* Hire */}
+        <div className="flex flex-col items-center gap-1">
+          <a
+            href="mailto:hello@bineet.in"
+            title="Hire"
+            className="w-9 h-9 rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-md flex items-center justify-center transition-transform hover:scale-105 cursor-pointer"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+          <span className="text-[10.5px] font-medium text-zinc-400 tracking-tight select-none">Hire</span>
+        </div>
 
-        {/* Tools / Brief popover */}
+        {/* Tools (popover) */}
         <ToolsPopover tools={item.tools} brief={item.brief} />
 
         {/* Share */}
-        <button
-          type="button"
-          onClick={handleShare}
-          title={shareCopied ? "Link copied!" : "Share"}
-          className="w-11 h-11 rounded-full bg-white text-[#141417] shadow-lg flex flex-col items-center justify-center hover:shadow-xl transition-shadow cursor-pointer gap-0.5"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="18" cy="5" r="3" />
-            <circle cx="6" cy="12" r="3" />
-            <circle cx="18" cy="19" r="3" />
-            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-          </svg>
-          <span className="text-[8px] font-semibold uppercase tracking-wide leading-none">
+        <div className="flex flex-col items-center gap-1">
+          <button
+            type="button"
+            onClick={handleShare}
+            title={shareCopied ? "Link copied!" : "Share"}
+            className="w-9 h-9 rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-md flex items-center justify-center transition-transform hover:scale-105 cursor-pointer"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="18" cy="5" r="3" />
+              <circle cx="6" cy="12" r="3" />
+              <circle cx="18" cy="19" r="3" />
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            </svg>
+          </button>
+          <span className="text-[10.5px] font-medium text-zinc-400 tracking-tight select-none">
             {shareCopied ? "Copied" : "Share"}
           </span>
-        </button>
+        </div>
+      </div>
+
+      {/* ── LAYER B: SCROLLABLE SLIDE VIEWPORT ─────────────────────── */}
+      <div
+        data-lenis-prevent="true"
+        onWheel={(e) => e.stopPropagation()}
+        onClick={onClose}
+        className="absolute inset-0 overflow-y-auto overscroll-contain pt-20 pb-16 px-4"
+      >
+        {/* Wide white presentation canvas — compact 780px */}
+        <div
+          className="max-w-[780px] w-full mx-auto bg-white rounded-[4px] shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden relative group/canvas"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Hover pills — top-left of canvas */}
+          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 opacity-0 group-hover/canvas:opacity-100 transition-opacity duration-200 pointer-events-none group-hover/canvas:pointer-events-auto">
+            {/* Brief pill */}
+            <div className="relative" ref={briefRef}>
+              <button
+                type="button"
+                onClick={() => setBriefOpen((v) => !v)}
+                className="px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[11.5px] font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4M12 8h.01" />
+                </svg>
+                Brief
+              </button>
+              <AnimatePresence>
+                {briefOpen && item.brief && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                    transition={{ duration: 0.14 }}
+                    className="absolute top-full left-0 mt-2 w-[290px] bg-[#141417]/96 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-2xl text-white z-30"
+                  >
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-2">
+                      Project Brief
+                    </span>
+                    <p className="text-[13px] text-zinc-200 leading-relaxed">{item.brief}</p>
+                    {item.tools && item.tools.length > 0 && (
+                      <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
+                        {item.tools.map((t) => (
+                          <span key={t} className="px-2 py-0.5 bg-white/10 rounded text-[11px] text-zinc-300 font-medium">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Permalink pill */}
+            <button
+              type="button"
+              onClick={handleCopyPermalink}
+              className="px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[11.5px] font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
+            >
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+              {copied ? "Copied!" : "Permalink"}
+            </button>
+          </div>
+
+          {/* Seamless vertical slide stack — starts at pixel 0 */}
+          <div className="flex flex-col gap-0">
+            {item.slides && item.slides.map((slide, idx) => {
+              if (typeof slide === "string") {
+                return (
+                  <div key={idx} className="w-full leading-[0]">
+                    <img
+                      src={slide}
+                      alt={`${item.title} — Artboard ${idx + 1}`}
+                      className="w-full h-auto block select-none"
+                      loading={idx < 2 ? "eager" : "lazy"}
+                      draggable={false}
+                    />
+                  </div>
+                );
+              }
+              if (slide.type === "loop") {
+                return (
+                  <div key={idx} className="w-full leading-[0]">
+                    <FrameLoopSlide
+                      frames={slide.frames}
+                      interval={slide.interval ?? 550}
+                      alt={`${item.title} — Regional motif loop`}
+                    />
+                  </div>
+                );
+              }
+              return null;
+            })}
+
+            {/* Fallback if no slides defined */}
+            {(!item.slides || item.slides.length === 0) && (
+              <img
+                src={item.src}
+                alt={item.title}
+                className="w-full h-auto block select-none"
+                draggable={false}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* End-of-showcase footer */}
+        <div className="text-center mt-10 mb-4 flex flex-col items-center gap-4 px-4">
+          <span className="text-[11px] text-zinc-500 uppercase tracking-[0.12em] font-mono">
+            End of showcase &middot; {slideCount} artboards
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="btn-secondary-pill !bg-white !text-[#141417] !px-6 !py-2 !text-[13px] font-medium"
+          >
+            Close Showcase &#x2715;
+          </button>
+        </div>
       </div>
     </motion.div>
   );
