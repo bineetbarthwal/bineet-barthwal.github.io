@@ -54,10 +54,10 @@ export default function Home() {
             <p>Product &amp; Brand Designer</p>
           </div>
 
-          {/* Name Display Heading (Bricolage Grotesque 800, exact #3B5BFF blue) */}
+          {/* Name Display Heading (Bricolage Grotesque 800) */}
           <h1
             style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
-            className="font-display font-extrabold text-[54px] sm:text-[68px] text-[#3B5BFF] tracking-[-0.045em] leading-[0.98]"
+            className="font-display font-extrabold text-[54px] sm:text-[68px] text-black tracking-[-0.045em] leading-[0.98]"
           >
             Bineet Barthwal
           </h1>

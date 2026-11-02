@@ -1,257 +1,506 @@
-'use client';
+"use client";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { Zap, LayoutDashboard, Rocket } from 'lucide-react';
-
-const logos = [
-  { name: 'WILL' },
-  { name: 'Fundbridge' },
-  { name: 'INCEPT' },
-  { name: 'CU-TBI' },
-  { name: 'MakerSpace' },
-  { name: 'IEDC' }
+// Map existing image paths and PDF links from the project into this flat array.
+// Set `pdf: "/path-to-guidelines.pdf"` for Brand Identity / Logo items so clicking opens the PDF.
+// Set `slides: [...]` for multi-artboard case studies to open the vertical Behance-style showcase stack.
+// Leave `pdf: null` and omit `slides` for single images to open the full-screen zoom modal.
+export const GALLERY_ITEMS = [
+  {
+    id: "item-1",
+    title: "ISBACON 2026 · National Summit Identity",
+    subtitle:
+      "Complete brand identity, cultural motif system, print collateral & event signage",
+    category: "Brand Identity",
+    span: "col-span-12",
+    height: "h-[270px] sm:h-[310px]",
+    src: "/studio/isbacon2026/1x/Slide 1.webp",
+    slides: [
+      "/studio/isbacon2026/1x/Slide 1.webp",
+      "/studio/isbacon2026/1x/Slide 2.webp",
+      "/studio/isbacon2026/1x/Slide 3.webp",
+      "/studio/isbacon2026/1x/Slide 4-1.webp",
+      "/studio/isbacon2026/1x/Slide 4-2.webp",
+      "/studio/isbacon2026/1x/Slide 4-3.webp",
+      "/studio/isbacon2026/1x/Slide 4-4.webp",
+      "/studio/isbacon2026/1x/Slide 4-5.webp",
+      "/studio/isbacon2026/1x/Slide 4-6.webp",
+      "/studio/isbacon2026/1x/Slide 4-7.webp",
+      "/studio/isbacon2026/1x/Slide 4-8.webp",
+      "/studio/isbacon2026/1x/Slide 5.webp",
+      "/studio/isbacon2026/1x/Slide 6.webp",
+    ],
+    brief:
+      "End-to-end visual identity system for the 18th Annual ISBACON 2026 National Conference—blending regional cultural motifs (Open Hand monument, Phulkari geometry, Golden Temple, wheat & state icons) into a modular grid across 40+ print, badge, and stage deliverables.",
+    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
+    pdf: null,
+  },
+  {
+    id: "item-2",
+    title: "INCEPT · Brand Identity Guidelines",
+    subtitle: "Logo architecture, typography & visual identity book",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-6",
+    height: "h-[220px]",
+    src: "/studio/incept-brand.jpg", // Keep existing working image path
+    pdf: "/studio/incept-guidelines.pdf", // Keep existing PDF path if present in /public
+  },
+  {
+    id: "item-3",
+    title: "CUBE · Ecosystem Identity System",
+    subtitle: "Brand mark, grid construction & merchandise system",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-6",
+    height: "h-[220px]",
+    src: "/studio/cube-brand.jpg", // Keep existing working image path
+    pdf: "/studio/cube-guidelines.pdf",
+  },
+  {
+    id: "item-4",
+    title: "ISBACON 2026 · Delegate Passes & Lanyards",
+    subtitle: "Print production & access control badge system",
+    category: "Event Systems",
+    span: "col-span-12 sm:col-span-5",
+    height: "h-[230px]",
+    src: "/studio/isbacon-passes.jpg", // Keep existing working image path
+    pdf: null,
+  },
+  {
+    id: "item-5",
+    title: "IEDC · Official Brand Guidelines",
+    subtitle: "Innovation cell identity mark, color palette & stationery",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-7",
+    height: "h-[230px]",
+    src: "/studio/iedc-identity.jpg", // Keep existing working image path
+    pdf: "/studio/iedc-guidelines.pdf",
+  },
+  {
+    id: "item-6",
+    title: "Republic For Startups · Summit Campaign",
+    subtitle: "Key visuals, stage backdrops & promotional suite",
+    category: "Print & Campaigns",
+    span: "col-span-12 sm:col-span-7",
+    height: "h-[225px]",
+    src: "/studio/republic-startups.jpg", // Keep existing working image path
+    pdf: null,
+  },
+  {
+    id: "item-7",
+    title: "Geebi · Brand & Visual Identity",
+    subtitle: "Startup brand identity & digital visual system",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-5",
+    height: "h-[225px]",
+    src: "/studio/geebi-brand.jpg", // Keep existing working image path
+    pdf: "/studio/geebi-guidelines.pdf",
+  },
+  {
+    id: "item-8",
+    title: "High-Volume Print & Campaign Collateral",
+    subtitle: "Editorial layouts, standees & automated InDesign production",
+    category: "Print & Campaigns",
+    span: "col-span-12",
+    height: "h-[250px]",
+    src: "/studio/campaign-spread.jpg", // Keep existing working image path
+    pdf: null,
+  },
 ];
 
-function LogoSet() {
+export default function BrandBentoPage() {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [lightboxItem, setLightboxItem] = useState(null);
+
+  const filters = ["All", "Brand Identity", "Event Systems", "Print & Campaigns"];
+
+  const filteredItems =
+    activeFilter === "All"
+      ? GALLERY_ITEMS
+      : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
+
+  // Close lightbox on Escape key
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setLightboxItem(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (lightboxItem) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightboxItem]);
+
+  const handleTileClick = (item) => {
+    if (item.pdf) {
+      window.open(item.pdf, "_blank", "noopener,noreferrer");
+    } else {
+      setLightboxItem(item);
+    }
+  };
+
   return (
-    <div className="flex items-center gap-16 md:gap-24 px-8 md:px-12">
-      {logos.map((logo, index) => (
-        <div 
-          key={index} 
-          className="flex items-center justify-center opacity-40 hover:opacity-100 transition-opacity duration-300"
-        >
-          {/* Placeholder SVG for client logos */}
-          <svg 
-            viewBox="0 0 160 40" 
-            className="h-7 md:h-9 lg:h-10 w-auto fill-current text-white" 
-            xmlns="http://www.w3.org/2000/svg"
+    <main className="min-h-screen bg-white text-[#141417]">
+      {/* Locked 590px Container Matching Homepage */}
+      <div className="max-w-[590px] mx-auto px-6 pt-10">
+        {/* Top Bar */}
+        <div className="flex items-center justify-between mb-9">
+          <Link className="btn-secondary-pill" href="/">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>All work</span>
+          </Link>
+
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary-pill"
           >
-            <text 
-              x="50%" 
-              y="50%" 
-              dominantBaseline="middle" 
-              textAnchor="middle" 
-              fontSize="24" 
-              fontWeight="900" 
-              fontFamily="sans-serif"
-              letterSpacing="0.02em"
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              {logo.name}
-            </text>
-          </svg>
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+            <span>Resume</span>
+          </a>
         </div>
-      ))}
-    </div>
-  );
-}
 
-export default function StudioPage() {
-  // Fast text-reveal animation variants
-  const sentence = {
-    hidden: { opacity: 1 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.1,
-        staggerChildren: 0.03,
-      },
-    },
-  };
-
-  const letter = {
-    hidden: { opacity: 0, y: 40, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: 'spring',
-        damping: 14,
-        stiffness: 200,
-      },
-    },
-  };
-
-  const textToAnimate = "THE EXECUTION PARTNER YOU'VE BEEN SEARCHING FOR.";
-
-  return (
-    <div className="min-h-screen bg-[#102028] text-white selection:bg-white selection:text-[#102028] font-sans overflow-x-hidden">
-      
-      {/* Hero Billboard */}
-      <section className="relative min-h-[70vh] flex flex-col justify-center items-center px-6 pt-24 pb-16 w-full max-w-7xl mx-auto">
-        
-        {/* Status Badge */}
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-12 shadow-lg backdrop-blur-sm"
+        {/* Compact Header (No wasted vertical space) */}
+        <h1
+          style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+          className="font-display font-extrabold text-[38px] sm:text-[44px] text-[#141417] tracking-[-0.04em] leading-[1.02]"
         >
-          <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-          </span>
-          <span className="text-xs md:text-sm font-semibold tracking-wide text-gray-300 uppercase">
-            Taking on 2 new startups this month
-          </span>
-        </motion.div>
+          Brand & Visuals
+        </h1>
 
-        {/* Main Headline */}
-        <motion.h1 
-          className="text-center text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter leading-[0.85] max-w-5xl mb-8"
-          variants={sentence}
-          initial="hidden"
-          animate="visible"
-          aria-label={textToAnimate}
-        >
-          {textToAnimate.split(" ").map((word, wordIndex) => (
-            <span key={wordIndex} className="inline-block whitespace-nowrap mr-[0.25em]" aria-hidden="true">
-              {word.split("").map((char, charIndex) => (
-                <motion.span 
-                  key={charIndex} 
-                  className="inline-block" 
-                  variants={letter}
+        <p className="font-sans-custom font-normal text-[15px] text-[#52525B] mt-2.5 leading-[1.6]">
+          Identity systems, national summit branding, and campaign collateral.
+          Hover for details—click logos to open brand PDFs or event visuals to
+          expand full screen.
+        </p>
+
+        {/* Filter Bar */}
+        <div className="flex flex-wrap items-center gap-2 mt-5">
+          {filters.map((tab) => {
+            const active = activeFilter === tab;
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveFilter(tab)}
+                className={
+                  active
+                    ? "btn-dark-pill !py-1.5 !px-3.5 !text-[12.5px]"
+                    : "btn-secondary-pill !py-1.5 !px-3.5 !text-[12.5px]"
+                }
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Sharp-Cornered Bento Grid (No text headers between tiles) */}
+        <motion.div layout className="grid grid-cols-12 gap-2.5 mt-7">
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map((item) => {
+              const isPdf = Boolean(item.pdf);
+              return (
+                <motion.div
+                  key={item.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.18 }}
+                  onClick={() => handleTileClick(item)}
+                  data-cursor="hand"
+                  className={`${item.span} ${item.height} group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 cursor-pointer select-none`}
                 >
-                  {char}
-                </motion.span>
-              ))}
-            </span>
-          ))}
-        </motion.h1>
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                  />
 
-        {/* Subheadline */}
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center text-gray-400 text-lg md:text-xl lg:text-2xl max-w-3xl font-medium leading-relaxed mb-16"
-        >
-          Premium UI/UX, Brand Identity, and full-stack Next.js Engineering. All in one place. One dedicated team.
-        </motion.p>
-        
-      </section>
+                  {/* Full-Tile Hover Overlay (All info strictly inside the image) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-4 flex flex-col justify-between">
+                    {/* Top-Right Action Badge (PDF vs Showcase vs Fullscreen Zoom) */}
+                    <div className="flex justify-end">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white text-[#141417] text-[11px] font-semibold tracking-tight shadow-sm">
+                        {isPdf ? (
+                          <>
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2.2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                              <polyline points="14 2 14 8 20 8" />
+                            </svg>
+                            <span>Open Brand PDF ↗</span>
+                          </>
+                        ) : item.slides && item.slides.length > 0 ? (
+                          <>
+                            <span>Full Showcase ({item.slides.length} Slides)</span>
+                            <span className="text-[12px]">↓</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Full View</span>
+                            <span>⤢</span>
+                          </>
+                        )}
+                      </span>
+                    </div>
 
-      {/* Logo Marquee Section */}
-      <section className="w-full relative pb-24">
-        <div className="w-full mx-auto relative">
-          
-          {/* CSS Gradient Masks for smooth fade out edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 md:w-56 bg-gradient-to-r from-[#102028] to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-24 md:w-56 bg-gradient-to-l from-[#102028] to-transparent z-10 pointer-events-none"></div>
+                    {/* Bottom-Left Project Info Inside Image */}
+                    <div className="translate-y-1 group-hover:translate-y-0 transition-transform duration-200">
+                      <span className="block text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-300">
+                        {item.category}
+                      </span>
+                      <h2
+                        style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                        className="font-display font-bold text-[15.5px] text-white leading-snug mt-0.5"
+                      >
+                        {item.title}
+                      </h2>
+                      {item.subtitle && (
+                        <p className="text-[12.5px] text-zinc-300 mt-0.5 line-clamp-1">
+                          {item.subtitle}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
+      </div>
 
-          {/* Marquee Container */}
-          <div className="flex overflow-hidden relative w-full items-center">
-            <motion.div
-              className="flex whitespace-nowrap items-center w-max"
-              animate={{
-                x: ['0%', '-50%'],
-              }}
-              transition={{
-                ease: 'linear',
-                duration: 30,
-                repeat: Infinity,
-              }}
-            >
-              {/* Render 4 sets for a seamless infinite loop across all screen sizes */}
-              <LogoSet />
-              <LogoSet />
-              <LogoSet />
-              <LogoSet />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Wall of Proof (Masonry Grid) */}
-      <section className="w-full max-w-7xl mx-auto px-6 py-24">
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
-          {/* 6 placeholder items with varying heights for the masonry effect */}
-          {[
-            { title: "WILL - Mobile App UX", height: "h-[400px]" },
-            { title: "Fundbridge - Pitch Deck", height: "h-[250px]" },
-            { title: "INCEPT - Brand Identity", height: "h-[350px]" },
-            { title: "CU-TBI - Web Platform", height: "h-[450px]" },
-            { title: "MakerSpace - Dashboard", height: "h-[300px]" },
-            { title: "IEDC - Marketing Site", height: "h-[350px]" },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: (i % 3) * 0.1 }}
-              className={`relative w-full ${item.height} rounded-2xl border border-gray-800 bg-[#1C1C1C] overflow-hidden group break-inside-avoid mb-6`}
-            >
-              {/* Fallback pattern / gradient for placeholder */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1C1C1C] to-[#2A2A2A] group-hover:scale-105 transition-transform duration-700"></div>
-              
-              {/* Next/Image placeholder (commented out until you have the actual image assets) */}
-              {/* <Image 
-                src={`/portfolio-${i+1}.webp`} 
-                alt={item.title} 
-                fill 
-                className="object-cover transition-transform duration-700 group-hover:scale-105" 
-              /> */}
-              
-              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span className="text-gray-500/50 font-mono text-xs uppercase tracking-widest px-4 text-center">
-                  Image Placeholder
-                </span>
+      {/* Sharp Full-Screen Zoom & Behance Showcase Modal */}
+      <AnimatePresence>
+        {lightboxItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-[9999] bg-[#0A0A0C]/96 backdrop-blur-md overflow-y-auto"
+          >
+            {/* Sticky Top Bar */}
+            <div className="sticky top-0 z-50 bg-[#0E0E11]/92 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5 flex items-center justify-between text-white">
+              <div className="flex items-center gap-3 min-w-0 pr-4">
+                <div>
+                  <span className="text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-400 block leading-tight">
+                    {lightboxItem.category}
+                  </span>
+                  <h3
+                    style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                    className="font-display font-bold text-[16px] sm:text-[18px] text-white truncate leading-tight mt-0.5"
+                  >
+                    {lightboxItem.title}
+                  </h3>
+                </div>
               </div>
-              
-              {/* Hover Label */}
-              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <span className="text-white font-semibold tracking-wide text-lg">{item.title}</span>
+              <button
+                type="button"
+                onClick={() => setLightboxItem(null)}
+                className="px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white text-[13px] font-medium transition-colors cursor-pointer shrink-0"
+              >
+                Close ✕
+              </button>
+            </div>
+
+            {/* Modal Body: Behance Stack vs Single Fullscreen Image */}
+            {lightboxItem.slides && lightboxItem.slides.length > 0 ? (
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+                {/* Project Briefing Card */}
+                {(lightboxItem.brief || lightboxItem.tools) && (
+                  <div className="bg-[#141417] border border-white/10 p-5 sm:p-7 mb-6 text-white">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                        {lightboxItem.category}
+                      </span>
+                      <span className="text-zinc-600">·</span>
+                      <span className="text-[12px] text-zinc-400 font-medium">
+                        {lightboxItem.slides.length} Deliverable Artboards
+                      </span>
+                    </div>
+                    <h2
+                      style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                      className="font-display font-extrabold text-[22px] sm:text-[28px] text-white tracking-[-0.03em] leading-tight"
+                    >
+                      {lightboxItem.title}
+                    </h2>
+                    {lightboxItem.subtitle && (
+                      <p className="text-[14px] text-zinc-300 font-medium mt-1">
+                        {lightboxItem.subtitle}
+                      </p>
+                    )}
+                    {lightboxItem.brief && (
+                      <p className="text-[14px] sm:text-[15px] text-zinc-300 mt-4 leading-relaxed border-t border-white/10 pt-4 font-normal">
+                        {lightboxItem.brief}
+                      </p>
+                    )}
+                    {lightboxItem.tools && lightboxItem.tools.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-2 mt-4 pt-4 border-t border-white/10">
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mr-1">
+                          Deliverable Tools:
+                        </span>
+                        {lightboxItem.tools.map((tool) => (
+                          <span
+                            key={tool}
+                            className="px-2.5 py-1 bg-white/10 text-zinc-200 text-[12px] font-medium"
+                          >
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Vertical Stack of Slides (Behance Style) */}
+                <div className="flex flex-col gap-3 sm:gap-4">
+                  {lightboxItem.slides.map((slideSrc, idx) => (
+                    <div
+                      key={idx}
+                      className="w-full bg-[#121215] border border-white/10 overflow-hidden shadow-2xl"
+                    >
+                      <img
+                        src={slideSrc}
+                        alt={`${lightboxItem.title} - Slide ${idx + 1}`}
+                        className="w-full h-auto block select-none"
+                        loading={idx < 2 ? "eager" : "lazy"}
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                {/* End of Showcase Footer */}
+                <div className="text-center py-12 flex flex-col items-center gap-4">
+                  <span className="text-[12px] text-zinc-500 uppercase tracking-widest font-mono">
+                    End of Case Study · {lightboxItem.slides.length} Deliverable Slides
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLightboxItem(null);
+                    }}
+                    className="btn-secondary-pill !bg-white !text-black !py-2 !px-6 text-[13px] font-medium"
+                  >
+                    Close Showcase ✕
+                  </button>
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+            ) : (
+              <div
+                onClick={() => setLightboxItem(null)}
+                className="min-h-[calc(100vh-65px)] flex flex-col items-center justify-center p-4 sm:p-8 cursor-zoom-out"
+              >
+                <motion.div
+                  initial={{ scale: 0.96, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.96, opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative max-w-5xl w-full max-h-[82vh] bg-[#141417] border border-white/15 flex items-center justify-center overflow-hidden cursor-default"
+                >
+                  <img
+                    src={lightboxItem.src}
+                    alt={lightboxItem.title}
+                    className="w-full h-auto max-h-[82vh] object-contain"
+                  />
+                </motion.div>
+              </div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* How It Works (Frictionless Onboarding) */}
-      <section className="w-full max-w-7xl mx-auto px-6 py-24 border-t border-white/5">
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight uppercase">How we operate.</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 */}
-          <div className="bg-[#1C1C1C] rounded-3xl p-8 border border-white/5 hover:border-white/10 transition-colors">
-            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-emerald-400">
-              <Zap size={24} />
-            </div>
-            <h3 className="text-xl font-bold mb-4 text-white">1. Subscribe & Sprint</h3>
-            <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-              Pick a flat-rate sprint package. No proposals, no lengthy scoping calls. Secure your slot instantly.
-            </p>
+      {/* Same White Editorial Footer */}
+      <footer className="w-full bg-white pt-20 pb-16">
+        <div className="max-w-[590px] mx-auto px-6">
+          <div className="inline-flex items-center gap-2 text-[14px] font-normal text-[#52525B] mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+            <span>Open to work · India</span>
           </div>
 
-          {/* Card 2 */}
-          <div className="bg-[#1C1C1C] rounded-3xl p-8 border border-white/5 hover:border-white/10 transition-colors">
-            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-blue-400">
-              <LayoutDashboard size={24} />
-            </div>
-            <h3 className="text-xl font-bold mb-4 text-white">2. Async Execution</h3>
-            <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-              We manage the entire project via a shared Notion board. Drop in your requests, requirements, and feedback asynchronously.
-            </p>
-          </div>
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-extrabold text-[44px] sm:text-[56px] text-[#111113] tracking-[-0.04em] leading-[1.02]"
+          >
+            Have a product or <br className="hidden sm:block" />
+            brand in mind?
+          </h2>
 
-          {/* Card 3 */}
-          <div className="bg-[#1C1C1C] rounded-3xl p-8 border border-white/5 hover:border-white/10 transition-colors">
-            <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center mb-6 text-purple-400">
-              <Rocket size={24} />
-            </div>
-            <h3 className="text-xl font-bold mb-4 text-white">3. Rapid Delivery</h3>
-            <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-              Receive high-fidelity Figma designs in days, and fully deployed Next.js MVPs in weeks. Pause or cancel anytime.
-            </p>
+          <div className="flex flex-wrap items-center gap-6 mt-7 text-[15px] font-medium text-[#3F3F46]">
+            <a
+              href="mailto:hello@bineet.in"
+              className="hover:text-[#111113] transition-colors"
+            >
+              hello@bineet.in
+            </a>
+            <a
+              href="https://www.linkedin.com/in/bineet-barthwal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#111113] transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#111113] transition-colors"
+            >
+              Resume
+            </a>
+            <Link className="text-[#71717A] hover:text-[#111113] transition-colors" href="/privacy">
+              Privacy Policy
+            </Link>
           </div>
         </div>
-      </section>
-
-    </div>
+      </footer>
+    </main>
   );
 }
