@@ -4,9 +4,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ─── GALLERY DATA ────────────────────────────────────────────────────────────
-// slides entries can be:
-//   • string  → static slide image path
-//   • { type: "loop", frames: [...], interval: 550 } → hard-cut frame animation
+// All widescreen 16:9 boards. Removed fixed heights so aspect-video handles layout.
 export const GALLERY_ITEMS = [
   {
     id: "item-1",
@@ -15,7 +13,6 @@ export const GALLERY_ITEMS = [
       "Complete brand identity, cultural motif system, print collateral & event signage",
     category: "Brand Identity",
     span: "col-span-12",
-    height: "h-[270px] sm:h-[310px]",
     src: "/studio/isbacon2026/1x/Slide 1.webp",
     slides: [
       "/studio/isbacon2026/1x/Slide 1.webp",
@@ -49,9 +46,11 @@ export const GALLERY_ITEMS = [
     subtitle: "Logo architecture, typography & visual identity book",
     category: "Brand Identity",
     span: "col-span-12 sm:col-span-6",
-    height: "h-[220px]",
     src: "/studio/incept-brand.jpg",
     pdf: "/studio/incept-guidelines.pdf",
+    brief:
+      "Comprehensive logo architecture, typography rules, color specifications, and visual identity standards manual for INCEPT incubation network.",
+    tools: ["Adobe Illustrator", "Adobe InDesign"],
   },
   {
     id: "item-3",
@@ -59,70 +58,137 @@ export const GALLERY_ITEMS = [
     subtitle: "Brand mark, grid construction & merchandise system",
     category: "Brand Identity",
     span: "col-span-12 sm:col-span-6",
-    height: "h-[220px]",
     src: "/studio/cube-brand.jpg",
+    slides: ["/designs/cube1.jpg", "/designs/cube2.jpg", "/designs/cube3.jpg"],
     pdf: "/studio/cube-guidelines.pdf",
+    brief:
+      "Brand mark architecture, geometric isometric grid construction, and modular merchandise ecosystem for CUBE tech community.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop"],
   },
   {
     id: "item-4",
-    title: "ISBACON 2026 · Delegate Passes & Lanyards",
-    subtitle: "Print production & access control badge system",
-    category: "Event Systems",
-    span: "col-span-12 sm:col-span-5",
-    height: "h-[230px]",
-    src: "/studio/isbacon-passes.jpg",
-    pdf: null,
-  },
-  {
-    id: "item-5",
     title: "IEDC · Official Brand Guidelines",
     subtitle: "Innovation cell identity mark, color palette & stationery",
     category: "Brand Identity",
-    span: "col-span-12 sm:col-span-7",
-    height: "h-[230px]",
+    span: "col-span-12 sm:col-span-6",
     src: "/studio/iedc-identity.jpg",
+    slides: [
+      "/designs/iedc1.jpg",
+      "/designs/iedc2.jpg",
+      "/designs/iedc3.jpg",
+      "/designs/iedc4.jpg",
+      "/designs/iedc5.jpg",
+      "/designs/iedc6.jpg",
+      "/designs/iedc7.jpg",
+      "/designs/iedc8.jpg",
+    ],
     pdf: "/studio/iedc-guidelines.pdf",
+    brief:
+      "Official brand identity manual, core emblem geometric construction, and institutional collateral suite designed for the Innovation and Entrepreneurship Development Centre.",
+    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
+  },
+  {
+    id: "item-5",
+    title: "Sandbox · Startup Incubator System",
+    subtitle: "Incubator brand system, banner kits & event collateral",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-6",
+    src: "/designs/sandbox.png",
+    slides: [
+      "/designs/sandbox1.jpg",
+      "/designs/sandbox2.jpg",
+      "/designs/sandbox3.jpg",
+      "/designs/sandbox4.jpg",
+      "/designs/sandbox5.jpg",
+      "/designs/sandbox6.jpg",
+      "/designs/sandbox7.jpg",
+      "/designs/sandbox8.jpg",
+      "/designs/sandbox9.jpg",
+    ],
+    brief:
+      "Visual identity, marketing collateral, pitch decks, and large-format environmental graphics designed for Sandbox startup accelerator.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Figma"],
+    pdf: null,
   },
   {
     id: "item-6",
-    title: "Republic For Startups · Summit Campaign",
-    subtitle: "Key visuals, stage backdrops & promotional suite",
-    category: "Print & Campaigns",
-    span: "col-span-12 sm:col-span-7",
-    height: "h-[225px]",
-    src: "/studio/republic-startups.jpg",
+    title: "Campus Tank · Flagship Pitch Event",
+    subtitle: "Key stage visual, pitch arena graphics & digital promotion",
+    category: "Event Systems",
+    span: "col-span-12 sm:col-span-6",
+    src: "/designs/campustank.jpg",
+    brief:
+      "High-impact visual identity, keynote stage backdrop, and promotional campaign materials for Campus Tank flagship venture pitching summit.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop"],
     pdf: null,
   },
   {
     id: "item-7",
-    title: "Geebi · Brand & Visual Identity",
-    subtitle: "Startup brand identity & digital visual system",
+    title: "Logo Collection · Selected Marks",
+    subtitle: "Curated brand marks across tech, education & healthcare",
     category: "Brand Identity",
-    span: "col-span-12 sm:col-span-5",
-    height: "h-[225px]",
-    src: "/studio/geebi-brand.jpg",
-    pdf: "/studio/geebi-guidelines.pdf",
+    span: "col-span-12 sm:col-span-6",
+    src: "/designs/logodesigns.png",
+    brief:
+      "A curated collection of minimalist logos, wordmarks, and geometric emblems designed for tech startups, educational ventures, and commercial products.",
+    tools: ["Adobe Illustrator"],
+    pdf: null,
   },
   {
     id: "item-8",
+    title: "ISBACON 2026 · Delegate Passes & Lanyards",
+    subtitle: "Print production & access control badge system",
+    category: "Event Systems",
+    span: "col-span-12 sm:col-span-6",
+    src: "/studio/isbacon-passes.jpg",
+    brief:
+      "High-security access tier badge design, lanyard print specifications, and RFID delegate credentials produced for ISBACON 2026.",
+    tools: ["Adobe Illustrator", "Adobe InDesign"],
+    pdf: null,
+  },
+  {
+    id: "item-9",
+    title: "Republic For Startups · Summit Campaign",
+    subtitle: "Key visuals, stage backdrops & promotional suite",
+    category: "Print & Campaigns",
+    span: "col-span-12 sm:col-span-6",
+    src: "/studio/republic-startups.jpg",
+    brief:
+      "Key visual identity, stage backdrop systems, and promotional collateral suite for the Republic For Startups national entrepreneurship summit.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop"],
+    pdf: null,
+  },
+  {
+    id: "item-10",
+    title: "Geebi · Brand & Visual Identity",
+    subtitle: "Startup brand identity & digital visual system",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-6",
+    src: "/studio/geebi-brand.jpg",
+    pdf: "/studio/geebi-guidelines.pdf",
+    brief:
+      "Visual identity design, modern typographic system, and digital brand collateral for Geebi startup ecosystem.",
+    tools: ["Adobe Illustrator", "Figma"],
+  },
+  {
+    id: "item-11",
     title: "High-Volume Print & Campaign Collateral",
     subtitle: "Editorial layouts, standees & automated InDesign production",
     category: "Print & Campaigns",
     span: "col-span-12",
-    height: "h-[250px]",
     src: "/studio/campaign-spread.jpg",
+    brief:
+      "Multi-format publication layouts, exhibition standees, and automated InDesign batch productions for high-volume academic and summit campaigns.",
+    tools: ["Adobe InDesign", "Adobe Illustrator", "Adobe Photoshop"],
     pdf: null,
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// FRAME LOOP SLIDE
-// Hard-cut stop-motion cycle — all frames preloaded on mount to avoid flicker.
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── FRAME LOOP SLIDE ────────────────────────────────────────────────────────
+// Hard-cut stop-motion cycle with all frames preloaded on mount.
 function FrameLoopSlide({ frames, interval = 550, alt = "Animated slide" }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Preload every frame image on mount
   useEffect(() => {
     frames.forEach((src) => {
       const img = new Image();
@@ -130,7 +196,6 @@ function FrameLoopSlide({ frames, interval = 550, alt = "Animated slide" }) {
     });
   }, [frames]);
 
-  // Cycle at the requested interval
   useEffect(() => {
     const id = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % frames.length);
@@ -148,92 +213,17 @@ function FrameLoopSlide({ frames, interval = 550, alt = "Animated slide" }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// TOOLS POPOVER  (right action rail — opens leftward from the rail button)
-// ─────────────────────────────────────────────────────────────────────────────
-function ToolsPopover({ tools, brief }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [open]);
-
-  return (
-    <div className="flex flex-col items-center gap-1 relative" ref={ref}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        title="Tools & Brief"
-        className="w-9 h-9 rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-md flex items-center justify-center transition-transform hover:scale-105 cursor-pointer"
-      >
-        {/* Illustrator-style "Ai" badge icon */}
-        <span className="font-bold text-[12px] leading-none tracking-tighter select-none">
-          Ai
-        </span>
-      </button>
-      <span className="text-[10.5px] font-medium text-zinc-400 tracking-tight select-none">
-        Tools
-      </span>
-
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92, x: 8 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            exit={{ opacity: 0, scale: 0.92, x: 8 }}
-            transition={{ duration: 0.14 }}
-            className="absolute right-full top-0 mr-3 w-[260px] bg-[#141417] border border-white/10 rounded-xl p-4 shadow-2xl text-white z-50"
-          >
-            {tools && tools.length > 0 && (
-              <div className="mb-3">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-2">
-                  Tools
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {tools.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 bg-white/10 rounded-md text-[12px] font-medium text-zinc-200"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            {brief && (
-              <div className="border-t border-white/10 pt-3">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-1.5">
-                  Brief
-                </span>
-                <p className="text-[12.5px] text-zinc-300 leading-relaxed">{brief}</p>
-              </div>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// BEHANCE SHOWCASE MODAL
-// Layer A = fixed UI (header, rail, arrows) — never scrolls.
-// Layer B = absolute inset scrollable viewport — native scroll, Lenis bypassed.
-// ─────────────────────────────────────────────────────────────────────────────
-function ShowcaseModal({ item, onClose }) {
-  const [briefOpen, setBriefOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+// ─── BEHANCE SHOWCASE MODAL ───────────────────────────────────────────────────
+// Layer A = Fixed UI (top bar, 52px right rail, bottom prev/next buttons)
+// Layer B = Native scrollable viewport with max-w-[920px] unobstructed canvas
+function ShowcaseModal({ item, allItems, onClose, onNavigate }) {
   const [shareCopied, setShareCopied] = useState(false);
-  const briefRef = useRef(null);
 
-  const slideCount = item.slides ? item.slides.length : 0;
+  const currentIndex = allItems.findIndex((it) => it.id === item.id);
+  const prevItem = allItems[(currentIndex - 1 + allItems.length) % allItems.length];
+  const nextItem = allItems[(currentIndex + 1) % allItems.length];
+
+  const slideCount = item.slides ? item.slides.length : item.pdf ? 1 : 1;
 
   // Lock body scroll + pause Lenis
   useEffect(() => {
@@ -247,31 +237,19 @@ function ShowcaseModal({ item, onClose }) {
     };
   }, []);
 
-  // Escape to close
+  // Keyboard navigation: Escape to close, Left/Right arrows to cycle
   useEffect(() => {
-    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    const handler = (e) => {
+      if (e.key === "Escape") onClose();
+      if (e.key === "ArrowRight") onNavigate(nextItem);
+      if (e.key === "ArrowLeft") onNavigate(prevItem);
+    };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [onClose, onNavigate, nextItem, prevItem]);
 
-  // Close brief popover on outside click
-  useEffect(() => {
-    if (!briefOpen) return;
-    const handler = (e) => {
-      if (briefRef.current && !briefRef.current.contains(e.target)) setBriefOpen(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, [briefOpen]);
-
-  const handleCopyPermalink = () => {
-    navigator.clipboard.writeText(window.location.href).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
-
-  const handleShare = () => {
+  const handleShare = (e) => {
+    e.stopPropagation();
     navigator.clipboard.writeText(window.location.href).then(() => {
       setShareCopied(true);
       setTimeout(() => setShareCopied(false), 2000);
@@ -284,9 +262,9 @@ function ShowcaseModal({ item, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
-      className="fixed inset-0 z-[9999] bg-black/88 backdrop-blur-xs"
+      className="fixed inset-0 z-[9999] bg-black/88 backdrop-blur-xs select-none"
     >
-      {/* ── LAYER A: FIXED UI — NEVER SCROLLS ──────────────────────── */}
+      {/* ── LAYER A: FIXED UI (NEVER SCROLLS) ──────────────────────── */}
 
       {/* Top Header Bar */}
       <div className="fixed top-0 inset-x-0 z-30 h-14 px-6 bg-[#0e0e11]/90 backdrop-blur-md border-b border-white/[0.07] flex items-center justify-between">
@@ -302,7 +280,7 @@ function ShowcaseModal({ item, onClose }) {
               {item.title}
             </span>
             <span className="text-[12px] text-zinc-400 hidden sm:inline shrink-0">
-              Bineet Barthwal &middot; Brand &amp; Visual Identity &middot; Available for work
+              Bineet Barthwal · Brand &amp; Visual Identity · Available for work
             </span>
           </div>
         </div>
@@ -316,46 +294,187 @@ function ShowcaseModal({ item, onClose }) {
         </button>
       </div>
 
-      {/* Right Floating Action Rail */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col items-center gap-4">
-        {/* Hire */}
-        <div className="flex flex-col items-center gap-1">
-          <a
-            href="mailto:hello@bineet.in"
-            title="Hire"
-            className="w-9 h-9 rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-md flex items-center justify-center transition-transform hover:scale-105 cursor-pointer"
+      {/* Right Floating Action Rail (52px circles, hover-triggered popovers) */}
+      <div className="fixed right-7 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-center gap-5">
+        {/* Button 1: Info (Hover Triggered) */}
+        <div className="relative group/info flex flex-col items-center gap-1.5">
+          <div
+            className="w-[52px] h-[52px] rounded-full bg-white text-[#141417] shadow-[0_6px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-transform duration-200 group-hover/info:scale-105 cursor-pointer"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
             </svg>
-          </a>
-          <span className="text-[10.5px] font-medium text-zinc-400 tracking-tight select-none">Hire</span>
+          </div>
+          <span className="text-[12px] font-medium text-zinc-300 tracking-tight">Info</span>
+
+          {/* Hover Popover */}
+          <div
+            className="absolute right-[68px] top-1/2 -translate-y-1/2 w-[310px] p-4 rounded-xl bg-[#18181B]/95 backdrop-blur-md border border-white/10 text-left shadow-2xl opacity-0 pointer-events-none group-hover/info:opacity-100 group-hover/info:pointer-events-auto transition-all duration-200 z-50 text-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-1">
+              {item.category}
+            </span>
+            <h4
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="text-[15px] font-bold text-white leading-snug"
+            >
+              {item.title}
+            </h4>
+            {item.subtitle && (
+              <p className="text-[12px] text-zinc-400 font-medium mt-0.5 leading-normal">
+                {item.subtitle}
+              </p>
+            )}
+            {item.brief && (
+              <p className="text-[12.5px] text-zinc-300 mt-2.5 leading-relaxed pt-2.5 border-t border-white/10">
+                {item.brief}
+              </p>
+            )}
+            {item.pdf && (
+              <div className="mt-3 pt-2.5 border-t border-white/10">
+                <a
+                  href={item.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[12px] font-medium text-[#3B5BFF] hover:text-[#657eff] transition-colors"
+                >
+                  <span>Open original PDF</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Tools (popover) */}
-        <ToolsPopover tools={item.tools} brief={item.brief} />
+        {/* Button 2: Tools (Hover Triggered with authentic Adobe Illustrator Ai icon) */}
+        <div className="relative group/tools flex flex-col items-center gap-1.5">
+          <div
+            className="w-[52px] h-[52px] rounded-full bg-white shadow-[0_6px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-transform duration-200 group-hover/tools:scale-105 cursor-pointer"
+          >
+            <div className="w-7 h-7 rounded-[6px] bg-[#330000] text-[#FF9A00] font-bold text-[13px] flex items-center justify-center tracking-tight select-none">
+              Ai
+            </div>
+          </div>
+          <span className="text-[12px] font-medium text-zinc-300 tracking-tight">Tools</span>
 
-        {/* Share */}
-        <div className="flex flex-col items-center gap-1">
+          {/* Hover Popover */}
+          <div
+            className="absolute right-[68px] top-1/2 -translate-y-1/2 w-[240px] p-3.5 rounded-xl bg-[#18181B]/95 backdrop-blur-md border border-white/10 shadow-2xl opacity-0 pointer-events-none group-hover/tools:opacity-100 transition-all duration-200 z-50 text-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-2">
+              Software &amp; Tools
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {(item.tools || ["Adobe Illustrator", "Adobe Photoshop"]).map((t) => {
+                let badgeStyle = "bg-white/10 text-zinc-200 border-white/10";
+                if (t.includes("Illustrator"))
+                  badgeStyle = "bg-[#330000] text-[#FF9A00] border-[#FF9A00]/25";
+                else if (t.includes("Photoshop"))
+                  badgeStyle = "bg-[#001E36] text-[#31A8FF] border-[#31A8FF]/25";
+                else if (t.includes("InDesign"))
+                  badgeStyle = "bg-[#49021F] text-[#FF3366] border-[#FF3366]/25";
+                else if (t.includes("Figma"))
+                  badgeStyle = "bg-[#1E1E1E] text-[#A259FF] border-[#A259FF]/25";
+                return (
+                  <span
+                    key={t}
+                    className={`px-2.5 py-1 rounded-md text-[11px] font-medium border ${badgeStyle}`}
+                  >
+                    {t}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Button 3: Share (Click to copy) */}
+        <div className="flex flex-col items-center gap-1.5">
           <button
             type="button"
             onClick={handleShare}
             title={shareCopied ? "Link copied!" : "Share"}
-            className="w-9 h-9 rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-md flex items-center justify-center transition-transform hover:scale-105 cursor-pointer"
+            className="w-[52px] h-[52px] rounded-full bg-white hover:bg-zinc-100 text-[#141417] shadow-[0_6px_20px_rgba(0,0,0,0.35)] flex items-center justify-center transition-transform duration-200 hover:scale-105 cursor-pointer"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="18" cy="5" r="3" />
-              <circle cx="6" cy="12" r="3" />
-              <circle cx="18" cy="19" r="3" />
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+              <polyline points="16 6 12 2 8 6" />
+              <line x1="12" y1="2" x2="12" y2="15" />
             </svg>
           </button>
-          <span className="text-[10.5px] font-medium text-zinc-400 tracking-tight select-none">
-            {shareCopied ? "Copied" : "Share"}
+          <span className="text-[12px] font-medium text-zinc-300 tracking-tight">
+            {shareCopied ? "Copied!" : "Share"}
           </span>
         </div>
+
+        {/* Button 4: Next (Bottom of rail) */}
+        <div className="flex flex-col items-center gap-1.5">
+          <button
+            type="button"
+            onClick={() => onNavigate(nextItem)}
+            title="Next project"
+            className="w-[52px] h-[52px] rounded-full bg-zinc-800/80 hover:bg-zinc-700/90 border border-white/10 text-white shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-105 cursor-pointer"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+          <span className="text-[12px] font-medium text-zinc-300 tracking-tight">Next</span>
+        </div>
+      </div>
+
+      {/* Prev Project Arrow (Fixed Bottom-Left) */}
+      <div className="fixed bottom-6 left-7 z-40 hidden md:flex flex-col items-center gap-1.5">
+        <button
+          type="button"
+          onClick={() => onNavigate(prevItem)}
+          title="Previous project"
+          className="w-[52px] h-[52px] rounded-full bg-zinc-800/80 hover:bg-zinc-700/90 border border-white/10 text-white shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-105 cursor-pointer"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <span className="text-[12px] font-medium text-zinc-300 tracking-tight">Prev</span>
       </div>
 
       {/* ── LAYER B: SCROLLABLE SLIDE VIEWPORT ─────────────────────── */}
@@ -365,113 +484,61 @@ function ShowcaseModal({ item, onClose }) {
         onClick={onClose}
         className="absolute inset-0 overflow-y-auto overscroll-contain pt-20 pb-16 px-4"
       >
-        {/* Wide white presentation canvas — compact 780px */}
+        {/* Presentation canvas (max-w-[920px], no top-left pills, starts at pixel 0) */}
         <div
-          className="max-w-[780px] w-full mx-auto bg-white rounded-[4px] shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden relative group/canvas"
+          className="max-w-[920px] w-full mx-auto bg-white rounded-[4px] shadow-[0_25px_70px_rgba(0,0,0,0.65)] overflow-hidden relative group/canvas select-none"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Hover pills — top-left of canvas */}
-          <div className="absolute top-3 left-3 z-20 flex items-center gap-1.5 opacity-0 group-hover/canvas:opacity-100 transition-opacity duration-200 pointer-events-none group-hover/canvas:pointer-events-auto">
-            {/* Brief pill */}
-            <div className="relative" ref={briefRef}>
-              <button
-                type="button"
-                onClick={() => setBriefOpen((v) => !v)}
-                className="px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[11.5px] font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
-              >
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 16v-4M12 8h.01" />
-                </svg>
-                Brief
-              </button>
-              <AnimatePresence>
-                {briefOpen && item.brief && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
-                    transition={{ duration: 0.14 }}
-                    className="absolute top-full left-0 mt-2 w-[290px] bg-[#141417]/96 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-2xl text-white z-30"
-                  >
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 block mb-2">
-                      Project Brief
-                    </span>
-                    <p className="text-[13px] text-zinc-200 leading-relaxed">{item.brief}</p>
-                    {item.tools && item.tools.length > 0 && (
-                      <div className="mt-3 pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
-                        {item.tools.map((t) => (
-                          <span key={t} className="px-2 py-0.5 bg-white/10 rounded text-[11px] text-zinc-300 font-medium">
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+          {item.slides && item.slides.length > 0 ? (
+            <div className="flex flex-col gap-0">
+              {item.slides.map((slide, idx) => {
+                if (typeof slide === "string") {
+                  return (
+                    <div key={idx} className="w-full leading-[0]">
+                      <img
+                        src={slide}
+                        alt={`${item.title} Artboard ${idx + 1}`}
+                        className="w-full h-auto block select-none"
+                        loading={idx < 2 ? "eager" : "lazy"}
+                        draggable={false}
+                      />
+                    </div>
+                  );
+                }
+                if (slide.type === "loop") {
+                  return (
+                    <div key={idx} className="w-full leading-[0]">
+                      <FrameLoopSlide
+                        frames={slide.frames}
+                        interval={slide.interval ?? 550}
+                        alt={`${item.title} Motif loop`}
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })}
             </div>
-
-            {/* Permalink pill */}
-            <button
-              type="button"
-              onClick={handleCopyPermalink}
-              className="px-3 py-1 rounded-full bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[11.5px] font-medium flex items-center gap-1.5 cursor-pointer transition-colors"
-            >
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-              </svg>
-              {copied ? "Copied!" : "Permalink"}
-            </button>
-          </div>
-
-          {/* Seamless vertical slide stack — starts at pixel 0 */}
-          <div className="flex flex-col gap-0">
-            {item.slides && item.slides.map((slide, idx) => {
-              if (typeof slide === "string") {
-                return (
-                  <div key={idx} className="w-full leading-[0]">
-                    <img
-                      src={slide}
-                      alt={`${item.title} — Artboard ${idx + 1}`}
-                      className="w-full h-auto block select-none"
-                      loading={idx < 2 ? "eager" : "lazy"}
-                      draggable={false}
-                    />
-                  </div>
-                );
-              }
-              if (slide.type === "loop") {
-                return (
-                  <div key={idx} className="w-full leading-[0]">
-                    <FrameLoopSlide
-                      frames={slide.frames}
-                      interval={slide.interval ?? 550}
-                      alt={`${item.title} — Regional motif loop`}
-                    />
-                  </div>
-                );
-              }
-              return null;
-            })}
-
-            {/* Fallback if no slides defined */}
-            {(!item.slides || item.slides.length === 0) && (
-              <img
-                src={item.src}
-                alt={item.title}
-                className="w-full h-auto block select-none"
-                draggable={false}
-              />
-            )}
-          </div>
+          ) : item.pdf ? (
+            <iframe
+              src={`${item.pdf}#toolbar=0&navpanes=0&view=FitH`}
+              title={item.title}
+              className="w-full h-[82vh] border-0 bg-white block"
+            />
+          ) : (
+            <img
+              src={item.src}
+              alt={item.title}
+              className="w-full h-auto block select-none"
+              draggable={false}
+            />
+          )}
         </div>
 
         {/* End-of-showcase footer */}
         <div className="text-center mt-10 mb-4 flex flex-col items-center gap-4 px-4">
           <span className="text-[11px] text-zinc-500 uppercase tracking-[0.12em] font-mono">
-            End of showcase &middot; {slideCount} artboards
+            End of presentation · {slideCount} {slideCount === 1 ? "deliverable" : "artboards"}
           </span>
           <button
             type="button"
@@ -486,78 +553,7 @@ function ShowcaseModal({ item, onClose }) {
   );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// SINGLE IMAGE FULLSCREEN MODAL
-// ─────────────────────────────────────────────────────────────────────────────
-function FullscreenModal({ item, onClose }) {
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev || ""; };
-  }, []);
-
-  useEffect(() => {
-    const handler = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.15 }}
-      onClick={onClose}
-      data-lenis-prevent="true"
-      onWheel={(e) => e.stopPropagation()}
-      className="fixed inset-0 z-[9999] bg-black/92 backdrop-blur-sm flex flex-col items-center justify-center p-4 sm:p-8 cursor-zoom-out"
-    >
-      <div
-        className="w-full max-w-5xl flex items-center justify-between pb-3 text-white"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div>
-          <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
-            {item.category}
-          </span>
-          <h3
-            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
-            className="font-display font-bold text-[17px] text-white"
-          >
-            {item.title}
-          </h3>
-        </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-[13px] font-medium transition-colors cursor-pointer rounded-md"
-        >
-          Close ✕
-        </button>
-      </div>
-
-      <motion.div
-        initial={{ scale: 0.96, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.96, opacity: 0 }}
-        transition={{ duration: 0.18 }}
-        onClick={(e) => e.stopPropagation()}
-        className="relative max-w-5xl w-full max-h-[82vh] bg-[#141417] border border-white/15 flex items-center justify-center overflow-hidden cursor-default"
-      >
-        <img
-          src={item.src}
-          alt={item.title}
-          className="w-full h-auto max-h-[82vh] object-contain"
-        />
-      </motion.div>
-    </motion.div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// PAGE
-// ─────────────────────────────────────────────────────────────────────────────
+// ─── MAIN PAGE ───────────────────────────────────────────────────────────────
 export default function BrandBentoPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [lightboxItem, setLightboxItem] = useState(null);
@@ -569,27 +565,31 @@ export default function BrandBentoPage() {
       ? GALLERY_ITEMS
       : GALLERY_ITEMS.filter((item) => item.category === activeFilter);
 
+  // Every tile opens the unified Behance showcase modal
   const handleTileClick = (item) => {
-    if (item.pdf) {
-      window.open(item.pdf, "_blank", "noopener,noreferrer");
-    } else {
-      setLightboxItem(item);
-    }
+    setLightboxItem(item);
   };
 
   const closeModal = useCallback(() => setLightboxItem(null), []);
-
-  const hasSlides = lightboxItem && lightboxItem.slides && lightboxItem.slides.length > 0;
+  const handleNavigate = useCallback((newItem) => setLightboxItem(newItem), []);
 
   return (
     <main className="min-h-screen bg-white text-[#141417]">
       {/* ── 590px LOCKED CONTAINER ─────────────────────────────────── */}
       <div className="max-w-[590px] mx-auto px-6 pt-10">
-
         {/* Top Bar */}
         <div className="flex items-center justify-between mb-9">
           <Link className="btn-secondary-pill" href="/">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="m15 18-6-6 6-6" />
             </svg>
             <span>All work</span>
@@ -601,7 +601,16 @@ export default function BrandBentoPage() {
             rel="noopener noreferrer"
             className="btn-primary-pill"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
               <line x1="16" y1="13" x2="8" y2="13" />
@@ -620,9 +629,7 @@ export default function BrandBentoPage() {
         </h1>
 
         <p className="font-sans-custom font-normal text-[15px] text-[#52525B] mt-2.5 leading-[1.6]">
-          Identity systems, national summit branding, and campaign collateral.
-          Hover for details—click logos to open brand PDFs or event visuals to
-          expand full screen.
+          Identity systems, national summit branding, and campaign collateral. Click any project to inspect the full presentation.
         </p>
 
         {/* Filter Bar */}
@@ -646,12 +653,10 @@ export default function BrandBentoPage() {
           })}
         </div>
 
-        {/* Bento Grid */}
-        <motion.div layout className="grid grid-cols-12 gap-2.5 mt-7">
+        {/* Bento Grid — All tiles aspect-video (16:9), col-span-12 or col-span-12 sm:col-span-6 */}
+        <motion.div layout className="grid grid-cols-12 gap-3.5 mt-7">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => {
-              const isPdf = Boolean(item.pdf);
-              const hasShowcase = Boolean(item.slides && item.slides.length > 0);
               return (
                 <motion.div
                   key={item.id}
@@ -662,7 +667,7 @@ export default function BrandBentoPage() {
                   transition={{ duration: 0.18 }}
                   onClick={() => handleTileClick(item)}
                   data-cursor="hand"
-                  className={`${item.span} ${item.height} group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 cursor-pointer select-none`}
+                  className={`${item.span} aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 cursor-pointer select-none`}
                 >
                   <img
                     src={item.src}
@@ -670,28 +675,25 @@ export default function BrandBentoPage() {
                     className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                   />
 
-                  {/* Hover Overlay */}
+                  {/* Full-Tile Hover Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-4 flex flex-col justify-between">
                     {/* Top-Right Badge */}
                     <div className="flex justify-end">
                       <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white text-[#141417] text-[11px] font-semibold tracking-tight shadow-sm">
-                        {isPdf ? (
-                          <>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                              <polyline points="14 2 14 8 20 8" />
-                            </svg>
-                            <span>Open Brand PDF &#x2197;</span>
-                          </>
-                        ) : hasShowcase ? (
+                        {item.slides && item.slides.length > 0 ? (
                           <>
                             <span>Full Showcase</span>
-                            <span className="text-[12px]">&#x2193;</span>
+                            <span className="text-[12px]">↓</span>
+                          </>
+                        ) : item.pdf ? (
+                          <>
+                            <span>Brand Guidelines PDF</span>
+                            <span className="text-[12px]">↗</span>
                           </>
                         ) : (
                           <>
-                            <span>Full View</span>
-                            <span>&#x2922;</span>
+                            <span>Inspect Project</span>
+                            <span>⤢</span>
                           </>
                         )}
                       </span>
@@ -704,7 +706,7 @@ export default function BrandBentoPage() {
                       </span>
                       <h2
                         style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
-                        className="font-display font-bold text-[15.5px] text-white leading-snug mt-0.5"
+                        className="font-display font-bold text-[15px] sm:text-[16px] text-white leading-snug mt-0.5"
                       >
                         {item.title}
                       </h2>
@@ -722,13 +724,16 @@ export default function BrandBentoPage() {
         </motion.div>
       </div>
 
-      {/* ── MODALS ─────────────────────────────────────────────────── */}
+      {/* ── UNIFIED SHOWCASE MODAL ──────────────────────────────────── */}
       <AnimatePresence>
-        {lightboxItem && hasSlides && (
-          <ShowcaseModal key="showcase" item={lightboxItem} onClose={closeModal} />
-        )}
-        {lightboxItem && !hasSlides && (
-          <FullscreenModal key="fullscreen" item={lightboxItem} onClose={closeModal} />
+        {lightboxItem && (
+          <ShowcaseModal
+            key="showcase"
+            item={lightboxItem}
+            allItems={filteredItems}
+            onClose={closeModal}
+            onNavigate={handleNavigate}
+          />
         )}
       </AnimatePresence>
 
