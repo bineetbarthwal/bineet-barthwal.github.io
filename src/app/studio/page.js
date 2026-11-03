@@ -4,10 +4,11 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ─── GALLERY DATA ────────────────────────────────────────────────────────────
-// All widescreen 16:9 boards. Removed fixed heights so aspect-video handles layout.
+// Consolidated to 7 high-impact flagship projects.
+// Every card is full-width (col-span-12 aspect-video) with no loose slides or duplicates.
 export const GALLERY_ITEMS = [
   {
-    id: "item-1",
+    id: "isbacon-2026",
     title: "ISBACON 2026 · National Summit Identity",
     subtitle:
       "Complete brand identity, cultural motif system, print collateral & event signage",
@@ -34,6 +35,7 @@ export const GALLERY_ITEMS = [
       },
       "/studio/isbacon2026/1x/Slide 5.webp",
       "/studio/isbacon2026/1x/Slide 6.webp",
+      "/studio/isbacon-passes.jpg",
     ],
     brief:
       "End-to-end visual identity system for the 18th Annual ISBACON 2026 National Conference, blending regional cultural motifs (Open Hand monument, Phulkari geometry, Golden Temple, wheat and state icons) into a modular grid across 40+ print, badge, and stage deliverables.",
@@ -41,38 +43,58 @@ export const GALLERY_ITEMS = [
     pdf: null,
   },
   {
-    id: "item-2",
-    title: "INCEPT · Brand Identity Guidelines",
-    subtitle: "Logo architecture, typography & visual identity book",
+    id: "sandbox",
+    title: "SANDBOX · Brand & Outdoor Campaign",
+    subtitle:
+      "Brand identity system, highway billboard campaign & outdoor launch kits",
     category: "Brand Identity",
-    span: "col-span-12 sm:col-span-6",
-    src: "/studio/incept-brand.jpg",
-    pdf: "/studio/incept-guidelines.pdf",
+    span: "col-span-12",
+    src: "/designs/sandbox.png",
+    slides: [
+      "/designs/sandbox.png",
+      "/designs/sandbox1.jpg",
+      "/designs/sandbox2.jpg",
+      "/designs/sandbox3.jpg",
+      "/designs/sandbox4.jpg",
+      "/designs/sandbox5.jpg",
+      "/designs/sandbox6.jpg",
+      "/designs/sandbox7.jpg",
+      "/designs/sandbox8.jpg",
+      "/designs/sandbox9.jpg",
+    ],
     brief:
-      "Comprehensive logo architecture, typography rules, color specifications, and visual identity standards manual for INCEPT incubation network.",
-    tools: ["Adobe Illustrator", "Adobe InDesign"],
+      "Visual identity, outdoor highway billboard campaign, pitch decks, and large-format environmental graphics designed for Sandbox startup accelerator.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Figma"],
+    pdf: null,
   },
   {
-    id: "item-3",
-    title: "CUBE · Ecosystem Identity System",
-    subtitle: "Brand mark, grid construction & merchandise system",
+    id: "cube",
+    title: "CUBE · Incubator Identity System",
+    subtitle:
+      "Brand mark architecture, isometric grid system & incubation strategy",
     category: "Brand Identity",
-    span: "col-span-12 sm:col-span-6",
-    src: "/studio/cube-brand.jpg",
-    slides: ["/designs/cube1.jpg", "/designs/cube2.jpg", "/designs/cube3.jpg"],
+    span: "col-span-12",
+    src: "/designs/cube3.jpg",
+    slides: [
+      "/designs/cube3.jpg",
+      "/designs/cube1.jpg",
+      "/designs/cube2.jpg",
+    ],
     pdf: "/studio/cube-guidelines.pdf",
     brief:
       "Brand mark architecture, geometric isometric grid construction, and modular merchandise ecosystem for CUBE tech community.",
     tools: ["Adobe Illustrator", "Adobe Photoshop"],
   },
   {
-    id: "item-4",
-    title: "IEDC · Official Brand Guidelines",
-    subtitle: "Innovation cell identity mark, color palette & stationery",
+    id: "iedc",
+    title: "IEDC · Innovation Cell Brand Identity",
+    subtitle:
+      "Official brand guidelines, particle globe mark & institutional collateral",
     category: "Brand Identity",
-    span: "col-span-12 sm:col-span-6",
+    span: "col-span-12",
     src: "/studio/iedc-identity.jpg",
     slides: [
+      "/studio/iedc-identity.jpg",
       "/designs/iedc1.jpg",
       "/designs/iedc2.jpg",
       "/designs/iedc3.jpg",
@@ -88,98 +110,57 @@ export const GALLERY_ITEMS = [
     tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
   },
   {
-    id: "item-5",
-    title: "Sandbox · Startup Incubator System",
-    subtitle: "Incubator brand system, banner kits & event collateral",
-    category: "Brand Identity",
-    span: "col-span-12 sm:col-span-6",
-    src: "/designs/sandbox.png",
-    slides: [
-      "/designs/sandbox1.jpg",
-      "/designs/sandbox2.jpg",
-      "/designs/sandbox3.jpg",
-      "/designs/sandbox4.jpg",
-      "/designs/sandbox5.jpg",
-      "/designs/sandbox6.jpg",
-      "/designs/sandbox7.jpg",
-      "/designs/sandbox8.jpg",
-      "/designs/sandbox9.jpg",
-    ],
-    brief:
-      "Visual identity, marketing collateral, pitch decks, and large-format environmental graphics designed for Sandbox startup accelerator.",
-    tools: ["Adobe Illustrator", "Adobe Photoshop", "Figma"],
-    pdf: null,
-  },
-  {
-    id: "item-6",
-    title: "Campus Tank · Flagship Pitch Event",
-    subtitle: "Key stage visual, pitch arena graphics & digital promotion",
+    id: "campus-tank",
+    title: "Campus Tank · National Startup Launchpad",
+    subtitle:
+      "Key stage visual, pitch arena graphics & national promotional campaign",
     category: "Event Systems",
-    span: "col-span-12 sm:col-span-6",
+    span: "col-span-12",
     src: "/designs/campustank.jpg",
+    slides: [
+      "/designs/campustank.jpg",
+    ],
     brief:
       "High-impact visual identity, keynote stage backdrop, and promotional campaign materials for Campus Tank flagship venture pitching summit.",
     tools: ["Adobe Illustrator", "Adobe Photoshop"],
     pdf: null,
   },
   {
-    id: "item-7",
-    title: "Logo Collection · Selected Marks",
-    subtitle: "Curated brand marks across tech, education & healthcare",
+    id: "logo-folio",
+    title: "Logo Folio · Selected Marks & Symbols",
+    subtitle:
+      "Curated brand marks across tech, education, finance & healthcare",
     category: "Brand Identity",
-    span: "col-span-12 sm:col-span-6",
+    span: "col-span-12",
     src: "/designs/logodesigns.png",
+    slides: [
+      "/designs/logodesigns.png",
+      "/designs/cube3.jpg",
+      "/designs/sandbox1.jpg",
+      "/designs/iedc1.jpg",
+      "/designs/AIconvergencelogo.svg",
+      "/designs/aifestlogo.svg",
+    ],
     brief:
       "A curated collection of minimalist logos, wordmarks, and geometric emblems designed for tech startups, educational ventures, and commercial products.",
-    tools: ["Adobe Illustrator"],
-    pdf: null,
-  },
-  {
-    id: "item-8",
-    title: "ISBACON 2026 · Delegate Passes & Lanyards",
-    subtitle: "Print production & access control badge system",
-    category: "Event Systems",
-    span: "col-span-12 sm:col-span-6",
-    src: "/studio/isbacon-passes.jpg",
-    brief:
-      "High-security access tier badge design, lanyard print specifications, and RFID delegate credentials produced for ISBACON 2026.",
-    tools: ["Adobe Illustrator", "Adobe InDesign"],
-    pdf: null,
-  },
-  {
-    id: "item-9",
-    title: "Republic For Startups · Summit Campaign",
-    subtitle: "Key visuals, stage backdrops & promotional suite",
-    category: "Print & Campaigns",
-    span: "col-span-12 sm:col-span-6",
-    src: "/studio/republic-startups.jpg",
-    brief:
-      "Key visual identity, stage backdrop systems, and promotional collateral suite for the Republic For Startups national entrepreneurship summit.",
-    tools: ["Adobe Illustrator", "Adobe Photoshop"],
-    pdf: null,
-  },
-  {
-    id: "item-10",
-    title: "Geebi · Brand & Visual Identity",
-    subtitle: "Startup brand identity & digital visual system",
-    category: "Brand Identity",
-    span: "col-span-12 sm:col-span-6",
-    src: "/studio/geebi-brand.jpg",
-    pdf: "/studio/geebi-guidelines.pdf",
-    brief:
-      "Visual identity design, modern typographic system, and digital brand collateral for Geebi startup ecosystem.",
     tools: ["Adobe Illustrator", "Figma"],
+    pdf: null,
   },
   {
-    id: "item-11",
-    title: "High-Volume Print & Campaign Collateral",
-    subtitle: "Editorial layouts, standees & automated InDesign production",
+    id: "republic-startups",
+    title: "Republic For Startups · Summit Campaign",
+    subtitle:
+      "Key visuals, stage backdrops & high-volume print production suite",
     category: "Print & Campaigns",
     span: "col-span-12",
-    src: "/studio/campaign-spread.jpg",
+    src: "/studio/republic-startups.jpg",
+    slides: [
+      "/studio/republic-startups.jpg",
+      "/studio/campaign-spread.jpg",
+    ],
     brief:
-      "Multi-format publication layouts, exhibition standees, and automated InDesign batch productions for high-volume academic and summit campaigns.",
-    tools: ["Adobe InDesign", "Adobe Illustrator", "Adobe Photoshop"],
+      "Key visual identity, stage backdrop systems, and promotional collateral suite for the Republic For Startups national entrepreneurship summit.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign"],
     pdf: null,
   },
 ];
@@ -653,8 +634,8 @@ export default function BrandBentoPage() {
           })}
         </div>
 
-        {/* Bento Grid — All tiles aspect-video (16:9), col-span-12 or col-span-12 sm:col-span-6 */}
-        <motion.div layout className="grid grid-cols-12 gap-3.5 mt-7">
+        {/* Bento Grid — All tiles full-width (col-span-12 aspect-video), gap-5, crisp architectural frame */}
+        <motion.div layout className="grid grid-cols-12 gap-5 mt-7">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => {
               return (
@@ -667,19 +648,19 @@ export default function BrandBentoPage() {
                   transition={{ duration: 0.18 }}
                   onClick={() => handleTileClick(item)}
                   data-cursor="hand"
-                  className={`${item.span} aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 cursor-pointer select-none`}
+                  className="col-span-12 aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none"
                 >
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
 
                   {/* Full-Tile Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-4 flex flex-col justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-5 flex flex-col justify-between">
                     {/* Top-Right Badge */}
                     <div className="flex justify-end">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-white text-[#141417] text-[11px] font-semibold tracking-tight shadow-sm">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-white text-[#141417] text-[11px] font-semibold tracking-tight shadow-sm">
                         {item.slides && item.slides.length > 0 ? (
                           <>
                             <span>Full Showcase</span>
@@ -701,17 +682,17 @@ export default function BrandBentoPage() {
 
                     {/* Bottom-Left Info */}
                     <div className="translate-y-1 group-hover:translate-y-0 transition-transform duration-200">
-                      <span className="block text-[10.5px] font-semibold uppercase tracking-[0.08em] text-zinc-300">
+                      <span className="block text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-300">
                         {item.category}
                       </span>
                       <h2
                         style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
-                        className="font-display font-bold text-[15px] sm:text-[16px] text-white leading-snug mt-0.5"
+                        className="font-display font-bold text-[18px] sm:text-[20px] text-white leading-snug mt-0.5"
                       >
                         {item.title}
                       </h2>
                       {item.subtitle && (
-                        <p className="text-[12.5px] text-zinc-300 mt-0.5 line-clamp-1">
+                        <p className="text-[13px] text-zinc-300 mt-0.5 line-clamp-1">
                           {item.subtitle}
                         </p>
                       )}
