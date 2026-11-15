@@ -634,13 +634,8 @@ export default function BrandBentoPage() {
           })}
         </div>
 
-      </div>
-
-      {/* ── 780px BENTO GRID ─────────────────────────────────────── */}
-      <div className="max-w-[780px] mx-auto px-6">
-
-        {/* Bento Grid — alternating 1→2→1→2 rhythm with aspect-video */}
-        <motion.div layout className="grid grid-cols-12 gap-4 mt-8">
+        {/* Bento Grid — 1→2→1→2 rhythm inside 590px; full-width=aspect-video, half-width=aspect-[4/3] */}
+        <motion.div layout className="grid grid-cols-12 gap-3.5 mt-7">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => {
               return (
@@ -653,7 +648,7 @@ export default function BrandBentoPage() {
                   transition={{ duration: 0.18 }}
                   onClick={() => handleTileClick(item)}
                   data-cursor="hand"
-                  className={`${item.span} aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none`}
+                  className={`${item.span} ${item.span.includes("sm:col-span-6") ? "aspect-[4/3]" : "aspect-video"} group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none`}
                 >
                   <img
                     src={item.src}
