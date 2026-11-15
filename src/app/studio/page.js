@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ─── GALLERY DATA ────────────────────────────────────────────────────────────
 // Consolidated to 7 high-impact flagship projects.
-// Every card is full-width (col-span-12 aspect-video) with no loose slides or duplicates.
+// Bento rhythm: ISBACON(full) → SANDBOX+IEDC(half/half) → CUBE(full) → CampusTank+LogoFolio(half/half) → Republic(full)
 export const GALLERY_ITEMS = [
   {
     id: "isbacon-2026",
@@ -48,7 +48,7 @@ export const GALLERY_ITEMS = [
     subtitle:
       "Brand identity system, highway billboard campaign & outdoor launch kits",
     category: "Brand Identity",
-    span: "col-span-12",
+    span: "col-span-12 sm:col-span-6",
     src: "/designs/sandbox.png",
     slides: [
       "/designs/sandbox.png",
@@ -66,6 +66,30 @@ export const GALLERY_ITEMS = [
       "Visual identity, outdoor highway billboard campaign, pitch decks, and large-format environmental graphics designed for Sandbox startup accelerator.",
     tools: ["Adobe Illustrator", "Adobe Photoshop", "Figma"],
     pdf: null,
+  },
+  {
+    id: "iedc",
+    title: "IEDC · Innovation Cell Brand Identity",
+    subtitle:
+      "Official brand guidelines, particle globe mark & institutional collateral",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-6",
+    src: "/studio/iedc-identity.jpg",
+    slides: [
+      "/studio/iedc-identity.jpg",
+      "/designs/iedc1.jpg",
+      "/designs/iedc2.jpg",
+      "/designs/iedc3.jpg",
+      "/designs/iedc4.jpg",
+      "/designs/iedc5.jpg",
+      "/designs/iedc6.jpg",
+      "/designs/iedc7.jpg",
+      "/designs/iedc8.jpg",
+    ],
+    pdf: "/studio/iedc-guidelines.pdf",
+    brief:
+      "Official brand identity manual, core emblem geometric construction, and institutional collateral suite designed for the Innovation and Entrepreneurship Development Centre.",
+    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
   },
   {
     id: "cube",
@@ -86,36 +110,12 @@ export const GALLERY_ITEMS = [
     tools: ["Adobe Illustrator", "Adobe Photoshop"],
   },
   {
-    id: "iedc",
-    title: "IEDC · Innovation Cell Brand Identity",
-    subtitle:
-      "Official brand guidelines, particle globe mark & institutional collateral",
-    category: "Brand Identity",
-    span: "col-span-12",
-    src: "/studio/iedc-identity.jpg",
-    slides: [
-      "/studio/iedc-identity.jpg",
-      "/designs/iedc1.jpg",
-      "/designs/iedc2.jpg",
-      "/designs/iedc3.jpg",
-      "/designs/iedc4.jpg",
-      "/designs/iedc5.jpg",
-      "/designs/iedc6.jpg",
-      "/designs/iedc7.jpg",
-      "/designs/iedc8.jpg",
-    ],
-    pdf: "/studio/iedc-guidelines.pdf",
-    brief:
-      "Official brand identity manual, core emblem geometric construction, and institutional collateral suite designed for the Innovation and Entrepreneurship Development Centre.",
-    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
-  },
-  {
     id: "campus-tank",
     title: "Campus Tank · National Startup Launchpad",
     subtitle:
       "Key stage visual, pitch arena graphics & national promotional campaign",
     category: "Event Systems",
-    span: "col-span-12",
+    span: "col-span-12 sm:col-span-6",
     src: "/designs/campustank.jpg",
     slides: [
       "/designs/campustank.jpg",
@@ -131,7 +131,7 @@ export const GALLERY_ITEMS = [
     subtitle:
       "Curated brand marks across tech, education, finance & healthcare",
     category: "Brand Identity",
-    span: "col-span-12",
+    span: "col-span-12 sm:col-span-6",
     src: "/designs/logodesigns.png",
     slides: [
       "/designs/logodesigns.png",
@@ -634,8 +634,13 @@ export default function BrandBentoPage() {
           })}
         </div>
 
-        {/* Bento Grid — All tiles full-width (col-span-12 aspect-video), gap-5, crisp architectural frame */}
-        <motion.div layout className="grid grid-cols-12 gap-5 mt-7">
+      </div>
+
+      {/* ── 780px BENTO GRID ─────────────────────────────────────── */}
+      <div className="max-w-[780px] mx-auto px-6">
+
+        {/* Bento Grid — alternating 1→2→1→2 rhythm with aspect-video */}
+        <motion.div layout className="grid grid-cols-12 gap-4 mt-8">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item) => {
               return (
@@ -648,7 +653,7 @@ export default function BrandBentoPage() {
                   transition={{ duration: 0.18 }}
                   onClick={() => handleTileClick(item)}
                   data-cursor="hand"
-                  className="col-span-12 aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none"
+                  className={`${item.span} aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none`}
                 >
                   <img
                     src={item.src}
