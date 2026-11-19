@@ -1,216 +1,287 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+
 export default function MIHCaseStudy() {
-  const backHref = '/work';
-  const backText = 'Back to Work';
+  const [zoomImage, setZoomImage] = useState(null);
 
-  const [copied, setCopied] = useState(false);
+  const closeZoom = useCallback(() => setZoomImage(null), []);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText("hello@bineet.in");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  useEffect(() => {
+    if (!zoomImage) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeZoom();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [zoomImage, closeZoom]);
 
   return (
-    <main className="bg-white min-h-screen font-sans">
-      <div className="w-full flex flex-col">
-        
-        {/* Navigation */}
-        <section className="max-w-[1100px] mx-auto px-5 w-full">
-          <div className="w-full mb-16 mt-12">
-            <Link href={backHref} className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit">
-              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-              </span>
-              <span className="font-medium text-sm md:text-base">{backText}</span>
-            </Link>
-          </div>
-        </section>
+    <main className="min-h-screen bg-white text-[#141417]">
+      {/* ── 590px LOCKED CONTAINER ─────────────────────────────────── */}
+      <article className="max-w-[590px] mx-auto px-6 pt-10 pb-20">
+        {/* Top Navigation Bar: matches /studio and /work 1:1 */}
+        <div className="flex items-center justify-between mb-9">
+          <Link className="btn-secondary-pill" href="/work">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>Product Design</span>
+          </Link>
 
-        {/* Hero Image */}
-        <div className="max-w-[1100px] mx-auto px-5 w-full mb-16 md:mb-24">
-          <div className="w-full h-[250px] sm:h-[350px] md:h-[460px] rounded-[24px] md:rounded-[32px] overflow-hidden">
-            <Image 
-              src="/images/mih-interiors.png" 
-              alt="MIH Interiors Case Study Thumbnail" 
-              width={1100} 
-              height={460} 
-              className="w-full h-full object-cover"
-              priority
-            />
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary-pill"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+            <span>Resume</span>
+          </a>
+        </div>
+
+        {/* Case Study Header */}
+        <header className="mt-8 mb-6">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#3B5BFF] block mb-2">
+            UX Case Study · Conversion &amp; Web
+          </span>
+          <h1
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-extrabold text-[32px] sm:text-[38px] text-[#141417] tracking-[-0.035em] leading-[1.08]"
+          >
+            MiH Interiors: Studio Website Built to Convert
+          </h1>
+          <p className="font-sans-custom font-normal text-[17px] text-[#52525B] mt-3 leading-[1.5] tracking-[-0.015em]">
+            Replacing high-friction inquiry forms with an interactive, value-first estimation engine that delivers transparent pricing and qualified leads.
+          </p>
+        </header>
+
+        {/* Hero Image Framing */}
+        <div
+          onClick={() =>
+            setZoomImage({
+              src: "/images/mih-interiors.png",
+              alt: "MiH Interiors Web Architecture & Conversion Showcase",
+            })
+          }
+          className="w-full border border-zinc-200/90 rounded-[4px] overflow-hidden bg-[#F8F8F9] my-6 cursor-zoom-in relative group"
+        >
+          <img
+            src="/images/mih-interiors.png"
+            alt="MiH Interiors Web Architecture & Conversion Showcase"
+            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+          />
+          <div className="absolute bottom-2.5 right-2.5 px-2 py-1 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity">
+            Click to zoom
           </div>
         </div>
 
-        {/* The Case Study Content */}
-        <section className="w-full bg-white">
-          <div className="max-w-[1100px] mx-auto px-5 w-full flex flex-col md:flex-row gap-16 md:gap-24 pb-32">
-            
-            {/* Left Column (Context & Link) */}
-            <div className="w-full md:w-1/3 flex flex-col">
-              <h3 className="text-[16px] font-medium text-zinc-500 mb-4 uppercase tracking-widest" style={{ fontFamily: 'var(--font-sans)' }}>Mini Case Study</h3>
-              <h4 className="text-[40px] leading-tight text-black mb-6" style={{ fontFamily: 'var(--font-sans)' }}>MIH Interiors</h4>
-              <p className="text-[16px] text-zinc-800 mb-8 font-medium" style={{ fontFamily: 'var(--font-sans)' }}>Focus: Conversion Rate Optimization & UX</p>
-              <a 
-                href="https://www.mihinteriors.in/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center justify-center border border-zinc-300 rounded-full px-6 py-3 text-[16px] text-black hover:bg-zinc-50 transition-colors w-fit"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                Visit Live Site ↗
-              </a>
-            </div>
+        {/* Project Meta Grid */}
+        <div className="grid grid-cols-3 gap-3 p-4 my-8 bg-[#F8F8F9] border border-zinc-200/80 rounded-[4px] text-[13px]">
+          <div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#71717A] block">
+              Domain
+            </span>
+            <span className="font-medium text-[#141417] mt-0.5 block">Interior Architecture</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#71717A] block">
+              Focus
+            </span>
+            <span className="font-medium text-[#141417] mt-0.5 block">CRO &amp; Experience</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#71717A] block">
+              Live Link
+            </span>
+            <a
+              href="https://www.mihinteriors.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-[#3B5BFF] hover:underline mt-0.5 block truncate"
+            >
+              mihinteriors.in ↗
+            </a>
+          </div>
+        </div>
 
-            {/* Right Column (The UX Breakdown) */}
-            <div className="w-full md:w-2/3 flex flex-col gap-12">
-              
-              {/* Block 1 (The Problem) */}
-              <div>
-                <h4 className="text-[24px] text-black mb-4" style={{ fontFamily: 'var(--font-sans)' }}>The Friction of Lead Generation</h4>
-                <p className="text-[16px] text-zinc-600 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                  In the luxury interior industry, traditional websites rely on high-friction &apos;Contact Us&apos; forms. Users are often intimidated by potential costs and fear aggressive sales tactics. Asking for high-effort data while offering zero immediate value causes massive user drop-off.
-                </p>
-              </div>
-
-              {/* Block 2 (The Solution) */}
-              <div>
-                <h4 className="text-[24px] text-black mb-4" style={{ fontFamily: 'var(--font-sans)' }}>A Value-First Quoting Flow</h4>
-                <p className="text-[16px] text-zinc-600 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                  We reframed the architecture from a &apos;data capture&apos; model to a &apos;value delivery&apos; model. By introducing an interactive, room-by-room AI Estimate tool, we provided immediate pricing transparency. This broke down intimidating costs into digestible chunks and explicitly lowered the commitment barrier for the user.
-                </p>
-              </div>
-
-              {/* Block 3 (The Outcome) */}
-              <div>
-                <h4 className="text-[24px] text-black mb-4" style={{ fontFamily: 'var(--font-sans)' }}>Driving Conversion</h4>
-                <p className="text-[16px] text-zinc-600 leading-relaxed" style={{ fontFamily: 'var(--font-sans)' }}>
-                  By replacing a blind form with a transparent pricing tool, the system successfully reduced user anxiety. The instant feedback loop keeps users engaged, significantly lowering bounce rates and seamlessly converting passive browsers into warm, qualified leads.
-                </p>
-              </div>
-
-            </div>
+        {/* Section: The Friction of Lead Generation */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[22px] text-[#141417] mb-3"
+          >
+            The Friction of Lead Generation
+          </h2>
+          <div className="space-y-4 text-[15px] text-[#52525B] leading-[1.65]">
+            <p>
+              In the luxury interior industry, traditional studio websites rely on high-friction &apos;Contact Us&apos; forms. Prospective clients are often intimidated by unknown costs, lack of pricing clarity, and fear of high-pressure sales calls.
+            </p>
+            <p>
+              Demanding high-effort personal data upfront while offering zero immediate reciprocal value leads to severe bounce rates: especially among high-intent homeowners who simply want to understand project scope and ballpark budgets.
+            </p>
           </div>
         </section>
 
-      </div>
-      
-      {/* Footer */}
-      <footer className="relative z-10 w-full bg-zinc-950 overflow-hidden py-32 md:py-40">
-        <div className="mx-auto max-w-6xl px-5 md:px-12">
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
-            {/* Left Column - CTA */}
-            <div>
-              <h3 
-                className="text-2xl font-normal text-white md:text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                I&apos;m available for new opportunities.
-              </h3>
-              
-              {/* Email Input */}
-              <div>
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="inline-flex md:hidden items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  hello@bineet.in
-                </a>
-                <button
-                  onClick={handleCopy}
-                  className="hidden md:inline-flex items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {copied ? "Email copied!" : "hello@bineet.in"}
-                </button>
-              </div>
-            </div>
-
-            {/* Right Column - Links */}
-            <div className="grid grid-cols-2 gap-8 md:gap-12">
-              {/* Links Column 1 */}
-              <nav className="flex flex-col gap-4 items-start">
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="block md:hidden text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Email
-                </a>
-                <button
-                  onClick={handleCopy}
-                  className="hidden md:block text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {copied ? "Copied!" : "Email"}
-                </button>
-                <a
-                  href="https://www.linkedin.com/in/bineet-barthwal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="/bineet-resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Resume
-                </a>
-              </nav>
-
-              {/* Links Column 2 */}
-              <nav className="flex flex-col gap-4">
-                <Link
-                  href="/#home"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/#projects"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Projects
-                </Link>
-                <Link
-                  href="/#about"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  About
-                </Link>
-                <Link
-                  href="/#skills"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Skills
-                </Link>
-                <Link
-                  href="/privacy"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Privacy Policy
-                </Link>
-              </nav>
-            </div>
+        {/* Section: A Value-First Quoting Flow */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[22px] text-[#141417] mb-3"
+          >
+            A Value-First Quoting Flow
+          </h2>
+          <div className="space-y-4 text-[15px] text-[#52525B] leading-[1.65]">
+            <p>
+              We reframed the user experience from a &apos;data capture&apos; gatekeeper into a &apos;value delivery&apos; service. By introducing an interactive, room-by-room cost estimation flow, prospective clients receive instant budget calculations tailored to their specific floor plan.
+            </p>
+            <p>
+              Breaking down complex renovation costs into digestible steps explicitly lowers the cognitive commitment threshold. The client receives transparent financial clarity, and the studio receives enriched, pre-qualified project parameters.
+            </p>
           </div>
-        </div>
-      </footer>
+        </section>
+
+        {/* Section: Driving Conversion */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[22px] text-[#141417] mb-3"
+          >
+            Driving Conversion &amp; Trust
+          </h2>
+          <div className="space-y-4 text-[15px] text-[#52525B] leading-[1.65]">
+            <p>
+              By replacing blind contact forms with an informative estimation tool, the site successfully dismantled user anxiety. The immediate feedback loop keeps prospective clients actively engaged, significantly lowering bounce rates and seamlessly converting casual visitors into warm, qualified inquiries.
+            </p>
+          </div>
+
+          {/* Key Principles Box */}
+          <div className="p-5 my-6 bg-[#F8F8F9] border border-zinc-200/80 rounded-[4px]">
+            <h3 className="font-display font-bold text-[15px] text-[#141417] mb-3">
+              Core UX Principles Applied:
+            </h3>
+            <ul className="space-y-2 text-[14px] text-[#52525B] leading-relaxed list-disc pl-5">
+              <li>
+                <strong className="text-[#141417]">Transparent Pricing:</strong> Immediate cost estimates beat arbitrary inquiry forms.
+              </li>
+              <li>
+                <strong className="text-[#141417]">Progressive Disclosure:</strong> Multi-step room selectors minimize cognitive load compared to monolithic text fields.
+              </li>
+              <li>
+                <strong className="text-[#141417]">Architectural Framing:</strong> Clean editorial typography and negative space reinforce the studio&apos;s premium market positioning.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ── EDITORIAL FOOTER DIVIDER ──────────────────────────────── */}
+        <footer className="border-t border-zinc-200/80 pt-8 mt-16 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <Link href="/will" className="btn-secondary-pill w-full sm:w-auto">
+            <span>Next Case Study: Will Marketplace</span>
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
+
+          <a
+            href="mailto:hello@bineet.in"
+            className="btn-primary-pill w-full sm:w-auto"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <span>Get in touch</span>
+          </a>
+        </footer>
+      </article>
+
+      {/* ── FULLSCREEN ZOOM LIGHTBOX ─────────────────────────────────── */}
+      <AnimatePresence>
+        {zoomImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeZoom}
+            data-lenis-prevent="true"
+            onWheel={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[9999] bg-black/92 backdrop-blur-xs flex flex-col items-center justify-center p-4 sm:p-8 cursor-zoom-out"
+          >
+            <button
+              type="button"
+              onClick={closeZoom}
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm font-semibold transition-colors cursor-pointer z-10"
+              aria-label="Close zoom"
+            >
+              ✕
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.96 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.96 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-[95vw] max-h-[85vh] flex flex-col items-center"
+            >
+              <img
+                src={zoomImage.src}
+                alt={zoomImage.alt}
+                className="max-w-full max-h-[82vh] object-contain rounded-[4px] border border-white/10 shadow-2xl"
+              />
+              {zoomImage.alt && (
+                <p className="text-[12.5px] text-zinc-400 mt-3 text-center">
+                  {zoomImage.alt}
+                </p>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

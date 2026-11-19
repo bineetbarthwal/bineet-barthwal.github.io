@@ -1,579 +1,590 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function WillCaseStudy() {
-  const backHref = '/work';
-  const backText = 'Back to Work';
+  const [zoomImage, setZoomImage] = useState(null);
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    show: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
-  };
+  const closeZoom = useCallback(() => setZoomImage(null), []);
 
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText("hello@bineet.in");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  useEffect(() => {
+    if (!zoomImage) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeZoom();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [zoomImage, closeZoom]);
 
   return (
-    <main className="bg-white min-h-screen font-sans">
-      <motion.div 
-        initial="hidden"
-        animate="show"
-        variants={{
-          hidden: { opacity: 0 },
-          show: { opacity: 1, transition: { staggerChildren: 0.15 } }
-        }}
-        className="w-full flex flex-col"
-      >
-        {/* Section 1: Hero */}
-        <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
-          {/* Top Nav */}
-          <motion.div variants={fadeInUp} className="w-full mb-16 mt-12">
-            <Link href={backHref} className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit">
-              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 12H5M12 19l-7-7 7-7"/>
-                </svg>
-              </span>
-              <span className="font-medium text-sm md:text-base">{backText}</span>
-            </Link>
-          </motion.div>
+    <main className="min-h-screen bg-white text-[#141417]">
+      {/* ── 590px LOCKED CONTAINER ─────────────────────────────────── */}
+      <article className="max-w-[590px] mx-auto px-6 pt-10 pb-20">
+        {/* Top Navigation Bar: matches /studio and /work 1:1 */}
+        <div className="flex items-center justify-between mb-9">
+          <Link className="btn-secondary-pill" href="/work">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>Product Design</span>
+          </Link>
 
-          {/* Title */}
-          <motion.h1 
-            variants={fadeInUp}
-            className="text-[36px] md:text-[64px] font-normal leading-tight text-black mb-6 md:mb-12"
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary-pill"
           >
-            UX Case Study : WILL
-          </motion.h1>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+            <span>Resume</span>
+          </a>
+        </div>
 
-          {/* Image */}
-          <motion.div 
-            variants={fadeInUp}
-            className="w-full aspect-video rounded-[24px] md:rounded-[32px] overflow-hidden mb-12 bg-[#F4F4F4]"
+        {/* Case Study Header */}
+        <header className="mt-8 mb-6">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[#3B5BFF] block mb-2">
+            UX Case Study · Mobile App
+          </span>
+          <h1
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-extrabold text-[32px] sm:text-[38px] text-[#141417] tracking-[-0.035em] leading-[1.08]"
           >
-            <AnimatePresence mode="wait">
-              <motion.img 
-                src="/images/will-image-1.png"
-                alt="UX Case Study : WILL"
-                initial={{ opacity: 0, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className="w-full h-full object-cover"
-              />
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Subtext */}
-          <motion.p 
-            variants={fadeInUp}
-            className="text-[20px] md:text-[32px] font-normal leading-tight text-black max-w-[850px] pb-12 md:pb-24"
-          >
+            Will: Blue-Collar Service Marketplace
+          </h1>
+          <p className="font-sans-custom font-normal text-[17px] text-[#52525B] mt-3 leading-[1.5] tracking-[-0.015em]">
             How do you design an app connecting India&apos;s busiest users to its least literate workforce?
-          </motion.p>
-        </section>
+          </p>
+        </header>
 
-        {/* Section 2: What is WILL? */}
-        <section className="max-w-[994px] mx-auto w-full px-5 md:px-0">
-          <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full mb-8 gap-4">
-            <h2 className="text-[28px] sm:text-[32px] text-black font-normal leading-tight">What is WILL?</h2>
-            <a href="https://www.figma.com/proto/lfwa1QNC1O9rpavVkhf7vk/Will----Define?node-id=188-1005&p=f&viewport=-24%2C-434%2C0.1&t=nomB2KN7WcgZfLoY-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=216%3A669&page-id=134%3A1295" target="_blank" rel="noopener noreferrer" className="border border-zinc-200 rounded-[20px] px-5 py-2.5 text-sm text-black hover:bg-[#F4F4F4] transition-colors whitespace-nowrap shrink-0">
-              View prototype
+        {/* Hero Image Framing */}
+        <div
+          onClick={() =>
+            setZoomImage({
+              src: "/images/will-image-1.png",
+              alt: "WILL Mobile App Mockup Overview",
+            })
+          }
+          className="w-full border border-zinc-200/90 rounded-[4px] overflow-hidden bg-[#F8F8F9] my-6 cursor-zoom-in relative group"
+        >
+          <img
+            src="/images/will-image-1.png"
+            alt="WILL Mobile App Mockup Overview"
+            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+          />
+          <div className="absolute bottom-2.5 right-2.5 px-2 py-1 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity">
+            Click to zoom
+          </div>
+        </div>
+
+        {/* Project Meta Grid */}
+        <div className="grid grid-cols-3 gap-3 p-4 my-8 bg-[#F8F8F9] border border-zinc-200/80 rounded-[4px] text-[13px]">
+          <div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#71717A] block">
+              Timeline
+            </span>
+            <span className="font-medium text-[#141417] mt-0.5 block">2 Weeks</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#71717A] block">
+              Role
+            </span>
+            <span className="font-medium text-[#141417] mt-0.5 block">Product &amp; UX</span>
+          </div>
+          <div>
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#71717A] block">
+              Deliverables
+            </span>
+            <span className="font-medium text-[#141417] mt-0.5 block">IA, Flows, Prototype</span>
+          </div>
+        </div>
+
+        {/* Section: What is WILL? */}
+        <section className="my-10">
+          <div className="flex items-center justify-between mb-4">
+            <h2
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="font-display font-bold text-[22px] text-[#141417]"
+            >
+              What is WILL?
+            </h2>
+            <a
+              href="https://www.figma.com/proto/lfwa1QNC1O9rpavVkhf7vk/Will----Define?node-id=188-1005&p=f&viewport=-24%2C-434%2C0.1&t=nomB2KN7WcgZfLoY-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=216%3A669&page-id=134%3A1295"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary-pill !py-1 !px-3 !text-[12px]"
+            >
+              <span>Figma Prototype ↗</span>
             </a>
-          </motion.div>
-          <motion.div variants={fadeInUp} className="text-[18px] text-zinc-600 max-w-[800px] flex flex-col gap-6 pb-24 leading-relaxed">
+          </div>
+
+          <div className="space-y-4 text-[15px] text-[#52525B] leading-[1.65]">
             <p>
-              WILL is a two-sided service marketplace connecting urban Indian professionals with daily wage workers like masonry workers & labourers.
+              WILL is a two-sided service marketplace connecting urban Indian professionals with daily wage workers like masonry workers and labourers.
             </p>
             <p>
               The platform required two separate apps designed simultaneously: one for the customer booking a service, one for the worker receiving the job.
             </p>
             <p>
-              The challenge wasn&apos;t just designing an app. It was designing trust, for a customer who&apos;s never let a stranger into his home, and a worker who&apos;s been underpaid his entire life.
+              The challenge wasn&apos;t just designing an app. It was designing trust: for a customer who has never let a stranger into his home, and a worker who has been underpaid his entire life.
             </p>
-          </motion.div>
+          </div>
         </section>
 
-        {/* Section 3: Project Overview */}
-        <motion.section variants={fadeInUp} className="w-full bg-[#F4F4F4] py-20">
-          <div className="max-w-[994px] mx-auto w-full px-5 md:px-0">
-            <h2 className="text-[32px] text-black font-normal leading-tight mb-12">Project Overview</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-[16px] text-black">
-              <div>
-                <p className="text-zinc-500 mb-2">Project Duration :</p>
-                <p>2 weeks</p>
-              </div>
-              <div>
-                <p className="text-zinc-500 mb-2">Role:</p>
-                <p>UX Designer - Research, IA, User Flows, Wireframes, Prototype.</p>
-              </div>
-              <div>
-                <p className="text-zinc-500 mb-2">Tools:</p>
-                <p>Figma, FigJam, Adobe Creative Suite</p>
-              </div>
+        {/* Section: The Problem */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[22px] text-[#141417] mb-3"
+          >
+            The Problem
+          </h2>
+          <p className="text-[15px] text-[#52525B] leading-[1.65] mb-5">
+            Every morning, skilled workers in Indian cities walk to a chowk and wait. They wait hoping someone has a job for them. Meanwhile, across the city, a software engineer discovers his roof has cracks and is leaking. He searches online, calls numbers off walls. After three days of no progress, he takes a leave from work, and goes to the same chowk to find someone who can fix it.
+          </p>
+
+          <div
+            onClick={() =>
+              setZoomImage({
+                src: "/images/chowk.png",
+                alt: "The Chowk: Daily Wage Labour Market",
+              })
+            }
+            className="w-full border border-zinc-200/90 rounded-[4px] overflow-hidden bg-[#F8F8F9] my-4 cursor-zoom-in relative group"
+          >
+            <img
+              src="/images/chowk.png"
+              alt="The Chowk: Daily Wage Labour Market"
+              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+            />
+            <div className="absolute bottom-2.5 right-2.5 px-2 py-1 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity">
+              Click to zoom
             </div>
           </div>
-        </motion.section>
+        </section>
 
-        {/* Section 4: The Problem */}
-        <motion.section variants={fadeInUp} className="max-w-[994px] mx-auto w-full py-24 px-5 md:px-0 flex flex-col md:flex-row gap-8 md:gap-16 items-center">
-          <div className="w-full md:w-[400px] h-auto aspect-video md:h-[260px] shrink-0 rounded-2xl overflow-hidden bg-[#F4F4F4] relative">
-            <img src="/images/chowk.png" alt="The Problem" className="w-full h-full object-cover absolute inset-0" />
-          </div>
-          <div className="w-full flex flex-col text-left">
-            <h2 className="text-[32px] text-black font-normal leading-tight mb-6">The Problem</h2>
-            <p className="text-[18px] text-zinc-600 leading-relaxed">
-              Every morning, skilled workers in Indian cities walk to a chowk and wait. They wait hoping someone has a job for them. Meanwhile, across the city, a software engineer discovers his roof has cracks and is leaking. He searches online, calls numbers off walls. After three days of no progress, he takes a leave from work — and goes to the same chowk to find someone who can fix it.
-            </p>
-          </div>
-        </motion.section>
-        {/* Section 5: Problem Statement & Personas */}
-        <motion.section variants={fadeInUp} className="max-w-[994px] mx-auto w-full flex flex-col gap-6 pb-24 px-5 md:px-0">
-          <h3 className="text-[32px] font-normal text-black mt-16 mb-8">Problem Statement & User Personas</h3>
+        {/* Section: Problem Statement & Personas */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[22px] text-[#141417] mb-4"
+          >
+            Problem Statement &amp; User Personas
+          </h2>
 
-          {/* Box 1 (2-Column Grid) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
-            <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
-              <h4 className="text-[24px] font-normal mb-6 text-black">User/Customer : Sanjay</h4>
-              <p className="text-[16px] text-zinc-600 leading-relaxed">No reliable, trust-verified way to book skilled workers on demand.</p>
-            </div>
-            <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
-              <h4 className="text-[24px] font-normal mb-6 text-black">Worker : Vinod</h4>
-              <p className="text-[16px] text-zinc-600 leading-relaxed">No consistent, fair way to find daily work without being underpaid.</p>
-            </div>
-          </div>
-
-          {/* Box 2 (How Might We) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
-            <h4 className="text-[24px] font-normal mb-6 text-black">How Might We:</h4>
-            <div className="flex flex-col gap-3 text-zinc-600 text-[16px] leading-relaxed">
-              <p>Q. HMW help Sanjay trust a worker he&apos;s never met before letting them into his home?</p>
-              <p>Q. HMW ensure Vinod gets paid exactly what was agreed — every time?</p>
-              <p>Q. HMW make the booking experience work for someone who can&apos;t read English?</p>
-              <p>Q. HMW reduce the risk of no-shows on both sides?</p>
-              <p>Q. HMW design two completely different experiences that still form one seamless transaction?</p>
-            </div>
-          </div>
-
-          {/* Box 3 (Understanding the Users) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
-            <h4 className="text-[24px] font-normal mb-6 text-black">Understanding the Users:</h4>
-            
-            <p className="text-[16px] text-zinc-600 leading-relaxed">
-              <strong className="text-black font-semibold">Sanjay Mehta — The Customer (Software Engineer, 29, Bangalore)</strong><br/><br/>
-              Sanjay is busy, digitally comfortable, and used to solving problems with his phone. When something breaks at home, he wants it fixed fast — without taking a day off work or letting an unverified stranger into his apartment.<br/>
-              Current behaviour: Googles services, calls random numbers, asks colleagues for referrals. Core anxiety: Can I trust this person in my home? Core goal: Book a verified, skilled worker quickly without disrupting his workday. <strong className="text-black font-semibold">Quote: &ldquo;I just need to know the person coming to my house is legit.&rdquo;</strong>
-            </p>
-
-            <div className="mt-8"></div>
-
-            <p className="text-[16px] text-zinc-600 leading-relaxed">
-              <strong className="text-black font-semibold">Vinod Kumar — The Worker (Electrician, 34, Mumbai)</strong><br/><br/>
-              Vinod is skilled, experienced, and entirely dependent on word of mouth and the chowk for daily work. Some days are good. Most are unpredictable. He&apos;s been underpaid, given less than agreed, and has no way to prove his worth beyond showing up.<br/>
-              Current behaviour: Goes to the chowk daily, relies on repeat clients and referrals. Core anxiety: Will I get paid what was promised? Core goal: Consistent, fairly paid work — without depending on luck every morning. <strong className="text-black font-semibold">Quote: &ldquo;I do the work. Getting paid what we agreed is another fight.&rdquo;</strong>
-            </p>
-          </div>
-
-          {/* Box 4 (Journey Maps) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
-            <h4 className="text-[24px] font-normal mb-6 text-black">Journey Maps:</h4>
-            <div className="flex flex-col gap-6 text-[16px] text-zinc-600 leading-relaxed">
-              <p>
-                Sanjay&apos;s Arc: Notices problem → Searches online → Calls unreliable numbers → Waits with no updates → Takes leave from work → Lets a stranger in with no verification → Pays cash, no record<br/>
-                Low points: No trust signals. No transparency. No accountability.
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
+            <div className="p-4 bg-[#F8F8F9] border border-zinc-200/80 rounded-[4px]">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#3B5BFF]">
+                Customer Profile
+              </span>
+              <h3 className="font-display font-bold text-[16px] text-[#141417] mt-1 mb-1.5">
+                Sanjay Mehta (29)
+              </h3>
+              <p className="text-[13.5px] text-[#52525B] leading-relaxed">
+                Software engineer in Bangalore. Needs immediate repairs without disruptions or unverified visitors in his home.
               </p>
-              <p>
-                Vinod&apos;s Arc: Wakes up early → Goes to chowk → Waits with no certainty → Gets a job (or doesn&apos;t) → Travels to site → Does the work → Gets paid less than agreed with no recourse<br/>
-                Low points: No consistency. No protection. No dignity.
+            </div>
+
+            <div className="p-4 bg-[#F8F8F9] border border-zinc-200/80 rounded-[4px]">
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-[#3B5BFF]">
+                Worker Profile
+              </span>
+              <h3 className="font-display font-bold text-[16px] text-[#141417] mt-1 mb-1.5">
+                Vinod Kumar (34)
+              </h3>
+              <p className="text-[13.5px] text-[#52525B] leading-relaxed">
+                Skilled electrician in Mumbai. Relies on daily chowk stands; frequently subjected to arbitrary payment cuts and no-shows.
               </p>
-              <p>Every negative emotion in these journey maps became a design question.</p>
             </div>
           </div>
 
-          {/* Box 5 (Information Architecture) */}
-          <div className="bg-[#F4F4F4] rounded-[24px] p-6 md:p-12 w-full">
-            <h4 className="text-[24px] font-normal mb-6 text-black">Information Architecture of WILL:</h4>
-            <p className="text-[16px] text-zinc-600 leading-relaxed">
-              WILL required two separate information architectures — one per user type. Designing one without the other would break the transaction.
-            </p>
+          {/* How Might We */}
+          <div className="p-5 bg-[#F8F8F9] border border-zinc-200/80 rounded-[4px]">
+            <h3 className="font-display font-bold text-[15px] text-[#141417] mb-3">
+              How Might We:
+            </h3>
+            <ul className="space-y-2 text-[14px] text-[#52525B] leading-relaxed list-disc pl-5">
+              <li>Help Sanjay trust a worker he has never met before letting them inside his home?</li>
+              <li>Ensure Vinod gets paid exactly what was agreed: every single time?</li>
+              <li>Make the booking interface functional for workers who cannot read English?</li>
+              <li>Reduce the risk of last-minute cancellations on both sides?</li>
+              <li>Design two distinct user flows that seamlessly converge into one trustworthy transaction?</li>
+            </ul>
+          </div>
+        </section>
 
-            <div className="mt-8 w-full bg-[#111111] text-zinc-300 p-8 rounded-2xl overflow-x-auto overflow-y-auto max-h-[500px] text-[13px] leading-relaxed font-mono whitespace-pre custom-scrollbar">
+        {/* Section: Information Architecture */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[22px] text-[#141417] mb-3"
+          >
+            Information Architecture
+          </h2>
+          <p className="text-[15px] text-[#52525B] leading-[1.65] mb-4">
+            WILL required two synchronized architectures: one for the customer and one for the worker. Designing one without the other would break the transaction.
+          </p>
+
+          <div
+            data-lenis-prevent="true"
+            className="w-full bg-[#111113] text-zinc-300 p-5 rounded-[4px] border border-zinc-800 overflow-x-auto overflow-y-auto max-h-[380px] text-[12.5px] leading-relaxed font-mono whitespace-pre"
+          >
 {`WILL (Customer App)
-│
-├── 1. Onboarding
-│   ├── Splash Screen
-│   ├── Sign Up / Log In
-│   ├── OTP Verification
-│   ├── Basic Profile Setup
-│   ├── Location Selection
-│   └── Role Selection (Customer / Worker)
-│
-├── 2. Home
-│   ├── Location Display
-│   ├── Search Bar (Explore Services)
-│   ├── Active Booking Card (conditional)
-│   ├── Service Categories
-│   │   ├── Masonry
-│   │   ├── Cleaning
-│   │   ├── Plumbing
-│   │   ├── Electrician
-│   │   ├── Gardening
-│   │   └── See All
-│   └── Top Reasons to Choose WILL (Trust Banner)
-│
-├── 3. Service Detail
-│   ├── Service Image
-│   ├── Social Proof Tag ("X people booked in last 24hrs")
-│   ├── Service Name + Rating + Reviews Count
-│   ├── About Tab
-│   │   ├── About Service Description
-│   │   └── How WILL Works (process diagram)
-│   ├── Review Tab
-│   │   ├── User Reviews List
-│   │   └── View All Reviews
-│   ├── Starting Price Display
-│   └── Book Now CTA
-│
+├── 1. Onboarding (OTP Verification, Role Selection)
+├── 2. Home (Location, Search, Active Booking, Trust Banner)
+├── 3. Service Detail (Pricing, Ratings, Process Diagram)
 ├── 4. Booking Flow
-│   ├── 4.1 Help Workers Understand the Task
-│   │   ├── Select Work Type (Dropdown)
-│   │   │   └── Other → Text Input
-│   │   ├── Describe the Problem (Optional)
-│   │   │   ├── Upload Photo
-│   │   │   ├── Voice Note
-│   │   │   └── Text Input
-│   │   ├── Number of Workers Selector
-│   │   └── Next CTA
-│   ├── 4.2 When Should We Start?
-│   │   ├── Hourly / Daily Toggle
-│   │   ├── Arrival Time Selector
-│   │   ├── Date Picker (7-day max)
-│   │   ├── Duration Slider (if Hourly)
-│   │   ├── Work Location (auto-filled, changeable)
-│   │   ├── Estimated Total Display
-│   │   └── Confirm CTA
-│   ├── 4.3 Secure Your Booking (₹20 Fee)
-│   │   ├── 100% Refundable Badge
-│   │   ├── Review Booking Details
-│   │   ├── Total Amount Display
-│   │   ├── Add Tip Options (+50 / +100 / Custom)
-│   │   ├── Payment Method Selector (UPI / Cards / Paytm)
-│   │   ├── Booking Fee Display (₹20)
-│   │   └── Pay Now CTA
-│   └── 4.4 Searching State
-│       ├── "Notifying Workers Near You" Header
-│       ├── Live Map with Radius Animation
-│       ├── Countdown Timer (30 min max)
-│       ├── View Booking Details (expandable)
-│       ├── High Demand / Status Message
-│       └── Cancel Search CTA
-│
+│   ├── Task Description (Photos, Voice Note, Worker Count)
+│   ├── Timing & Location (Hourly/Daily, Duration Slider)
+│   ├── ₹20 Booking Fee (100% Refundable Guarantee)
+│   └── Searching State (30-min Proximity Matcher)
 ├── 5. Active Booking
-│   ├── 5.1 Worker Assigned
-│   │   ├── Confirmation Header + Checkmark
-│   │   ├── Worker Profile Card
-│   │   ├── Message / Call / More Actions
-│   │   ├── Work Details Card
-│   │   ├── Total Amount Due Display
-│   │   └── Track Status CTA
-│   ├── 5.2 Track Status
-│   │   ├── Progress Bar
-│   │   ├── Arrival OTP Display
-│   │   ├── Worker Card
-│   │   └── Work Complete → Pay Now CTA
-│   └── 5.3 Payment & Completion
-│       ├── "Your Work is Complete" Header
-│       ├── Amount Due Display
-│       ├── Payment Method Selector
-│       └── Pay Now CTA
-│
-├── 6. Booking Complete
-│   ├── Payment Confirmation
-│   ├── Thank You Message
-│   ├── Rate Your Experience
-│   └── Go to Home CTA
-│
-├── 7. Bookings
-├── 8. Profile
-└── 9. Settings
+│   ├── Worker Assigned (Verified Profile, Call/Message)
+│   ├── Track Status (Arrival OTP Gate)
+│   └── Completion & Payment (Completion OTP Gate)
+└── 6. Booking Summary & Rating
 
 WILL (Worker App)
-│
-├── 1. Onboarding
-│   ├── Splash Screen
-│   ├── Sign Up / Log In
-│   ├── OTP Verification
-│   ├── Role Selection (Customer / Worker)
-│   ├── Profile Setup
-│   └── Skill & Document Setup
-│       ├── Select Skills
-│       ├── Experience (years)
-│       └── Document Upload ([ID Redacted] etc.)
-│
-├── 2. Home (होम)
-│   ├── Location Display
-│   ├── Online / Offline Toggle
-│   ├── Active Job Card (conditional)
-│   └── Incoming Job Notification (overlay)
-│       ├── Amount (large, prominent)
-│       ├── Tip Display
-│       ├── Job Type + Icon
-│       ├── Location + Distance
-│       ├── Voice Note Button
-│       ├── Reject Button
-│       └── Accept Button
-│
+├── 1. Onboarding (Document Upload, Skill Selection)
+├── 2. Home / होम (Online Toggle, Incoming Job Alert)
 ├── 3. Job Flow
-│   ├── 3.1 काम स्वीकृत (Job Accepted)
-│   ├── 3.2 Job Detail (Active)
-│   │   ├── Job Type Header (Hindi)
-│   │   ├── Date & Expected Completion Time
-│   │   ├── Customer Name
-│   │   ├── Amount Display
-│   │   ├── Work Location + Direction Button
-│   │   ├── Call / Message Customer
-│   │   ├── "मैं पहुँच गया हूँ" CTA (Arrival)
-│   │   └── Arrival OTP Entry (4-digit)
-│   └── 3.3 Job Completion
-│       ├── "काम पूरा हुआ - भुगतान मांगे" CTA
-│       ├── Completion OTP Entry (4-digit)
-│       └── काम पूरा हुआ Screen
-│
-├── 4. Work (काम)
-├── 5. पैसा हिसाब (Transactions)
-├── 6. Profile (प्रोफाइल)
-└── 7. Settings (सेटिंग)`}
-            </div>
+│   ├── Job Detail (Address, Expected Pay, Voice Direction)
+│   ├── Arrival Confirmation (Arrival OTP Input)
+│   └── Job Completion (Completion OTP Verification)
+└── 4. Transactions / पैसा हिसाब (Daily Earnings & Settlement)`}
           </div>
-        </motion.section>
+        </section>
 
-        {/* Section 6: Key Decisions */}
-        <section className="w-full bg-[#F4F4F4] py-32">
-          <div className="max-w-[1100px] mx-auto w-full px-5">
-            <h2 className="text-[32px] md:text-[48px] font-normal text-black mb-16 md:mb-24 text-center">Key Decisions</h2>
+        {/* Section: Key Decisions */}
+        <section className="my-10">
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[24px] text-[#141417] mb-2"
+          >
+            Key Design Decisions
+          </h2>
+          <p className="text-[15px] text-[#52525B] leading-[1.65] mb-6">
+            Six architectural trade-offs that resolved the core trust deficit between customers and tradespeople:
+          </p>
 
+          <div className="space-y-8">
             {/* Decision 01 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
-              <div className="w-full md:w-1/2">
-                <img src="/images/decision-1.png" alt="Decision 01" className="object-contain w-full" />
+            <div className="border border-zinc-200/80 rounded-[4px] p-4 bg-[#FFFFFF]">
+              <div
+                onClick={() =>
+                  setZoomImage({
+                    src: "/images/decision-1.png",
+                    alt: "Decision 01: Two Separate Apps",
+                  })
+                }
+                className="w-full border border-zinc-200/80 rounded-[4px] overflow-hidden bg-[#F8F8F9] mb-4 cursor-zoom-in relative group"
+              >
+                <img
+                  src="/images/decision-1.png"
+                  alt="Decision 01: Two Separate Apps"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">01</span>
-                <div className="relative z-10">
-                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 01: Two Separate Apps</h3>
-                  <p className="text-[16px] font-medium text-black mb-2">The decision: Build a dedicated customer app & a dedicated worker app.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: A single app causes heavy cognitive load. Keeping them separate allows for distinct UI/UX, different mental models, and targeted language settings for the worker demographic.</p>
-                </div>
-              </div>
+              <span className="text-[11.5px] font-bold text-[#3B5BFF] uppercase tracking-wider">
+                Decision 01
+              </span>
+              <h3
+                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                className="font-display font-bold text-[17px] text-[#141417] mt-0.5 mb-1.5"
+              >
+                Two Separate Dedicated Applications
+              </h3>
+              <p className="text-[14px] text-[#52525B] leading-relaxed">
+                <strong className="text-[#141417]">Decision:</strong> Build separate customer and worker apps instead of a unified role switcher.
+                <br />
+                <strong className="text-[#141417]">Why:</strong> Eliminates cognitive overload and allows localized language, voice triggers, and distinct interaction paradigms suited for low-literacy tradespeople.
+              </p>
             </div>
 
             {/* Decision 02 */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
-              <div className="w-full md:w-1/2">
-                <img src="/images/decision-2.png" alt="Decision 02" className="object-contain w-full" />
+            <div className="border border-zinc-200/80 rounded-[4px] p-4 bg-[#FFFFFF]">
+              <div
+                onClick={() =>
+                  setZoomImage({
+                    src: "/images/decision-2.png",
+                    alt: "Decision 02: Hindi and Voice Navigation",
+                  })
+                }
+                className="w-full border border-zinc-200/80 rounded-[4px] overflow-hidden bg-[#F8F8F9] mb-4 cursor-zoom-in relative group"
+              >
+                <img
+                  src="/images/decision-2.png"
+                  alt="Decision 02: Hindi and Voice Navigation"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">02</span>
-                <div className="relative z-10">
-                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 02: Hindi/Voice Navigation</h3>
-                  <p className="text-[16px] font-medium text-black mb-2">The decision: Worker app defaults to Hindi with voice readouts for core actions.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: A vast portion of our target demographic has low literacy. A text-heavy UI is non-functional. Voice and iconography allow users who can&apos;t read to still operate independently.</p>
-                </div>
-              </div>
+              <span className="text-[11.5px] font-bold text-[#3B5BFF] uppercase tracking-wider">
+                Decision 02
+              </span>
+              <h3
+                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                className="font-display font-bold text-[17px] text-[#141417] mt-0.5 mb-1.5"
+              >
+                Hindi Defaults &amp; Voice Guidance
+              </h3>
+              <p className="text-[14px] text-[#52525B] leading-relaxed">
+                <strong className="text-[#141417]">Decision:</strong> Worker app defaults to Hindi audio readouts for incoming requests and task confirmations.
+                <br />
+                <strong className="text-[#141417]">Why:</strong> Text-heavy interfaces fail with non-literate workers. Audio prompts and bold iconography allow independent navigation without third-party assistance.
+              </p>
             </div>
 
             {/* Decision 03 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
-              <div className="w-full md:w-1/2">
-                <img src="/images/decision-3.png" alt="Decision 03" className="object-contain w-full" />
+            <div className="border border-zinc-200/80 rounded-[4px] p-4 bg-[#FFFFFF]">
+              <div
+                onClick={() =>
+                  setZoomImage({
+                    src: "/images/decision-3.png",
+                    alt: "Decision 03: Refundable Booking Fee",
+                  })
+                }
+                className="w-full border border-zinc-200/80 rounded-[4px] overflow-hidden bg-[#F8F8F9] mb-4 cursor-zoom-in relative group"
+              >
+                <img
+                  src="/images/decision-3.png"
+                  alt="Decision 03: Refundable Booking Fee"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">03</span>
-                <div className="relative z-10">
-                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 03: ₹20 Booking Fee</h3>
-                  <p className="text-[16px] font-medium text-black mb-2">The decision: Charge a nominal, 100% refundable booking fee.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: Without financial commitment, customers cancel easily, wasting a wage worker&apos;s time. This fee ensures serious intent, while the refund guarantee protects the customer against no-shows.</p>
-                </div>
-              </div>
+              <span className="text-[11.5px] font-bold text-[#3B5BFF] uppercase tracking-wider">
+                Decision 03
+              </span>
+              <h3
+                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                className="font-display font-bold text-[17px] text-[#141417] mt-0.5 mb-1.5"
+              >
+                Refundable ₹20 Commitment Fee
+              </h3>
+              <p className="text-[14px] text-[#52525B] leading-relaxed">
+                <strong className="text-[#141417]">Decision:</strong> Charge a nominal, 100% refundable booking fee at request submission.
+                <br />
+                <strong className="text-[#141417]">Why:</strong> Prevents casual cancellations that waste a worker&apos;s travel costs, while the full-refund badge reassures the homeowner.
+              </p>
             </div>
 
             {/* Decision 04 */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
-              <div className="w-full md:w-1/2">
-                <img src="/images/decision-4.png" alt="Decision 04" className="object-contain w-full" />
+            <div className="border border-zinc-200/80 rounded-[4px] p-4 bg-[#FFFFFF]">
+              <div
+                onClick={() =>
+                  setZoomImage({
+                    src: "/images/decision-4.png",
+                    alt: "Decision 04: Dual OTP Verification",
+                  })
+                }
+                className="w-full border border-zinc-200/80 rounded-[4px] overflow-hidden bg-[#F8F8F9] mb-4 cursor-zoom-in relative group"
+              >
+                <img
+                  src="/images/decision-4.png"
+                  alt="Decision 04: Dual OTP Verification"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">04</span>
-                <div className="relative z-10">
-                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 04: Dual OTP System</h3>
-                  <p className="text-[16px] font-medium text-black mb-2">The decision: Require an Arrival OTP and a Completion OTP.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: The trust deficit is massive. The Arrival OTP verifies the worker before home entry. The Completion OTP authorizes payment only when the customer is satisfied. It creates a secure boundary.</p>
-                </div>
-              </div>
+              <span className="text-[11.5px] font-bold text-[#3B5BFF] uppercase tracking-wider">
+                Decision 04
+              </span>
+              <h3
+                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                className="font-display font-bold text-[17px] text-[#141417] mt-0.5 mb-1.5"
+              >
+                Dual OTP Verification Architecture
+              </h3>
+              <p className="text-[14px] text-[#52525B] leading-relaxed">
+                <strong className="text-[#141417]">Decision:</strong> Require an Arrival OTP before home entry and a Completion OTP to release settlement.
+                <br />
+                <strong className="text-[#141417]">Why:</strong> Provides concrete safety for the household and guarantees that the worker is credited immediately once work is authorized.
+              </p>
             </div>
 
             {/* Decision 05 */}
-            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16 mb-20 md:mb-32 relative">
-              <div className="w-full md:w-1/2">
-                <img src="/images/decision-5.png" alt="Decision 05" className="object-contain w-full" />
+            <div className="border border-zinc-200/80 rounded-[4px] p-4 bg-[#FFFFFF]">
+              <div
+                onClick={() =>
+                  setZoomImage({
+                    src: "/images/decision-5.png",
+                    alt: "Decision 05: Automated Assignment",
+                  })
+                }
+                className="w-full border border-zinc-200/80 rounded-[4px] overflow-hidden bg-[#F8F8F9] mb-4 cursor-zoom-in relative group"
+              >
+                <img
+                  src="/images/decision-5.png"
+                  alt="Decision 05: Automated Assignment"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">05</span>
-                <div className="relative z-10">
-                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 05: Automated Assignment</h3>
-                  <p className="text-[16px] font-medium text-black mb-2">The decision: Connect users automatically based on verified skills rather than profile browsing.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: In traditional models, customers may discriminate based on photos or names. Automatic assignment removes bias, ensures equal opportunity for verified workers, and speeds up booking.</p>
-                </div>
-              </div>
+              <span className="text-[11.5px] font-bold text-[#3B5BFF] uppercase tracking-wider">
+                Decision 05
+              </span>
+              <h3
+                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                className="font-display font-bold text-[17px] text-[#141417] mt-0.5 mb-1.5"
+              >
+                Algorithmic Proximity Assignment
+              </h3>
+              <p className="text-[14px] text-[#52525B] leading-relaxed">
+                <strong className="text-[#141417]">Decision:</strong> Automatically pair verified tradespeople based on skill ratings and distance rather than visual directory browsing.
+                <br />
+                <strong className="text-[#141417]">Why:</strong> Prevents socio-economic bias, guarantees equal work distribution among verified workers, and shortens booking confirmation to minutes.
+              </p>
             </div>
 
             {/* Decision 06 */}
-            <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-16 relative">
-              <div className="w-full md:w-1/2">
-                <img src="/images/decision-6.png" alt="Decision 06" className="object-contain w-full" />
+            <div className="border border-zinc-200/80 rounded-[4px] p-4 bg-[#FFFFFF]">
+              <div
+                onClick={() =>
+                  setZoomImage({
+                    src: "/images/decision-6.png",
+                    alt: "Decision 06: Visual Process Diagrams",
+                  })
+                }
+                className="w-full border border-zinc-200/80 rounded-[4px] overflow-hidden bg-[#F8F8F9] mb-4 cursor-zoom-in relative group"
+              >
+                <img
+                  src="/images/decision-6.png"
+                  alt="Decision 06: Visual Process Diagrams"
+                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
+                />
               </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center relative">
-                <span className="absolute -top-6 -left-2 md:-top-10 md:-left-10 text-[80px] md:text-[140px] font-bold text-zinc-50 z-0 leading-none select-none">06</span>
-                <div className="relative z-10">
-                  <h3 className="text-[20px] md:text-[24px] text-black mb-6">Decision 06: Visual Process Diagrams</h3>
-                  <p className="text-[16px] font-medium text-black mb-2">The decision: Show a step-by-step visual diagram before booking commitment.</p>
-                  <p className="text-[16px] text-zinc-500 leading-relaxed">Why: To lower anxiety. Users need to know exactly what happens after they hit &apos;Book&apos;. Visual roadmaps answer unspoken questions and build trust instantly.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* The Final Quote Section */}
-            <div className="w-full max-w-[800px] mx-auto text-center border-t border-zinc-200 mt-16">
-              <p className="text-[24px] md:text-[40px] font-normal leading-tight text-black px-5 py-16 md:py-24">
-                &ldquo;WILL is the first system that connects Sanjay (the user) &amp; Vinod (the Worker) &amp; protects simultaneously.&rdquo;
+              <span className="text-[11.5px] font-bold text-[#3B5BFF] uppercase tracking-wider">
+                Decision 06
+              </span>
+              <h3
+                style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                className="font-display font-bold text-[17px] text-[#141417] mt-0.5 mb-1.5"
+              >
+                Explicit Process Transparency Diagrams
+              </h3>
+              <p className="text-[14px] text-[#52525B] leading-relaxed">
+                <strong className="text-[#141417]">Decision:</strong> Show a visual step-by-step roadmap prior to booking commitment.
+                <br />
+                <strong className="text-[#141417]">Why:</strong> Demystifies the post-booking steps, eliminates customer anxiety regarding stranger visits, and establishes firm service boundaries.
               </p>
             </div>
           </div>
         </section>
 
-      </motion.div>
-      {/* Footer */}
-      <footer className="relative z-10 w-full bg-zinc-950 overflow-hidden py-32 md:py-40">
-        <div className="mx-auto max-w-6xl px-5 md:px-12">
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16 lg:gap-24">
-            {/* Left Column - CTA */}
-            <div>
-              <h3 
-                className="text-2xl font-normal text-white md:text-3xl lg:text-4xl"
-                style={{ fontFamily: 'var(--font-sans)' }}
-              >
-                I&apos;m available for new opportunities.
-              </h3>
-              
-              {/* Email Input */}
-              <div>
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="inline-flex md:hidden items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  hello@bineet.in
-                </a>
-                <button
-                  onClick={handleCopy}
-                  className="hidden md:inline-flex items-center justify-center w-fit px-8 py-4 mt-8 bg-black border border-zinc-600 rounded-2xl text-zinc-100 text-lg hover:bg-zinc-900 hover:border-zinc-400 transition-all cursor-pointer"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {copied ? "Email copied!" : "hello@bineet.in"}
-                </button>
-              </div>
-            </div>
-
-            {/* Right Column - Links */}
-            <div className="grid grid-cols-2 gap-8 md:gap-12">
-              {/* Links Column 1 */}
-              <nav className="flex flex-col gap-4 items-start">
-                <a
-                  href="mailto:hello@bineet.in"
-                  className="block md:hidden text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Email
-                </a>
-                <button
-                  onClick={handleCopy}
-                  className="hidden md:block text-sm text-zinc-400 transition-colors hover:text-white md:text-base text-left"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  {copied ? "Copied!" : "Email"}
-                </button>
-                <a
-                  href="https://www.linkedin.com/in/bineet-barthwal"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="/bineet-resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Resume
-                </a>
-              </nav>
-
-              {/* Links Column 2 */}
-              <nav className="flex flex-col gap-4">
-                <Link
-                  href="/#home"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/#projects"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Projects
-                </Link>
-                <Link
-                  href="/#about"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  About
-                </Link>
-                <Link
-                  href="/#skills"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Skills
-                </Link>
-                <Link
-                  href="/privacy"
-                  className="text-sm text-zinc-400 transition-colors hover:text-white md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Privacy Policy
-                </Link>
-              </nav>
-            </div>
-          </div>
+        {/* Section: Synthesis Quote */}
+        <div className="p-6 my-10 border border-zinc-200/80 bg-[#F8F8F9] rounded-[4px] text-center">
+          <p
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-bold text-[19px] sm:text-[21px] text-[#141417] leading-snug"
+          >
+            &ldquo;WILL is a system that connects Sanjay the homeowner and Vinod the worker, protecting both simultaneously.&rdquo;
+          </p>
         </div>
-      </footer>
+
+        {/* ── EDITORIAL FOOTER DIVIDER ──────────────────────────────── */}
+        <footer className="border-t border-zinc-200/80 pt-8 mt-16 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <Link href="/mih" className="btn-secondary-pill w-full sm:w-auto">
+            <span>Next Case Study: MiH Interiors</span>
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </Link>
+
+          <a
+            href="mailto:hello@bineet.in"
+            className="btn-primary-pill w-full sm:w-auto"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <span>Get in touch</span>
+          </a>
+        </footer>
+      </article>
+
+      {/* ── FULLSCREEN ZOOM LIGHTBOX ─────────────────────────────────── */}
+      <AnimatePresence>
+        {zoomImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeZoom}
+            data-lenis-prevent="true"
+            onWheel={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[9999] bg-black/92 backdrop-blur-xs flex flex-col items-center justify-center p-4 sm:p-8 cursor-zoom-out"
+          >
+            <button
+              type="button"
+              onClick={closeZoom}
+              className="absolute top-5 right-5 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm font-semibold transition-colors cursor-pointer z-10"
+              aria-label="Close zoom"
+            >
+              ✕
+            </button>
+
+            <motion.div
+              initial={{ scale: 0.96 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.96 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="max-w-[95vw] max-h-[85vh] flex flex-col items-center"
+            >
+              <img
+                src={zoomImage.src}
+                alt={zoomImage.alt}
+                className="max-w-full max-h-[82vh] object-contain rounded-[4px] border border-white/10 shadow-2xl"
+              />
+              {zoomImage.alt && (
+                <p className="text-[12.5px] text-zinc-400 mt-3 text-center">
+                  {zoomImage.alt}
+                </p>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

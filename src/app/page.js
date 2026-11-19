@@ -21,7 +21,7 @@ export default function Home() {
     <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]" style={{ scrollBehavior: "smooth" }}>
       
       {/* ═══════════════════════════════════════════ */}
-      {/* HERO SECTION — Single aligned editorial column */}
+      {/* HERO SECTION: Single aligned editorial column */}
       {/* ═══════════════════════════════════════════ */}
       <section id="home" className="relative flex flex-col justify-center overflow-hidden">
         <div className="relative z-10 max-w-[590px] mx-auto w-full px-6 pt-10">
@@ -116,9 +116,9 @@ export default function Home() {
           <div className="mt-24 sm:mt-28 grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
             <GlassFolder
               variant="product"
-              title="Product & UI/UX"
+              title="Product Design"
               description="B2B SaaS workflows, mobile apps, and conversion web interfaces."
-              href="#projects"
+              href="/work"
               cards={productCards}
             />
             <GlassFolder
@@ -147,7 +147,7 @@ export default function Home() {
             <Link href="/will" className="w-full sm:w-[135px] h-[95px] flex-shrink-0 rounded-[10px] border border-zinc-200/80 overflow-hidden bg-zinc-100 block">
               <img
                 src="/images/will-thumbnail-1.jpg"
-                alt="Will — service marketplace app"
+                alt="Will: service marketplace app"
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
               />
             </Link>
@@ -176,7 +176,7 @@ export default function Home() {
             <Link href="/mih" className="w-full sm:w-[135px] h-[95px] flex-shrink-0 rounded-[10px] border border-zinc-200/80 overflow-hidden bg-zinc-100 block">
               <img
                 src="/images/mih-interiors.png"
-                alt="MIH Interiors — conversion-focused website"
+                alt="MIH Interiors: conversion-focused website"
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
               />
             </Link>

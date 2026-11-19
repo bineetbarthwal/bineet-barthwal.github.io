@@ -1,230 +1,368 @@
 "use client";
-import { useState, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
-function WorkContent() {
-  const searchParams = useSearchParams();
-  const initialTab = searchParams.get("tab") === "Creative" ? "Creative" : "UX";
-  const [activeTab, setActiveTab] = useState(initialTab);
+const PRODUCT_PROJECTS = [
+  {
+    id: "will",
+    title: "Will: Blue-Collar Service Marketplace",
+    category: "Mobile Apps",
+    tag: "Mobile App · 2024",
+    summary:
+      "Designing a low-friction service booking platform connecting India's busiest urban households with daily-wage skilled trades through dual OTP verification and voice guidance.",
+    image: "/images/will-thumbnail-1.jpg",
+    href: "/will",
+    cta: "Read Case Study ↗",
+    type: "case-study",
+  },
+  {
+    id: "mih",
+    title: "MiH Interiors: Studio Website Built to Convert",
+    category: "B2B & SaaS",
+    tag: "UX & Conversion · 2024",
+    summary:
+      "Replacing high-friction inquiry forms with an interactive, value-first estimation engine that delivers transparent pricing and qualified leads for a luxury studio.",
+    image: "/images/mih-interiors.png",
+    href: "/mih",
+    cta: "Read Case Study ↗",
+    type: "case-study",
+  },
+  {
+    id: "fundbridge",
+    title: "Fundbridge: Founder & VC Diligence Platform",
+    category: "B2B & SaaS",
+    tag: "B2B & SaaS · 2024",
+    summary:
+      "A unified dealflow and investor relationship platform designed to streamline startup pitch submissions, evaluation matrices, and diligence workflows.",
+    image: "/images/fundbridge-thumbnail-1.png",
+    href: null,
+    cta: "View Preview ↗",
+    type: "modal",
+    brief:
+      "Fundbridge bridges early-stage venture capital firms with startup founders through an organized submission pipeline, live cap table modeling, and streamlined due diligence workflows.",
+    tools: ["Figma", "Design Systems", "Prototyping"],
+  },
+  {
+    id: "rkade",
+    title: "Rkade: Campus Gaming & Events Platform",
+    category: "Design Systems",
+    tag: "Design Systems · 2023",
+    summary:
+      "A campus platform and modular design system where students discover and participate in hackathons, gaming tournaments, fests, and student communities.",
+    image: "/images/rkade-thumbnail.png",
+    href: null,
+    cta: "View Preview ↗",
+    type: "modal",
+    brief:
+      "An end-to-end design system and mobile interface for collegiate event organizers, enabling tournament bracket generation, ticketing, and live campus leaderboards.",
+    tools: ["Figma", "UI Systems", "Mobile Design"],
+  },
+];
 
-  return (
-    <main className="relative flex flex-col bg-white overflow-x-hidden w-full max-w-[100vw]">
-      <section className="pt-32 pb-12 px-5 md:px-12 flex flex-col items-center w-full">
-        <div className="w-full max-w-6xl">
-          
-          {/* Top Bar: Standardized Container Alignment */}
-          <div className="flex flex-col md:flex-row items-center w-full mb-16 gap-6">
-            
-            {/* 1. Left: Back Button */}
-            <div className="flex-1 self-start">
-              <Link href="/" className="inline-flex items-center gap-3 text-gray-600 hover:text-[#1C1C1C] transition-colors group w-fit whitespace-nowrap">
-                <span className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 group-hover:bg-gray-200 transition-colors shrink-0">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                  </svg>
-                </span>
-                <span className="font-medium text-sm md:text-base">Back to Home</span>
-              </Link>
-            </div>
-
-            {/* 2. Center: Toggle Switch */}
-            <div className="shrink-0 flex items-center justify-center">
-              <div className="flex items-center rounded-[16px] border border-gray-300 bg-white/95 p-1">
-                <button
-                  onClick={() => setActiveTab("UX")}
-                  className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "UX"
-                    ? "bg-black text-white"
-                    : "bg-transparent text-[#71717a] hover:text-black"
-                    }`}
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Product &amp; UX
-                </button>
-                <button
-                  onClick={() => setActiveTab("Creative")}
-                  className={`px-3 md:px-6 py-2 text-sm md:text-base font-normal rounded-full transition-colors ${activeTab === "Creative"
-                    ? "bg-black text-white"
-                    : "bg-transparent text-[#71717a] hover:text-black"
-                    }`}
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Creative Design
-                </button>
-              </div>
-            </div>
-            
-            {/* 3. Right: Flexible Spacer */}
-            <div className="flex-1 hidden md:block"></div>
-            
-          </div>
-
-          {/* Page Title */}
-          <div className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: 'var(--font-sans)' }}>
-              My Work
-            </h1>
-            <p
-              className="mt-4 text-sm leading-relaxed text-gray-600 md:text-base max-w-2xl"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              A collection of case studies and projects I&apos;ve worked on.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Grid */}
-      <section className="relative z-10 flex w-full flex-col items-center px-5 md:px-12 pb-24">
-        <div className="w-full max-w-6xl">
-          {activeTab === "UX" ? (
-            <div className="grid gap-8 md:grid-cols-2">
-              {/* Will Project */}
-              <Link href="/will?from=work" className="block">
-                <article className="flex flex-col hover:opacity-90 transition-opacity">
-                  <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                    <img src="/images/will-thumbnail-1.jpg" alt="Will thumbnail" className="w-full h-full object-cover object-top" />
-                  </div>
-                  <h3
-                    className="text-xl font-normal text-gray-900 md:text-2xl"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    Will
-                  </h3>
-                  <p
-                    className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    How do you design an app connecting India&apos;s busiest users to its least literate workforce?
-                  </p>
-                </article>
-              </Link>
-
-              {/* Fundbridge Project */}
-              <article className="flex flex-col hover:opacity-90 transition-opacity">
-                <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                  <img src="/images/fundbridge-thumbnail-1.png" alt="Fundbridge thumbnail" className="w-full h-full object-cover object-top" />
-                </div>
-                <h3
-                  className="text-xl font-normal text-gray-900 md:text-2xl"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Fundbridge
-                </h3>
-                <p
-                  className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  A unified platform connecting founders and VCs.
-                </p>
-              </article>
-
-              {/* MiH Interiors Project */}
-              <Link href="/mih?from=work" className="block">
-                <article className="flex flex-col hover:opacity-90 transition-opacity">
-                  <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                    <Image
-                      src="/images/mih-interiors.png"
-                      alt="MIH Interiors Case Study"
-                      width={800}
-                      height={600}
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </div>
-                  <h3
-                    className="text-xl font-normal text-gray-900 md:text-2xl"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    MiH Interiors
-                  </h3>
-                  <p
-                    className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                    style={{ fontFamily: 'var(--font-sans)' }}
-                  >
-                    Designing a website for a premium interior design studio that actually converts.
-                  </p>
-                </article>
-              </Link>
-
-              {/* Rkade Project */}
-              <article className="flex flex-col hover:opacity-90 transition-opacity">
-                <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                  <img src="/images/rkade-thumbnail.png" alt="Rkade thumbnail" className="w-full h-full object-cover object-top" />
-                </div>
-                <h3
-                  className="text-xl font-normal text-gray-900 md:text-2xl"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  Rkade
-                </h3>
-                <p
-                  className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                  style={{ fontFamily: 'var(--font-sans)' }}
-                >
-                  A campus-focused platform where students can discover and participate in college events, hackathons, fests, and gaming/community activities.
-                </p>
-              </article>
-            </div>
-          ) : (
-            <div className="w-full animate-in fade-in duration-500">
-              <div className="grid gap-8 md:grid-cols-2">
-                
-                {/* Visual Craft Category Card */}
-                <Link href="/work/visual-craft" className="block">
-                  <article className="flex flex-col hover:opacity-90 transition-opacity">
-                    <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                      <img src="/images/visualcraft.png" alt="Visual Craft" className="w-full h-full object-cover" />
-                    </div>
-                    <h3
-                      className="text-xl font-normal text-gray-900 md:text-2xl"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      Visual Craft
-                    </h3>
-                    <p
-                      className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      Editorial layouts, brand identity, and marketing design.
-                    </p>
-                  </article>
-                </Link>
-
-                {/* Logo Design Category Card */}
-                <Link href="/work/logos" className="block">
-                  <article className="flex flex-col hover:opacity-90 transition-opacity">
-                    <div className="relative mb-6 w-full aspect-video overflow-hidden rounded-2xl bg-[#F4F4F4]">
-                      <img src="/images/logodesigns.png" alt="Logo Design" className="w-full h-full object-cover" />
-                    </div>
-                    <h3
-                      className="text-xl font-normal text-gray-900 md:text-2xl"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      Logo Design
-                    </h3>
-                    <p
-                      className="mt-3 text-sm leading-relaxed text-gray-600 md:text-base"
-                      style={{ fontFamily: 'var(--font-sans)' }}
-                    >
-                      Crafting memorable brand identities through thoughtful logo design.
-                    </p>
-                  </article>
-                </Link>
-
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-    </main>
-  );
-}
+const FILTERS = ["All", "Mobile Apps", "B2B & SaaS", "Design Systems"];
 
 export default function WorkPage() {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [modalItem, setModalItem] = useState(null);
+
+  const filteredProjects =
+    activeFilter === "All"
+      ? PRODUCT_PROJECTS
+      : PRODUCT_PROJECTS.filter((p) => p.category === activeFilter);
+
+  const closeModal = useCallback(() => setModalItem(null), []);
+
+  useEffect(() => {
+    if (!modalItem) return;
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeModal();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [modalItem, closeModal]);
+
   return (
-    <Suspense fallback={<div className="min-h-screen bg-white"></div>}>
-      <WorkContent />
-    </Suspense>
+    <main className="min-h-screen bg-white text-[#141417]">
+      {/* ── 590px LOCKED CONTAINER ─────────────────────────────────── */}
+      <div className="max-w-[590px] mx-auto px-6 pt-10 pb-20">
+        {/* Top Bar: matches /studio 1:1 */}
+        <div className="flex items-center justify-between mb-9">
+          <Link className="btn-secondary-pill" href="/">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>All work</span>
+          </Link>
+
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary-pill"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+            <span>Resume</span>
+          </a>
+        </div>
+
+        {/* Page Header */}
+        <h1
+          style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+          className="font-display font-extrabold text-[32px] sm:text-[36px] text-[#141417] tracking-[-0.03em] leading-[1.05] mt-10"
+        >
+          Product &amp; UX Design
+        </h1>
+
+        <p className="font-sans-custom font-normal text-[15px] text-[#52525B] mt-2.5 leading-[1.6]">
+          End-to-end product architecture, design systems, and high-craft interfaces. Select a case study to read the full breakdown.
+        </p>
+
+        {/* Filter Bar */}
+        <div className="flex flex-wrap items-center gap-2 mt-5">
+          {FILTERS.map((tab) => {
+            const active = activeFilter === tab;
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveFilter(tab)}
+                className={
+                  active
+                    ? "btn-dark-pill !py-1.5 !px-3.5 !text-[12.5px]"
+                    : "btn-secondary-pill !py-1.5 !px-3.5 !text-[12.5px]"
+                }
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Case Study Feed */}
+        <div className="flex flex-col gap-8 mt-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => {
+              const cardContent = (
+                <div className="flex flex-col">
+                  {/* Thumbnail Container */}
+                  <div className="w-full aspect-video bg-[#F4F4F6] border border-zinc-200/90 rounded-[4px] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.04)] relative group">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.015]"
+                    />
+
+                    {/* Top-Right Hover Pill */}
+                    <div className="absolute top-3.5 right-3.5 z-10">
+                      <span className="inline-flex items-center gap-1 px-3 py-1 bg-white/95 backdrop-blur-xs text-[#141417] text-[11.5px] font-semibold tracking-tight shadow-sm opacity-90 group-hover:opacity-100 transition-opacity">
+                        <span>{project.cta}</span>
+                      </span>
+                    </div>
+
+                    {/* Gradient Vignette on Hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  </div>
+
+                  {/* Editorial Meta Row Below Thumbnail */}
+                  <div className="mt-3.5">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <h2
+                        style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                        className="font-display font-bold text-[18px] text-[#141417] group-hover:text-[#3B5BFF] transition-colors leading-snug"
+                      >
+                        {project.title}
+                      </h2>
+                      <span className="text-[12.5px] font-medium text-[#71717A] shrink-0">
+                        {project.tag}
+                      </span>
+                    </div>
+                    <p className="text-[14px] text-[#52525B] leading-relaxed mt-1">
+                      {project.summary}
+                    </p>
+                  </div>
+                </div>
+              );
+
+              return (
+                <motion.article
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 12 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full"
+                >
+                  {project.href ? (
+                    <Link href={project.href} className="block group">
+                      {cardContent}
+                    </Link>
+                  ) : (
+                    <div
+                      onClick={() => setModalItem(project)}
+                      className="block group cursor-pointer"
+                    >
+                      {cardContent}
+                    </div>
+                  )}
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ── PREVIEW MODAL FOR SLIDE / PREVIEW PROJECTS ──────────────── */}
+      <AnimatePresence>
+        {modalItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] bg-black/88 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6"
+            onClick={closeModal}
+          >
+            <motion.div
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              data-lenis-prevent="true"
+              onWheel={(e) => e.stopPropagation()}
+              className="bg-white rounded-lg max-w-[680px] w-full max-h-[90vh] overflow-y-auto border border-zinc-200/80 shadow-2xl relative flex flex-col"
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-white/95 backdrop-blur-xs border-b border-zinc-200/80 px-5 py-4 flex items-center justify-between z-10">
+                <div>
+                  <span className="text-[11.5px] font-semibold uppercase tracking-wider text-[#71717A]">
+                    {modalItem.tag}
+                  </span>
+                  <h3
+                    style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+                    className="font-display font-bold text-[18px] text-[#141417]"
+                  >
+                    {modalItem.title}
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 flex items-center justify-center text-sm font-semibold transition-colors cursor-pointer"
+                  aria-label="Close"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Body */}
+              <div className="p-5 flex flex-col gap-4">
+                <div className="w-full aspect-video rounded-md overflow-hidden bg-[#F4F4F6] border border-zinc-200/80">
+                  <img
+                    src={modalItem.image}
+                    alt={modalItem.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="mt-2">
+                  <h4 className="text-[13px] font-semibold uppercase tracking-wider text-zinc-500 mb-1">
+                    Project Brief
+                  </h4>
+                  <p className="text-[14.5px] text-[#52525B] leading-relaxed">
+                    {modalItem.brief || modalItem.summary}
+                  </p>
+                </div>
+
+                {modalItem.tools && (
+                  <div>
+                    <h4 className="text-[13px] font-semibold uppercase tracking-wider text-zinc-500 mb-1.5">
+                      Tools &amp; Competencies
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {modalItem.tools.map((tool) => (
+                        <span
+                          key={tool}
+                          className="px-2.5 py-1 rounded bg-zinc-100 text-zinc-700 text-[12px] font-medium"
+                        >
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── FOOTER ─────────────────────────────────────────────────── */}
+      <footer className="w-full bg-white pt-10 pb-16">
+        <div className="max-w-[590px] mx-auto px-6">
+          <div className="inline-flex items-center gap-2 text-[14px] font-normal text-[#52525B] mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+            <span>Open to work · India</span>
+          </div>
+
+          <h2
+            style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+            className="font-display font-extrabold text-[40px] sm:text-[52px] text-[#111113] tracking-[-0.04em] leading-[1.02]"
+          >
+            Have a product or <br className="hidden sm:block" />
+            brand in mind?
+          </h2>
+
+          <div className="flex flex-wrap items-center gap-6 mt-7 text-[15px] font-medium text-[#3F3F46]">
+            <a href="mailto:hello@bineet.in" className="hover:text-[#111113] transition-colors">
+              hello@bineet.in
+            </a>
+            <a
+              href="https://www.linkedin.com/in/bineet-barthwal/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#111113] transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#111113] transition-colors"
+            >
+              Resume
+            </a>
+            <Link className="text-[#71717A] hover:text-[#111113] transition-colors" href="/privacy">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </main>
   );
 }
