@@ -3,15 +3,16 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ─── GALLERY DATA ────────────────────────────────────────────────────────────
-// Consolidated to 7 high-impact flagship projects.
-// Bento rhythm: ISBACON(full) → SANDBOX+IEDC(half/half) → CUBE(full) → CampusTank+LogoFolio(half/half) → Republic(full)
+// ─── GALLERY DATA ─────────────────────────────────────────────────────────────
+// 11 projects. Bento rhythm: ISBACON(full) → SANDBOX+IEDC(half) →
+// CUBE(full) → CampusTank+INCEPT(half) → AI Fest(full) →
+// AI Convergence+Geebi(half) → Republic(full) → LogoFolio(full)
 export const GALLERY_ITEMS = [
   {
     id: "isbacon-2026",
     title: "ISBACON 2026 · National Summit Identity",
     subtitle:
-      "Complete brand identity, cultural motif system, print collateral & event signage",
+      "Complete brand identity, cultural motif system, print collateral and event signage",
     category: "Brand Identity",
     span: "col-span-12",
     src: "/studio/isbacon2026/1x/Slide 1.webp",
@@ -35,7 +36,6 @@ export const GALLERY_ITEMS = [
       },
       "/studio/isbacon2026/1x/Slide 5.webp",
       "/studio/isbacon2026/1x/Slide 6.webp",
-      "/studio/isbacon-passes.jpg",
     ],
     brief:
       "End-to-end visual identity system for the 18th Annual ISBACON 2026 National Conference, blending regional cultural motifs (Open Hand monument, Phulkari geometry, Golden Temple, wheat and state icons) into a modular grid across 40+ print, badge, and stage deliverables.",
@@ -44,9 +44,9 @@ export const GALLERY_ITEMS = [
   },
   {
     id: "sandbox",
-    title: "SANDBOX · Brand & Outdoor Campaign",
+    title: "SANDBOX · Brand and Outdoor Campaign",
     subtitle:
-      "Brand identity system, highway billboard campaign & outdoor launch kits",
+      "Brand identity system, highway billboard campaign and outdoor launch kits",
     category: "Brand Identity",
     span: "col-span-12 sm:col-span-6",
     src: "/designs/sandbox.png",
@@ -71,7 +71,7 @@ export const GALLERY_ITEMS = [
     id: "iedc",
     title: "IEDC · Innovation Cell Brand Identity",
     subtitle:
-      "Official brand guidelines, particle globe mark & institutional collateral",
+      "Official brand guidelines, particle globe mark and institutional collateral",
     category: "Brand Identity",
     span: "col-span-12 sm:col-span-6",
     src: "/studio/iedc-identity.jpg",
@@ -95,11 +95,12 @@ export const GALLERY_ITEMS = [
     id: "cube",
     title: "CUBE · Incubator Identity System",
     subtitle:
-      "Brand mark architecture, isometric grid system & incubation strategy",
+      "Brand mark architecture, isometric grid system and incubation strategy",
     category: "Brand Identity",
     span: "col-span-12",
-    src: "/designs/cube3.jpg",
+    src: "/studio/cube-brand.jpg",
     slides: [
+      "/studio/cube-brand.jpg",
       "/designs/cube3.jpg",
       "/designs/cube1.jpg",
       "/designs/cube2.jpg",
@@ -113,44 +114,90 @@ export const GALLERY_ITEMS = [
     id: "campus-tank",
     title: "Campus Tank · National Startup Launchpad",
     subtitle:
-      "Key stage visual, pitch arena graphics & national promotional campaign",
+      "Key stage visual, pitch arena graphics and national promotional campaign",
     category: "Event Systems",
     span: "col-span-12 sm:col-span-6",
     src: "/designs/campustank.jpg",
-    slides: [
-      "/designs/campustank.jpg",
-    ],
+    slides: ["/designs/campustank.jpg"],
     brief:
       "High-impact visual identity, keynote stage backdrop, and promotional campaign materials for Campus Tank flagship venture pitching summit.",
     tools: ["Adobe Illustrator", "Adobe Photoshop"],
     pdf: null,
   },
   {
-    id: "logo-folio",
-    title: "Logo Folio · Selected Marks & Symbols",
+    id: "incept",
+    title: "INCEPT · Brand Identity Guidelines",
     subtitle:
-      "Curated brand marks across tech, education, finance & healthcare",
+      "Logo architecture, typography system and visual identity standards",
     category: "Brand Identity",
     span: "col-span-12 sm:col-span-6",
-    src: "/designs/logodesigns.png",
+    src: "/studio/incept-brand.jpg",
+    slides: ["/studio/incept-brand.jpg"],
+    pdf: "/studio/incept-guidelines.pdf",
+    brief:
+      "Comprehensive logo architecture, typography rules, color specifications, and visual identity standards manual for the INCEPT incubation network.",
+    tools: ["Adobe Illustrator", "Adobe InDesign"],
+  },
+  {
+    id: "aifest",
+    title: "AI Fest · National AI Student Summit",
+    subtitle:
+      "Complete event identity, stage visuals and national campaign collateral",
+    category: "Event Systems",
+    span: "col-span-12",
+    src: "/designs/aifest.jpg",
     slides: [
-      "/designs/logodesigns.png",
-      "/designs/cube3.jpg",
-      "/designs/sandbox1.jpg",
-      "/designs/iedc1.jpg",
-      "/designs/AIconvergencelogo.svg",
-      "/designs/aifestlogo.svg",
+      "/designs/aifest.jpg",
+      "/designs/aifest2.jpg",
+      "/designs/aifest3.jpg",
+      "/designs/aifest4.jpg",
+      "/designs/aifest5.jpg",
+      "/designs/aifest6.jpg",
+      "/designs/aifest7.jpg",
     ],
     brief:
-      "A curated collection of minimalist logos, wordmarks, and geometric emblems designed for tech startups, educational ventures, and commercial products.",
-    tools: ["Adobe Illustrator", "Figma"],
+      "End-to-end visual identity, keynote stage backdrops, digital campaigns, and large-format print production for AI Fest national student summit.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign"],
     pdf: null,
+  },
+  {
+    id: "ai-convergence",
+    title: "AI Convergence 2026 · Summit Brand System",
+    subtitle:
+      "Pre-event identity system, official print collateral and digital campaign",
+    category: "Print & Campaigns",
+    span: "col-span-12 sm:col-span-6",
+    src: "/designs/aiconvergence.jpg",
+    slides: [
+      "/designs/aiconvergence.jpg",
+      "/designs/aiconvergence1.jpg",
+      "/designs/aiconvergence2.jpg",
+      "/designs/aiconvergence3.jpg",
+    ],
+    pdf: "/designs/India AI Convergence 2026 - Official Pre Event - India AI Impact Summit 2026.pdf",
+    brief:
+      "Official pre-event visual identity, digital campaign materials, and print collateral for the India AI Convergence 2026 national summit.",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign"],
+  },
+  {
+    id: "geebi",
+    title: "Geebi · Brand and Visual Identity",
+    subtitle:
+      "Startup brand identity and digital visual system",
+    category: "Brand Identity",
+    span: "col-span-12 sm:col-span-6",
+    src: "/studio/geebi-brand.jpg",
+    slides: ["/studio/geebi-brand.jpg"],
+    pdf: "/studio/geebi-guidelines.pdf",
+    brief:
+      "Visual identity design, modern typographic system, and digital brand collateral for Geebi startup ecosystem.",
+    tools: ["Adobe Illustrator", "Figma"],
   },
   {
     id: "republic-startups",
     title: "Republic For Startups · Summit Campaign",
     subtitle:
-      "Key visuals, stage backdrops & high-volume print production suite",
+      "Key visuals, stage backdrops and high-volume print production suite",
     category: "Print & Campaigns",
     span: "col-span-12",
     src: "/studio/republic-startups.jpg",
@@ -161,6 +208,28 @@ export const GALLERY_ITEMS = [
     brief:
       "Key visual identity, stage backdrop systems, and promotional collateral suite for the Republic For Startups national entrepreneurship summit.",
     tools: ["Adobe Illustrator", "Adobe Photoshop", "Adobe InDesign"],
+    pdf: null,
+  },
+  {
+    id: "logo-folio",
+    title: "Logo Folio · Selected Marks and Symbols",
+    subtitle:
+      "Curated brand marks across tech, education, finance and healthcare",
+    category: "Brand Identity",
+    span: "col-span-12",
+    src: "/designs/logodesigns.png",
+    slides: [
+      "/designs/logodesigns.png",
+      "/designs/cubelogo.svg",
+      "/designs/sandboxlogo.svg",
+      "/designs/iedclogo.svg",
+      "/designs/AIconvergencelogo.svg",
+      "/designs/aifestlogo.svg",
+      "/designs/narilogo.svg",
+    ],
+    brief:
+      "A curated collection of minimalist logos, wordmarks, and geometric emblems designed for tech startups, educational ventures, and commercial products.",
+    tools: ["Adobe Illustrator", "Figma"],
     pdf: null,
   },
 ];
@@ -648,7 +717,7 @@ export default function BrandBentoPage() {
                   transition={{ duration: 0.18 }}
                   onClick={() => handleTileClick(item)}
                   data-cursor="hand"
-                  className={`${item.span} ${item.span.includes("sm:col-span-6") ? "aspect-[4/3]" : "aspect-video"} group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none`}
+                  className={`${item.span} aspect-video group relative rounded-none overflow-hidden bg-[#F4F4F6] border border-zinc-200/90 shadow-[0_2px_12px_rgba(0,0,0,0.04)] cursor-pointer select-none`}
                 >
                   <img
                     src={item.src}
