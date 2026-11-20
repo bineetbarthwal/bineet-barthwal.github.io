@@ -2,6 +2,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import EmailLink from "@/components/EmailLink";
 
 const PRODUCT_PROJECTS = [
   {
@@ -173,6 +174,7 @@ export default function WorkPage() {
                     <img
                       src={project.image}
                       alt={project.title}
+                      draggable={false}
                       className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.015]"
                     />
 
@@ -285,6 +287,7 @@ export default function WorkPage() {
                   <img
                     src={modalItem.image}
                     alt={modalItem.title}
+                    draggable={false}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -338,9 +341,7 @@ export default function WorkPage() {
           </h2>
 
           <div className="flex flex-wrap items-center gap-6 mt-7 text-[15px] font-medium text-[#3F3F46]">
-            <a href="mailto:hello@bineet.in" className="hover:text-[#111113] transition-colors">
-              hello@bineet.in
-            </a>
+            <EmailLink className="hover:text-[#111113] transition-colors" />
             <a
               href="https://www.linkedin.com/in/bineet-barthwal/"
               target="_blank"

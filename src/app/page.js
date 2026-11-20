@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import GlassFolder from "@/components/GlassFolder";
+import EmailLink from "@/components/EmailLink";
 
 /* ─── Main Homepage ─── */
 export default function Home() {
@@ -103,13 +104,13 @@ export default function Home() {
 
           {/* Get in Touch Button */}
           <div className="mt-7 mb-2 flex items-center gap-3">
-            <a href="mailto:hello@bineet.in" className="btn-dark-pill">
+            <EmailLink className="btn-dark-pill">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect width="20" height="16" x="2" y="4" rx="2" />
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
               </svg>
               <span>Get in touch</span>
-            </a>
+            </EmailLink>
           </div>
 
           {/* Bento Folders Row */}
@@ -148,6 +149,7 @@ export default function Home() {
               <img
                 src="/images/will-thumbnail-1.jpg"
                 alt="Will: service marketplace app"
+                draggable={false}
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
               />
             </Link>
@@ -177,6 +179,7 @@ export default function Home() {
               <img
                 src="/images/mih-interiors.png"
                 alt="MIH Interiors: conversion-focused website"
+                draggable={false}
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
               />
             </Link>
@@ -251,13 +254,17 @@ export default function Home() {
               <img
                 src="/images/bineet-illustration.jpg"
                 alt="Bineet Barthwal"
+                draggable={false}
                 className="w-full h-full object-cover object-center"
               />
             </div>
             <div className="text-[15.5px] text-[#52525B] leading-[1.65] space-y-4">
               <p>
                 I&apos;m a designer with a{" "}
-                <span className="kw">
+                <span
+                  tabIndex={0}
+                  className="kw inline !inline relative underline decoration-dashed underline-offset-4 cursor-default"
+                >
                   B.Sc. in Statistics and an MBA in Business Analytics
                   <span className="kw-pop flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-white border border-zinc-200/90 shadow-xl">
                     <svg width="42" height="24" viewBox="0 0 44 30" fill="none">
@@ -408,12 +415,7 @@ export default function Home() {
 
           {/* Clean Horizontal Links Row (Matches reference "Email  LinkedIn  X  Dribbble" style) */}
           <div className="flex flex-wrap items-center gap-6 mt-7 text-[15px] font-medium text-[#3F3F46]">
-            <a
-              href="mailto:hello@bineet.in"
-              className="hover:text-[#111113] transition-colors"
-            >
-              hello@bineet.in
-            </a>
+            <EmailLink className="hover:text-[#111113] transition-colors" />
             <a
               href="https://www.linkedin.com/in/bineet-barthwal/"
               target="_blank"

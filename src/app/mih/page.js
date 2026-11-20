@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import EmailLink from "@/components/EmailLink";
 
 export default function MIHCaseStudy() {
   const [zoomImage, setZoomImage] = useState(null);
@@ -93,6 +94,7 @@ export default function MIHCaseStudy() {
           <img
             src="/images/mih-interiors.png"
             alt="MiH Interiors Web Architecture & Conversion Showcase"
+            draggable={false}
             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
           />
           <div className="absolute bottom-2.5 right-2.5 px-2 py-1 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -217,10 +219,7 @@ export default function MIHCaseStudy() {
             </svg>
           </Link>
 
-          <a
-            href="mailto:hello@bineet.in"
-            className="btn-primary-pill w-full sm:w-auto"
-          >
+          <EmailLink className="btn-primary-pill w-full sm:w-auto">
             <svg
               width="14"
               height="14"
@@ -235,7 +234,7 @@ export default function MIHCaseStudy() {
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
             </svg>
             <span>Get in touch</span>
-          </a>
+          </EmailLink>
         </footer>
       </article>
 
@@ -271,6 +270,7 @@ export default function MIHCaseStudy() {
               <img
                 src={zoomImage.src}
                 alt={zoomImage.alt}
+                draggable={false}
                 className="max-w-full max-h-[82vh] object-contain rounded-[4px] border border-white/10 shadow-2xl"
               />
               {zoomImage.alt && (

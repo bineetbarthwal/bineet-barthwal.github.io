@@ -1,92 +1,85 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy Policy | Bineet Barthwal",
+  title: "Privacy Policy",
   description:
-    "Privacy policy for Bineet Barthwal's portfolio website — data collection, cookies, and your rights.",
+    "Privacy policy for Bineet Barthwal's portfolio: data collection, cookies, and your rights.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPolicy() {
   return (
-    <main className="flex min-h-screen flex-col items-center bg-white">
-      <div className="max-w-2xl mx-auto py-24 px-6 w-full">
-        {/* Header */}
+    <main className="min-h-screen bg-white text-[#141417]">
+      <div className="max-w-[590px] mx-auto px-6 pt-10 pb-24">
+        {/* Back button */}
+        <div className="mb-9">
+          <Link href="/" className="btn-secondary-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>Back to home</span>
+          </Link>
+        </div>
+
         <h1
-          className="text-3xl font-normal text-gray-900 md:text-4xl"
-          style={{ fontFamily: "var(--font-sans)" }}
+          style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+          className="font-display font-extrabold text-[38px] sm:text-[44px] text-[#141417] tracking-[-0.04em] leading-[1.02]"
         >
           Privacy Policy
         </h1>
+        <p className="font-sans-custom text-[15px] text-[#52525B] mt-3 leading-[1.6]">
+          Last updated: November 2026
+        </p>
 
-        {/* Content */}
-        <div className="mt-12 flex flex-col gap-10">
-          {/* Data Collection */}
+        <div className="mt-10 flex flex-col gap-8 font-sans-custom text-[15px] leading-[1.7] text-[#3F3F46]">
           <section>
             <h2
-              className="text-lg font-medium text-gray-900 md:text-xl"
-              style={{ fontFamily: "var(--font-sans)" }}
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="font-display font-bold text-[20px] text-[#141417] mb-2"
             >
               Data Collection
             </h2>
-            <p
-              className="mt-3 text-sm leading-relaxed text-gray-700 md:text-base"
-              style={{ fontFamily: "var(--font-sans)" }}
-            >
-              I use Google Analytics to understand how visitors use my portfolio
-              so I can make better design decisions. This tracks page views and
-              general behavior.
+            <p>
+              I use Google Analytics to understand how visitors interact with my portfolio so I can make better design decisions. This tracks page views and general behaviour patterns only.
             </p>
           </section>
 
-          {/* Cookies */}
           <section>
             <h2
-              className="text-lg font-medium text-gray-900 md:text-xl"
-              style={{ fontFamily: "var(--font-sans)" }}
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="font-display font-bold text-[20px] text-[#141417] mb-2"
             >
               Cookies
             </h2>
-            <p
-              className="mt-3 text-sm leading-relaxed text-gray-700 md:text-base"
-              style={{ fontFamily: "var(--font-sans)" }}
-            >
-              This site uses standard cookies to enable these analytics.
+            <p>
+              This site uses standard analytics cookies. No tracking cookies are used for advertising.
             </p>
           </section>
 
-          {/* No PII */}
           <section>
             <h2
-              className="text-lg font-medium text-gray-900 md:text-xl"
-              style={{ fontFamily: "var(--font-sans)" }}
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="font-display font-bold text-[20px] text-[#141417] mb-2"
             >
               No Personally Identifiable Information
             </h2>
-            <p
-              className="mt-3 text-sm leading-relaxed text-gray-700 md:text-base"
-              style={{ fontFamily: "var(--font-sans)" }}
-            >
-              I do not collect, store, or sell any personally identifiable
-              information (PII) about you.
+            <p>
+              I do not collect, store, or sell any personally identifiable information (PII) about you.
             </p>
           </section>
 
-          {/* Contact */}
           <section>
             <h2
-              className="text-lg font-medium text-gray-900 md:text-xl"
-              style={{ fontFamily: "var(--font-sans)" }}
+              style={{ fontFamily: "var(--font-bricolage), sans-serif" }}
+              className="font-display font-bold text-[20px] text-[#141417] mb-2"
             >
               Contact
             </h2>
-            <p
-              className="mt-3 text-sm leading-relaxed text-gray-700 md:text-base"
-              style={{ fontFamily: "var(--font-sans)" }}
-            >
-              If you have questions, reach me at{" "}
+            <p>
+              Questions? Reach me at{" "}
               <a
                 href="mailto:hello@bineet.in"
-                className="text-black underline underline-offset-4 hover:text-gray-600 transition-colors"
+                className="text-[#3B5BFF] hover:underline"
               >
                 hello@bineet.in
               </a>
@@ -95,14 +88,12 @@ export default function PrivacyPolicy() {
           </section>
         </div>
 
-        {/* Footer Link */}
         <div className="mt-16 pt-8 border-t border-zinc-200">
-          <Link
-            href="/"
-            className="text-sm text-zinc-500 hover:text-black transition-colors"
-            style={{ fontFamily: "var(--font-sans)" }}
-          >
-            ← Back to Home
+          <Link href="/" className="btn-secondary-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+            <span>Back to home</span>
           </Link>
         </div>
       </div>

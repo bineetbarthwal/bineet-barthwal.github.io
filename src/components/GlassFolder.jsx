@@ -54,6 +54,7 @@ export default function GlassFolder({
                 <img
                   src={src}
                   alt=""
+                  draggable={false}
                   className="w-full h-full rounded-[9px] object-cover object-top"
                 />
               </motion.div>

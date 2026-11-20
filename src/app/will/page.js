@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import EmailLink from "@/components/EmailLink";
 
 export default function WillCaseStudy() {
   const [zoomImage, setZoomImage] = useState(null);
@@ -93,6 +94,7 @@ export default function WillCaseStudy() {
           <img
             src="/images/will-image-1.png"
             alt="WILL Mobile App Mockup Overview"
+            draggable={false}
             className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
           />
           <div className="absolute bottom-2.5 right-2.5 px-2 py-1 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -178,6 +180,7 @@ export default function WillCaseStudy() {
             <img
               src="/images/chowk.png"
               alt="The Chowk: Daily Wage Labour Market"
+              draggable={false}
               className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
             />
             <div className="absolute bottom-2.5 right-2.5 px-2 py-1 bg-black/60 backdrop-blur-xs text-white text-[11px] font-medium rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -305,6 +308,7 @@ WILL (Worker App)
                 <img
                   src="/images/decision-1.png"
                   alt="Decision 01: Two Separate Apps"
+                  draggable={false}
                   className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </div>
@@ -338,6 +342,7 @@ WILL (Worker App)
                 <img
                   src="/images/decision-2.png"
                   alt="Decision 02: Hindi and Voice Navigation"
+                  draggable={false}
                   className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </div>
@@ -520,10 +525,7 @@ WILL (Worker App)
             </svg>
           </Link>
 
-          <a
-            href="mailto:hello@bineet.in"
-            className="btn-primary-pill w-full sm:w-auto"
-          >
+          <EmailLink className="btn-primary-pill w-full sm:w-auto">
             <svg
               width="14"
               height="14"
@@ -538,7 +540,7 @@ WILL (Worker App)
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
             </svg>
             <span>Get in touch</span>
-          </a>
+          </EmailLink>
         </footer>
       </article>
 

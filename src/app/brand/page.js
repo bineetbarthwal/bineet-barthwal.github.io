@@ -1,1 +1,5 @@
-export { default, GALLERY_ITEMS } from "../studio/page";
+import { permanentRedirect } from "next/navigation";
+
+export default function BrandPage() {
+  permanentRedirect("/studio");
+}
