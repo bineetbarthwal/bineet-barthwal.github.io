@@ -1,6 +1,9 @@
 import "./globals.css";
 import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google";
+import Script from "next/script";
 import SmoothScroll from "@/components/SmoothScroll";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-KWVJF2Z0VX";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -51,6 +54,18 @@ export default function RootLayout({ children }) {
       >
         <SmoothScroll/>
         {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );
